@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="A6lAK9hZVYr0IGtEET6imG">
+<head data-page-node-id="LDlcAcsagNyoyG8hmk2oqj">
+    <meta charset="UTF-8" data-page-node-id="wGPaRfxjpguR34HXqovazM">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="JdC2NUBiCR10SrQuMUMB2f">
+    <title>网页整体布局 · 课后作业 | 朱思冰</title>
+    <!-- 外链式 CSS：作业要求 CSS 一律外链，不写行内 -->
+    <link rel="stylesheet" href="layout-homework.css" data-page-node-id="8RMkZhoR0BSwUJlbIzHB0e">
+</head>
+
+<!-- id="top" 给回到顶部按钮当锚点 -->
+<body id="top" data-page-node-id="BvhPIbrDYZfnBTozdzGElC">
+
+    <!-- ===== 演示区：这一段就是"可运行的 HTML"，直接能在浏览器打开 ===== -->
+    <!-- 页头：老师在 layout004 里 header 用 position:relative，里面 logo/login 绝对定位 -->
+    <header id="header" data-page-node-id="53dTK4OdGZobEadAsI0lb0">
+        <div class="logo" data-page-node-id="5tTNg3470FDT9wovDNDfm4">我的小站</div>
+        <div class="login" data-page-node-id="68M3ZMrzTrB4nSbIBPkVCn">登录</div>
+    </header>
+
+    <!-- 导航条 -->
+    <nav data-page-node-id="KamKBntPWva0AFHTDbCkg6">首页&nbsp;|&nbsp;课程&nbsp;|&nbsp;作业&nbsp;|&nbsp;关于</nav>
+
+    <!-- 版心 1200，里面两栏 flex -->
+    <div class="wrap" data-page-node-id="fconjRrPgIEeGkCRhK3CX0">
+        <div class="content-row" data-page-node-id="rxI35tZnVL4teY8AdZ2BkD">
+            <!-- 主内容 792px -->
+            <main data-page-node-id="5HoHFVTOYlMH0AMaOOtoeA">
+                <h2 data-page-node-id="CWqmnlAq6ZlZAGnqDtf1Ap">主要内容区（main，宽 792px）</h2>
+                <p data-page-node-id="xJVH6HObdglbjyQMUenqaW">下面是作业 2.2 的 6 张图文卡片，鼠标移上去看图片放大 + 文字展开。</p>
+
+                <!-- 卡片区 -->
+                <section class="box" data-page-node-id="stEGdYblIQNuM0MdtI9kup">
+                    <ul data-page-node-id="3bPjqgbmIQCJTUDrrvurja">
+                        <li data-page-node-id="b57pJyTmevBd6xYAcp7KPl">
+                            <img src="img/1.jpg" alt="图片1" data-page-node-id="F6U1JY4fNbnmPfFHdQzmBH">
+                            <div class="txt" data-page-node-id="mDIt3093K5unjOIi3RBnAF">图片1文字描述</div>
+                        </li>
+                        <li data-page-node-id="kW1fwgo3tJIZnr07vtyZhV">
+                            <img src="img/2.jpg" alt="图片2" data-page-node-id="FDO09PJbzVTOGHcRTHIcJT">
+                            <div class="txt" data-page-node-id="PSjXdr8HeFlmjHLiFKTOkI">图片2文字描述</div>
+                        </li>
+                        <li data-page-node-id="hP25sg6zzOU5YqKDR1dKbg">
+                            <img src="img/3.jpg" alt="图片3" data-page-node-id="vphTgFazfvHUQSa9zPjiSC">
+                            <div class="txt" data-page-node-id="3vcNmBPRjI1APzioz4Mgiu">图片3文字描述</div>
+                        </li>
+                        <li data-page-node-id="706SmigKS4M6khPczFUdvE">
+                            <img src="img/4.jpg" alt="图片4" data-page-node-id="xHU49Dg0J8OXCdrgACMYTU">
+                            <div class="txt" data-page-node-id="zZCBoWH5P3a9G8sVd2GCq1">图片4文字描述</div>
+                        </li>
+                        <li data-page-node-id="2pr2jd26AlOvpayNKpCx45">
+                            <img src="img/5.jpg" alt="图片5" data-page-node-id="nETPtTFJtYitM6T9OnloLv">
+                            <div class="txt" data-page-node-id="whqaVl2xnMJytbGs2N6CVP">图片5文字描述</div>
+                        </li>
+                        <li data-page-node-id="zhHIwXaAUuwg0LBOyEmexz">
+                            <img src="img/6.jpg" alt="图片6" data-page-node-id="5cCPb2jhNZhd1s7adnOGki">
+                            <div class="txt" data-page-node-id="YqFmmDswwZgGyISBZpWn1H">图片6文字描述</div>
+                        </li>
+                    </ul>
+                </section>
+            </main>
+
+            <!-- 侧边栏 400px -->
+            <aside data-page-node-id="HTR6GYjmh3PNAWHJ2jCAla">
+                <h2 data-page-node-id="ytnInSvXbPnlFBfY3ka83f">侧边栏（aside，宽 400px）</h2>
+                <p data-page-node-id="btRA4XLCFTIOVJxXkrZZoI">放点补充内容、广告位或者目录都行。</p>
+            </aside>
+        </div>
+    </div>
+
+    <footer data-page-node-id="QaFy8AKYKPEEVXuNrz91Di">© 2026 朱思冰 · 学号 24001010915 · 9班15号</footer>
+
+    <!-- 第四部分扩展：纯 CSS 回到顶部，点它滚回最上面 -->
+    <a id="backTop" href="#top" title="回到顶部" data-page-node-id="7fPgMh653T2vitXFgS14DE">↑</a>
+
+    <!-- ===== 课后作业答案部分 ===== -->
+    <div class="hw" id="answers" data-page-node-id="13A6xD9ZJMLbHgWYOfeRcd">
+        <h1 data-page-node-id="diBnBtThBNBZW5v4x9DYxq">网页整体布局 · 课后作业答案</h1>
+
+        <!-- ============ 第一部分 ============ -->
+        <h2 data-page-node-id="Cei4u6sVjnw2gZPxkvxGKh">第一部分：看代码找错（3 处 bug）</h2>
+        <p data-page-node-id="dTBJyLMSEGpXVEA5DNonHT">作业给的原始代码（原样）：</p>
+<pre data-page-node-id="aKaNIKZ1Gs61LmiXMRucEW">&lt;style&gt;
+  .box li{ width: 300px; }
+  .box img{ width: 100%; }
+  .box li:hover img{ transform: scale(1.2); transition: all .6s; }
+  .txt{ position: absolute; bottom: 0; height: 40px; background: rgba(0,0,0,.6); }
+  .box{ display: flex; }
+&lt;/style&gt;</pre>
+
+        <div class="bug" data-page-node-id="875DKUxFArujG40OzoZyhx">
+            <strong data-page-node-id="CQ0IbDDPtznWTZqzH35XW7">Bug 1（现象：图片放大跑出卡片，盖住旁边卡片）</strong><br data-page-node-id="7ur0UjlJxsEUU1DWUCuoFz">
+            原因：li 上没有 <code data-page-node-id="4qq8RBHlH4vfBnxL4xJqp5">overflow:hidden</code>，图片 <code data-page-node-id="XLMtuAOR2uvD8HUQtuHLAF">scale(1.2)</code> 放大后超出 li 的部分没被裁掉，就压到右边卡片上了。
+        </div>
+        <div class="fix" data-page-node-id="RvhngZZxReR6QbXQ72rdUE">
+            改法：给 li 加 <code data-page-node-id="jwwyzF39sCuMDZ2gRMT7ta">overflow:hidden</code>。<br data-page-node-id="SgRYHYb2sfsLTqvTBaYWCp">
+            <code data-page-node-id="oulkiSDQqk1Lbp1jDs8msA">.box li { overflow: hidden; }</code>
+        </div>
+
+        <div class="bug" data-page-node-id="Dj6kzO3CwDZSFCrH4Z2wsC">
+            <strong data-page-node-id="xFKwbrmYfhQtevbctIaajl">Bug 2（现象：文字展开只有移入有动画，移出没过渡）</strong><br data-page-node-id="SgJ4SeCa57PX0HJsD8yEMP">
+            原因：<code data-page-node-id="AhFB86D66gdCFDGNssTJoH">transition</code> 写在了 <code data-page-node-id="D2suOJCKGVGZWzGUQFwb7F">.box li:hover img</code> 上，意思是"进入 hover 那一刻"才有过渡；鼠标移开回到默认状态时没有过渡规则，所以瞬间恢复。
+        </div>
+        <div class="fix" data-page-node-id="zr3lgCqEK7hytwimjgVJCP">
+            改法：把 <code data-page-node-id="JO6c3EEktREJrB1tfPhp2c">transition</code> 移到默认的 <code data-page-node-id="WZaPNH0kVKzmqHUIXtXYXN">.box li img</code> 上。<br data-page-node-id="toj8F5DVUR6WbvS01Uds1y">
+            <code data-page-node-id="Y4zyLBJI8EQVgHdbB879AM">.box li img { width:100%; transition: transform .6s; }</code><br data-page-node-id="oZpKU8zE2clq4fHYuSEaPD">
+            <code data-page-node-id="Ds4k2WyAyazCV24FIGFSKQ">.box li:hover img { transform: scale(1.2); }</code>
+        </div>
+
+        <div class="bug" data-page-node-id="XUV1DjOcSD0BjHWeo7y7f4">
+            <strong data-page-node-id="fgtBtOK8ZcOjTz6H9CS18V">Bug 3（现象：卡片布局排版错乱）</strong><br data-page-node-id="EmbBnwg7peMF6BBwTecKHc">
+            原因：<code data-page-node-id="TUyT1JhnDDszfUNEJrQb7c">.box{display:flex}</code> 写在外层 <code data-page-node-id="QemClYUZKyQ5BP0lhjYAmi">.box</code> 上，但 li 的真正父级是 <code data-page-node-id="npnrAqYHczrbCHZVUpr56B">ul</code>，flex 根本没作用到 li，li 还是按默认块级竖着排，就乱了。
+        </div>
+        <div class="fix" data-page-node-id="mao16tNexigmKWZBnWzt10">
+            改法：让 li 的直接父级（ul）成为 flex 容器。<br data-page-node-id="ob7tWyonUljN6asiBrx1EZ">
+            <code data-page-node-id="MiY5FnGKu2rZfUTUACxQ2l">.box ul { display:flex; flex-wrap:wrap; gap:16px; list-style:none; padding:0; }</code>
+        </div>
+
+        <!-- ============ 第二部分 ============ -->
+        <h2 data-page-node-id="XAWMd6BcBZuexUFDkj3u2z">第二部分：补全代码</h2>
+
+        <h3 data-page-node-id="JGc4TD4bEs5hFXUBoa6OuJ">2.1 语义标签填空</h3>
+        <ul data-page-node-id="1THLrW11PaYziRyfHeU9we">
+            <li data-page-node-id="cKCqZijq164ttnftb9G5Xg">页面顶部头部区域 → <code data-page-node-id="KgGOH9ES6Xi5v4yHAJ4WRn">&lt;header&gt;</code></li>
+            <li data-page-node-id="Aw2dNObjJhUwinZHaL83P8">导航条 → <code data-page-node-id="yyI4TYQrTKHFRZrkJMlSXw">&lt;nav&gt;</code></li>
+            <li data-page-node-id="86XU6RKgzKu6HEEJArP2dU">页面唯一主要内容区 → <code data-page-node-id="SOnEdzffpt67byVzP6ZXFr">&lt;main&gt;</code></li>
+            <li data-page-node-id="iVbnV4RJ9HarTZlLrtiDgs">侧边栏附属内容 → <code data-page-node-id="JgoihM4vMXY32BRMpL0Vqx">&lt;aside&gt;</code></li>
+            <li data-page-node-id="pV6pCkfxDdTbO87aSLvdBN">页面底部版权页脚 → <code data-page-node-id="zhUIZkhCFkapfpgBJpA4vM">&lt;footer&gt;</code></li>
+        </ul>
+
+        <h3 data-page-node-id="vTIR2haZiCs7yRS15jYRUR">2.2 卡片动画补全</h3>
+        <table border="1" cellspacing="0" cellpadding="8" width="100%" data-page-node-id="23EKFu4DbuJqaOx11X7YGI">
+            <tr data-page-node-id="STzBUKnsL9gbUBVHjOEVvz"><th data-page-node-id="IEZNCNvSPqETFXqjDEjPBd">需要实现的效果</th><th data-page-node-id="HS0H35TIsZJP47tRAoEQku">关键 CSS / 答案</th></tr>
+            <tr data-page-node-id="ZCGVZA7EpBqvDK32InkqDL"><td data-page-node-id="7i2NBgEs4clEYoF0lIxxoz">防止放大图片溢出 li 容器</td><td data-page-node-id="I9p2IlYqtUpKGdQyUrSFut"><code data-page-node-id="2C3ENphrgdiJxX98XL4lQ7">overflow: hidden</code>（写在 li 上）</td></tr>
+            <tr data-page-node-id="g1baQKCHQt5GFIuDBaPUjx"><td data-page-node-id="EDa885L1ss6FRMbbzF7vnu">子绝父相，让文字条定位在卡片底部</td><td data-page-node-id="6hxB5qxdF0y7ss2GTGYp5X"><code data-page-node-id="qTfg2CLEFxUrQ93CuMVoO7">position: relative</code>（写在 li 上，给 .txt 当父级参照）</td></tr>
+            <tr data-page-node-id="CsOtJ4w0HkUFjd43UNGEcC"><td data-page-node-id="lAN3lYo1BWSpPohCSnw037">hover 图片从原大放大到 scale(1.2)</td><td data-page-node-id="o0VwQymtZZgnOHPC6nNNJH">要写两个选择器：<code data-page-node-id="v7SwTszylRkZuXjnnJt5BH">.box li img</code>（默认）和 <code data-page-node-id="qF5KLEyWkRImcz9ukIjeWI">.box li:hover img</code></td></tr>
+            <tr data-page-node-id="P2ciLmnDgwvixJErzywJvM"><td data-page-node-id="AR6WAcXflLh9QNVcs6UUKZ">文字高度平滑展开，移入移出都有动画</td><td data-page-node-id="8EOmC3DiPo7dFjvDhMPWqJ">transition 写在<strong data-page-node-id="XrxoNtMwgeIAMLKGglCict">默认（普通）选择器</strong>上；因为写在 <code data-page-node-id="BKuhISQ9J4fZ9feFr2NRzc">:hover</code> 上只有移入有动画，移出是瞬间的</td></tr>
+            <tr data-page-node-id="5Auo44l5hTa1gt4CGqHkmb"><td data-page-node-id="kjcV1LosEiyUMPB7JUp2PG">奇数卡片悬浮，文字铺满整张卡片</td><td data-page-node-id="N2I0znS8I0uYlGWhzdcHwB">伪类选择器 <code data-page-node-id="Rb0OAuYDPWfZIdwOiIp928">:nth-child(odd)</code>，即 <code data-page-node-id="K6nhqdsn0y7BAsext6vaAT">.box li:nth-child(odd):hover .txt { height:100%; }</code></td></tr>
+        </table>
+
+        <h3 data-page-node-id="mQOGsaTQwNlbSzXkkZwjuy">2.3 flex 两栏布局填空</h3>
+        <ul data-page-node-id="bylUg18IkJpH9AaiNzAs5y">
+            <li data-page-node-id="yeSZi0Xu2o4KI3ca3qqyre">父容器开启 flex：<code data-page-node-id="IfL4pIZIJ6PEKY0YNuGYLP">display: flex</code></li>
+            <li data-page-node-id="WoCXx1vwfgtM6pSSqLj3c3">设置两栏间隙 8px：<code data-page-node-id="uGCmrvNHZAHVafPg0haPC2">gap: 8px</code>（作业明确禁止用 margin）</li>
+        </ul>
+        <p data-page-node-id="TenWOHqtkKeQEs7gPkSCrP">我算了一下：792（主）+ 400（侧）+ 8（间隔）= 1200，正好等于版心宽度，所以两栏并排刚好满版心。</p>
+
+        <!-- ============ 第三部分 ============ -->
+        <h2 data-page-node-id="KOIkooGk9Ic68C6L2SRaBs">第三部分：手写原理简答</h2>
+        <ol data-page-node-id="MZOzrPpXjpzXAysO8A2nSP">
+            <li data-page-node-id="S77OqBdtHV0JeDydJSmyVC">
+                <strong data-page-node-id="mvDgjwVEZAbZs5cUkJvIc5">画图：父 position:relative，子 position:absolute 的盒子关系</strong>
+                <div class="diagram">
+                    <img src="img/position-diagram.jpg" alt="父relative子absolute手绘图">
+                </div>
+                <p data-page-node-id="GAnLWsJdjSijin7kRLipJb">父设了 relative 之后，子元素 absolute 的 top/right/bottom/left 就都相对"父的边框"来定位，不会乱跑去贴浏览器边缘。</p>
+            </li>
+            <li data-page-node-id="BVQlgyCjd8GkYg3SZ5qByg">
+                <strong data-page-node-id="DmcsKcqFzI3CNqSIY82mEH">overflow:hidden 本节课两个作用</strong>
+                <ul data-page-node-id="fiGyJLSbeXkX38NbEF0X23">
+                    <li data-page-node-id="ektQHEV8ydLVNhQz2WXjxn">作用 1：把超出容器边框的内容裁掉（hidden），图片放大后多出来的部分直接看不见。</li>
+                    <li data-page-node-id="87lMCqFElnDISl9Y2s08Ar">作用 2：配合缩放动画，把"动"的范围框死在卡片里，不影响旁边布局。</li>
+                </ul>
+            </li>
+            <li data-page-node-id="btIjz0OXBZGrdBtpnf9RQR">
+                <strong data-page-node-id="UZr60IsjwTAGBQ1X4ec6Fi">transform:scale(1.2) 会不会把盒子实际占位变大、挤压旁边卡片？</strong><br data-page-node-id="bMiCPOCSKbgMs1USEEsDRv">
+                不会。transform 只改"画出来"的样子（视觉渲染），不改元素在文档流里的占位盒子，所以旁边卡片的位置一点不变。
+            </li>
+            <li data-page-node-id="07oxE8UoAsf42eaBqK2Guv">
+                <strong data-page-node-id="GzGaNxPEncU5UCfVOmmBEJ">transition 写在 hover 上 vs 写普通选择器上，移出动画的区别？</strong><br data-page-node-id="z2xwdS4gMBMjroYcF4Rfnj">
+                写在普通选择器（默认状态）上：移入和移出都走过渡，<strong data-page-node-id="BGaX3JixGPBcwJDNsHMJQ9">都有动画</strong>；写在 <code data-page-node-id="VOOQuPvIcSEueYcpLysGTU">:hover</code> 上：只有移入那一下有过渡，<strong data-page-node-id="TJQuKSYrrIe2GUS50lmWww">移出是瞬间的</strong>。所以作业里我把它写在默认 <code data-page-node-id="QFfy7dGyHEC3OZEH46SEfD">.box li img</code> 上。
+            </li>
+            <li data-page-node-id="pBxAJLhxsdonFViBO5XSkK">
+                <strong data-page-node-id="IeLlMwt6VkIzRG9payR61n">记录自己写代码遇到的 1 个 bug（≥30 字）</strong><br data-page-node-id="2eBesX1M0GK09FbeE2LWPG">
+                做卡片时图片放大后盖住了右边卡片，排查发现是给 li 加 overflow 时写成了 overflow:auto 还漏了，后来改成 hidden，图片就被裁在卡片里，旁边卡片也不被挡了。
+            </li>
+        </ol>
+
+        <!-- ============ 第四部分 ============ -->
+        <h2 data-page-node-id="sDEjjjtTg6wNm2xbPDUQus">第四部分：扩展挑战（纯 CSS 回到顶部）</h2>
+        <p data-page-node-id="i0m0d5j1Hz1yFim5nJWGtb">左下角那个蓝色圆圈就是，纯 CSS 没写 JS：</p>
+        <ul data-page-node-id="Enkkpfinna1WDSdE9GNS5q">
+            <li data-page-node-id="RZNR8t8Dgn6R0aOVcEHUzy"><code data-page-node-id="ydPHYoJ1CIkfLbn9D4I0VO">position: fixed</code> 固定在视口左下角（left:20px; bottom:20px）；</li>
+            <li data-page-node-id="pEtDAb2yuihdREawVGV8Hr">初始 <code data-page-node-id="tWXk38VvhGrbRjW5rgJlVD">opacity: .5</code> 半透明；</li>
+            <li data-page-node-id="t5aAhf93VcAOa2ocL5TDgD"><code data-page-node-id="mnd4xvkIx3dyC6PSvCBrtj">:hover</code> 时 <code data-page-node-id="zPj1ANtlHqLNGFdTHyVfHh">opacity: 1</code> 完全不透明，同时 <code data-page-node-id="XpiESOEgYD3BgC6dfBeXLs">transform: scale(1.1)</code> 轻微放大；</li>
+            <li data-page-node-id="XQ43CmGDv8dl8z4jSK0tN5"><code data-page-node-id="ycvAcHSGm285FMb40MxrDX">z-index: 999</code> 保证浮在页面内容之上；</li>
+            <li data-page-node-id="O9dozgnVHxIVrgxB9KpKHC">点击靠锚点 <code data-page-node-id="bCFqThIHeSlAQeOOnAxQOI">&lt;a href="#top"&gt;</code> 回到页面顶部。</li>
+        </ul>
+        <pre data-page-node-id="2zE4VO18J5KcljbLbxqWDg">#backTop{
+  position: fixed; left: 20px; bottom: 20px;
+  width: 50px; height: 50px; border-radius: 50%;
+  background: #5b6cff; color: #fff; opacity: .5;
+  z-index: 999; transition: all .3s;
+}
+#backTop:hover{ opacity: 1; transform: scale(1.1); }</pre>
+
+        <p style="margin-top:24px;" data-page-node-id="OOAHcQxQF7GXmNYaP1afgQ"><a href="index.html" data-page-node-id="nqVLXsVJBmvt0x9Wmq3of4">← 返回课程目录</a></p>
+    </div>
+
+</body>
+</html>

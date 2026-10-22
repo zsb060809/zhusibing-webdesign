@@ -1,0 +1,114 @@
+/* ===== 标签选择器：页面整体深色渐变背景与字体 ===== */
+body {
+  margin: 0;
+  padding: 30px 16px 50px;
+  min-height: 100vh;
+  background:
+    radial-gradient(1200px 600px at 18% -10%, #2a2a5e 0%, transparent 60%),
+    radial-gradient(1000px 500px at 100% 0%, #3a1f5e 0%, transparent 55%),
+    linear-gradient(135deg, #0f1024 0%, #161a3a 100%);
+  font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+  color: #e8ecff;
+}
+
+/* ===== 标签选择器：标题，渐变文字效果 ===== */
+h1 {
+  text-align: center;
+  font-size: 34px;
+  letter-spacing: 4px;
+  margin: 4px 0 18px;
+  background: linear-gradient(90deg, #7afcff, #b388ff, #ff7eb3);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ===== 类选择器：玻璃拟态规则条 ===== */
+.rule {
+  background: rgba(255, 255, 255, .07);
+  border: 1px solid rgba(255, 255, 255, .12);
+  backdrop-filter: blur(6px);
+  border-radius: 12px;
+  padding: 14px 22px;
+  font-size: 16px;
+  text-align: center;
+}
+
+/* ===== 群组选择器：规则条与网格共用宽度并居中 ===== */
+.rule,
+#grid {
+  max-width: 1040px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===== id 选择器：顶部统计信息栏 ===== */
+#stats {
+  max-width: 1040px;
+  margin: 14px auto;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* ===== 类选择器：统计小卡片 ===== */
+.chip {
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 10px;
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+/* ===== id 选择器：数字网格容器 ===== */
+#grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+
+/* ===== 类选择器：数字玻璃卡片 + 入场淡入 ===== */
+.cell {
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 10px;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 17px;
+  color: #7afcff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .25);
+  opacity: 0;
+  animation: fade .45s ease forwards;
+  transition: transform .2s, box-shadow .2s;
+}
+
+/* 类选择器：卡片悬停上浮发光 */
+.cell:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 22px rgba(122, 252, 255, .25);
+}
+
+/* ===== 后代选择器：网格里的"过"格（红粉渐变） ===== */
+#grid .pass {
+  color: #fff;
+  background: linear-gradient(135deg, #ff5f6d, #ff2e63);
+  border: 1px solid rgba(255, 94, 109, .5);
+  font-weight: bold;
+  box-shadow: 0 4px 14px rgba(255, 46, 99, .35);
+}
+
+/* ===== 类选择器：底部学号署名 ===== */
+.sign {
+  max-width: 1040px;
+  margin: 28px auto 0;
+  text-align: center;
+  font-size: 14px;
+  color: #8b93c7;
+}
+
+/* ===== 关键帧：卡片入场淡入 ===== */
+@keyframes fade {
+  to { opacity: 1; }
+}

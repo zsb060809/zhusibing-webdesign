@@ -1,0 +1,100 @@
+/* ============================================================
+   css-diner.css —— 朱思冰《高级网页设计》
+   CSS Diner 通关答案页样式
+   演示选择器：* 通配 / body 标签 / .container 类 /
+             .container-title 类 / h2 标签 /
+             .card-wrap 类 / #card-wrap id /
+             .answers-list li 后代 / ol,li 群组
+   ============================================================ */
+
+/* （1）通配选择器：清空默认间距 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* （2）标签选择器 body */
+body {
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    background: #f5f7fb;
+    color: #1f2937;
+    line-height: 1.7;
+    padding: 40px 16px;
+}
+
+/* （3）类选择器 .container：居中限宽 */
+.container {
+    max-width: 760px;
+    margin: 0 auto;
+    background: #fff;
+    border: 1px solid #eef0f5;
+    border-radius: 16px;
+    padding: 34px 36px 40px;
+    box-shadow: 0 16px 40px rgba(23, 37, 43, 0.08);
+}
+
+/* （4）类选择器 .container-title */
+.container-title {
+    text-align: center;
+    font-size: 34px;
+    background: linear-gradient(135deg, #5b6cff 0%, #8b5cf6 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* （5）标签选择器 h2 */
+h2 {
+    text-align: center;
+    color: #4b5563;
+    font-weight: 500;
+    font-size: 18px;
+    margin: 6px 0 24px;
+}
+
+/* （6）类选择器 .card-wrap：卡片容器 */
+.card-wrap {
+    border-top: 3px solid #5b6cff;
+    padding-top: 22px;
+}
+
+/* （7）id 选择器 #card-wrap：答案列表卡片，唯一 */
+#card-wrap {
+    background: #eef1ff;
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin-top: 14px;
+}
+
+/* （8）后代选择器 .answers-list li：只选中答案列表里的每一项 */
+.answers-list li {
+    padding: 9px 12px;
+    border-bottom: 1px dashed #d7dcff;
+    font-family: "Cascadia Code", Consolas, monospace;
+    font-size: 15px;
+}
+.answers-list li:last-child {
+    border-bottom: none;
+}
+.answers-list li code {
+    background: #fff;
+    border: 1px solid #d7dcff;
+    border-radius: 6px;
+    padding: 1px 8px;
+    color: #5b6cff;
+}
+
+/* （9）群组选择器 ol, li：统一列表基础样式 */
+ol, li {
+    list-style-position: inside;
+}
+
+/* 返回链接 */
+.back-link {
+    display: inline-block;
+    margin-top: 22px;
+    color: #5b6cff;
+    font-weight: 700;
+    text-decoration: none;
+}

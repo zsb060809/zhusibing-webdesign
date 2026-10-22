@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>朱思冰 · 当堂课作业提交</title>
+    <!-- 外链式 CSS：和课程其他页面共用 html_basic.css -->
+    <link rel="stylesheet" href="html_basic.css">
+</head>
+
+<body class="form-page">
+
+    <!-- ============ 导航条 ============ -->
+    <nav class="nav-bar">
+        <a href="index.html">← 返回目录</a>
+        <a href="form.html">前往留言表单</a>
+    </nav>
+
+    <!-- ============ 头部 ============ -->
+    <header class="hero hero-small">
+        <div class="hero-text">
+            <h1>当堂课作业提交</h1>
+            <p class="text-cont">《高级网页设计》课堂实践 · 提交你本次课的练习作业</p>
+        </div>
+    </header>
+
+    <!-- ============ 表单区域 ============ -->
+    <main class="container">
+        <section id="submit-section">
+            <h2 class="title-demo">作业提交表单</h2>
+
+            <!-- 表单 form：action 暂时留空，method 用 post -->
+            <form action="#" name="hw" method="post" class="msg-form">
+
+                <!-- 学号 -->
+                <p class="form-row">
+                    <label for="sid">学号：</label>
+                    <input type="text" id="sid" name="sid" value="24001010915" placeholder="请输入学号" required>
+                </p>
+
+                <!-- 姓名 -->
+                <p class="form-row">
+                    <label for="sname">姓名：</label>
+                    <input type="text" id="sname" name="sname" value="朱思冰" placeholder="请输入姓名" required>
+                </p>
+
+                <!-- 班级（下拉选择） -->
+                <p class="form-row">
+                    <label for="sclass">班级：</label>
+                    <select id="sclass" name="sclass">
+                        <option value="9">9 班</option>
+                        <option value="other">其他班级</option>
+                    </select>
+                </p>
+
+                <!-- 本次课次（下拉选择） -->
+                <p class="form-row">
+                    <label for="lesson">本次课次：</label>
+                    <select id="lesson" name="lesson">
+                        <option value="1">第 1 次课 · HTML 基础</option>
+                        <option value="2">第 2 次课 · 自我介绍网页</option>
+                        <option value="3">第 3 次课 · 表单与交互</option>
+                        <option value="4">第 4 次课 · CSS 层叠与盒模型</option>
+                        <option value="5">第 5 次课 · CSS 选择器小游戏</option>
+                    </select>
+                </p>
+
+                <!-- 作业名称 -->
+                <p class="form-row">
+                    <label for="hwtitle">作业名称：</label>
+                    <input type="text" id="hwtitle" name="hwtitle" placeholder="例如：我的第一个网页">
+                </p>
+
+                <!-- 作业说明（多行文本） -->
+                <p class="form-row">
+                    <label for="hwdesc">作业说明：</label>
+                    <textarea id="hwdesc" name="hwdesc" cols="30" rows="5"
+                        placeholder="简要说明本次作业用到的知识点，如标签、选择器、盒模型等..."></textarea>
+                </p>
+
+                <!-- 提交链接 / 仓库地址 -->
+                <p class="form-row">
+                    <label for="link">作业链接或仓库地址：</label>
+                    <input type="url" id="link" name="link" placeholder="https://...">
+                </p>
+
+                <!-- 自评（单选框） -->
+                <p class="form-row">
+                    <span class="row-label">完成度自评：</span>
+                    <input type="radio" name="rate" value="a" id="rate-a" checked>
+                    <label for="rate-a">优秀</label>
+                    <input type="radio" name="rate" value="b" id="rate-b">
+                    <label for="rate-b">良好</label>
+                    <input type="radio" name="rate" value="c" id="rate-c">
+                    <label for="rate-c">待改进</label>
+                </p>
+
+                <!-- 用到的知识点（复选框） -->
+                <p class="form-row">
+                    <span class="row-label">用到的知识点：</span>
+                    <input type="checkbox" name="skill" value="tag" id="sk-tag" checked>
+                    <label for="sk-tag">HTML 标签</label>
+                    <input type="checkbox" name="skill" value="selector" id="sk-sel">
+                    <label for="sk-sel">CSS 选择器</label>
+                    <input type="checkbox" name="skill" value="box" id="sk-box">
+                    <label for="sk-box">盒模型</label>
+                    <input type="checkbox" name="skill" value="form" id="sk-form" checked>
+                    <label for="sk-form">表单</label>
+                </p>
+
+                <!-- 文件上传 -->
+                <p class="form-row">
+                    <label for="file">上传作业截图/源码：</label>
+                    <input type="file" id="file" name="file" multiple>
+                </p>
+
+                <!-- 提交时间（只读，页面加载时由脚本填入） -->
+                <p class="form-row">
+                    <label for="subtime">提交时间：</label>
+                    <input type="text" id="subtime" name="subtime" readonly>
+                </p>
+
+                <!-- 操作按钮 -->
+                <p class="form-row form-actions">
+                    <input type="submit" value="提交作业">
+                    <input type="reset" value="重置">
+                    <input type="button" value="返回目录" onclick="location.href='index.html'">
+                </p>
+
+            </form>
+
+            <button onclick="location.href='index.html'">返回目录</button>
+        </section>
+    </main>
+
+    <!-- ============ 页脚 ============ -->
+    <footer class="footer">
+        <p>© 2026 朱思冰 · 网页设计课程作业</p>
+    </footer>
+
+    <!-- 提交时间自动填充 -->
+    <script>
+        document.getElementById("subtime").value = new Date().toLocaleString("zh-CN");
+    </script>
+
+</body>
+
+</html>

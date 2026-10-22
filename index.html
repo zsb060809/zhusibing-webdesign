@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="jENlF2wd84ZB7fql0cqj2v">
+
+<head data-page-node-id="Db2VmM2v9sI1Pdcbfpqt5s">
+    <meta charset="UTF-8" data-page-node-id="0AuId8FYEQltqgt2hESKKS">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="f37jXAwOApi9x2XjzB07LS">
+    <meta name="description" content="朱思冰的《高级网页设计》课堂实践目录" data-page-node-id="m2qlngJoZLrR5GAhvF1xEd">
+    <title>朱思冰 · 高级网页设计课堂实践</title>
+    <style>
+        :root {
+            --ink: #17252b;
+            --muted: #64757a;
+            --paper: #f7f5ef;
+            --card: #fffdf8;
+            --line: #dedbd0;
+            --teal: #087f8c;
+            --orange: #e97843;
+            --yellow: #f4c95d;
+            --shadow: 0 16px 40px rgba(23, 37, 43, 0.09);
+        }
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            color: var(--ink);
+            background: var(--paper);
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            line-height: 1.7;
+        }
+        a { color: inherit; text-decoration: none; }
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px clamp(22px, 6vw, 88px);
+            border-bottom: 1px solid var(--line);
+            background: rgba(247, 245, 239, 0.92);
+        }
+        .brand { font-weight: 800; letter-spacing: .08em; }
+        .brand span { color: var(--orange); }
+        .topbar a { color: var(--muted); font-size: 14px; }
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: clamp(70px, 12vw, 150px) clamp(22px, 9vw, 140px) 110px;
+            background: var(--teal);
+            color: #fffdf8;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 310px;
+            height: 310px;
+            right: 7%;
+            top: 20%;
+            border: 1px solid rgba(255, 255, 255, .32);
+            transform: rotate(16deg);
+        }
+        .eyebrow { margin: 0 0 18px; color: var(--yellow); font-size: 14px; letter-spacing: .16em; }
+        h1 { max-width: 780px; margin: 0; font-size: clamp(42px, 7vw, 88px); line-height: 1.1; letter-spacing: .02em; }
+        .hero p { max-width: 570px; margin: 28px 0 0; font-size: 18px; color: #d8eff0; }
+        .hero-mark { position: absolute; right: 12%; bottom: 34px; font-size: 90px; font-weight: 900; color: rgba(255, 255, 255, .12); }
+        main { max-width: 1160px; margin: 0 auto; padding: 72px 22px 90px; }
+        .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 28px; }
+        h2 { margin: 0; font-size: 32px; line-height: 1.2; }
+        .section-heading p { margin: 0; color: var(--muted); }
+        .directory { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+        .lesson {
+            min-height: 265px;
+            display: flex;
+            flex-direction: column;
+            padding: 25px;
+            border: 1px solid var(--line);
+            background: var(--card);
+            box-shadow: 0 4px 0 var(--line);
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+        .lesson:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+        .lesson-number { color: var(--orange); font-weight: 800; font-size: 13px; letter-spacing: .12em; }
+        .lesson h3 { margin: 38px 0 8px; font-size: 23px; }
+        .lesson p { margin: 0; color: var(--muted); font-size: 14px; }
+        .lesson-link { margin-top: auto; padding-top: 24px; color: var(--teal); font-weight: 800; }
+        .lesson-link::after { content: "  ↗"; }
+        .pending { background: #f0eee6; border-style: dashed; box-shadow: none; }
+        .pending .lesson-number { color: var(--muted); }
+        .brief {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            gap: 30px;
+            margin-top: 80px;
+            padding: 34px;
+            border-top: 5px solid var(--orange);
+            background: var(--card);
+        }
+        .brief h2 { font-size: 26px; }
+        blockquote { margin: 0; color: var(--muted); font-size: 15px; }
+        blockquote::before { content: "\201C"; float: left; margin: -20px 8px 0 0; color: var(--yellow); font: 72px Georgia, serif; line-height: 1; }
+        footer { padding: 25px 22px 40px; text-align: center; color: var(--muted); font-size: 13px; }
+        @media (max-width: 760px) {
+            .topbar { align-items: flex-start; gap: 12px; flex-direction: column; }
+            .hero { padding-bottom: 95px; }
+            .directory, .brief { grid-template-columns: 1fr; }
+            .section-heading { display: block; }
+            .section-heading p { margin-top: 8px; }
+            .hero-mark { right: 5%; font-size: 58px; }
+        }
+    </style>
+</head>
+
+<body data-page-node-id="tMIQOqDrFCrGmT6vqKH0z0">
+    <nav class="topbar" aria-label="主导航" data-page-node-id="dL4BIWUGJ81aogj6kFYrIk">
+        <a class="brand" href="index.html" data-page-node-id="zGBEHU57WdRLMyAzuyjRgu">WEB<span data-page-node-id="XIHBI1N19IGaHwA7eGqClU">/</span>LAB</a>
+        <a href="#directory" data-page-node-id="U5ce74JOEo9B2LqK1ipyif">查看课堂目录 ↓</a>
+    </nav>
+
+    <header class="hero" data-page-node-id="PTmwHJq4ymr0bfkoC6g1NU">
+        <p class="eyebrow" data-page-node-id="JGfyf0zqSt0VPcKFbRYdKp">CLASSROOM PRACTICE · 2026</p>
+        <h1 data-page-node-id="f48Rz5gWbkWKdMJhYesBf4">朱思冰的<br data-page-node-id="99u14uXOaez4vCv001vV3b">《高级网页设计》</h1>
+        <p data-page-node-id="iSM9zEhCS7B2xpQ5ELtWHf">把每一次课堂练习整理成可访问、可回顾、会持续生长的网页档案。</p>
+        <strong class="hero-mark" aria-hidden="true" data-page-node-id="uDWS2dakHxTUUaDAQoNkiP">01</strong>
+    </header>
+
+    <main data-page-node-id="4JateEaGZ75Sz8FgFGd9Jn">
+        <section id="directory" aria-labelledby="directory-title" data-page-node-id="tKyhZ6ooLPN97AfLTP8BZX">
+            <div class="section-heading" data-page-node-id="fu7xjAubWIWm1TUH3jPDQB">
+                <div data-page-node-id="V0OrqtsMwh0eVYAsdOHGfZ">
+                    <p class="eyebrow" style="color: var(--orange);" data-page-node-id="9iJ64abJe4QHBlw7lZWrLz">COURSE DIRECTORY</p>
+                    <h2 id="directory-title" data-page-node-id="kQQllUlC3LB3q2AB7nBnxr">课堂目录</h2>
+                </div>
+                <p data-page-node-id="qiWAzdyk3Lwg9de94pJQmB">已完成 13 个模块 · 后续持续增加</p>
+            </div>
+            <div class="directory" data-page-node-id="hHKtRGkkgwH58QPWefqavY">
+                <a class="lesson" href="html-basics.html" data-page-node-id="iwp3mOXRXpZZlsrsZEoKQe">
+                    <span class="lesson-number" data-page-node-id="qA4TPW3jodkgziZ650NEmA">01 / FOUNDATION</span>
+                    <h3 data-page-node-id="GQ2v3C8fMex9RWEuFFuVE0">HTML 基础</h3>
+                    <p data-page-node-id="5uP4AaHEwzHS5F8Mb2yobJ">认识常用标签、页面结构与语义化写法，建立网页骨架。</p>
+                    <span class="lesson-link" data-page-node-id="uqNRGTemnE5JunsCpp6gVg">进入练习</span>
+                </a>
+                <a class="lesson" href="html.24001010915zsb.html" data-page-node-id="1kk0QSR63BG52NpGTmKjNg">
+                    <span class="lesson-number" data-page-node-id="eWbJnCSlssvYu0x9uvgN4F">02 / PROFILE</span>
+                    <h3 data-page-node-id="nzoJgkW28zso3g0lTLZdMz">自我介绍网页</h3>
+                    <p data-page-node-id="riCWi9aBQgB27AWA1RKd03">结合导航、图片、列表、表格和语义标签完成个人页面。</p>
+                    <span class="lesson-link" data-page-node-id="iMtG9oqkdP6Is1WJs46T3j">查看网页</span>
+                </a>
+                <a class="lesson" href="form.html" data-page-node-id="lBmvLYsRBndos2oqnu0VfU">
+                    <span class="lesson-number" data-page-node-id="653rpT9fnBTHRByI8lj3Ba">03 / INTERACTION</span>
+                    <h3 data-page-node-id="QCU6CRGPhSoa9Fxgb2KDjF">留言表单</h3>
+                    <p data-page-node-id="F8bRPGc2VRWxCoktCx5GHJ">练习文本框、单选框、复选框、下拉菜单和文件上传。</p>
+                    <span class="lesson-link" data-page-node-id="S5qu11FGgLnWGGVvuNSy4E">打开表单</span>
+                </a>
+                <a class="lesson" href="submit.html" data-page-node-id="XXvZbqc55CIniCtSrXKkIR">
+                    <span class="lesson-number" data-page-node-id="YoBcew5RXt1961EFasicju">04 / HOMEWORK</span>
+                    <h3 data-page-node-id="78prcS62vsDHcUXyhPoGDG">当堂课作业提交</h3>
+                    <p data-page-node-id="MOeA1Gxn6Wx1BwhAyaOnmE">提交本次课的练习作业：学号、课次、作业说明与链接。</p>
+                    <span class="lesson-link" data-page-node-id="ObnQAQwI4bX3AMRt6UB7Sz">去提交</span>
+                </a>
+                <a class="lesson" href="cascade.html" data-page-node-id="K7KtxykytvFMPNS1Dmm5kV">
+                    <span class="lesson-number" data-page-node-id="AfeZBSbc4TCwBMENlyTace">05 / CASCADE</span>
+                    <h3 data-page-node-id="OHPPNfN0xvIShV1G3K6tdA">CSS 层叠与盒模型</h3>
+                    <p data-page-node-id="IVarol2flymmGwsRd99Scc">用通配/标签/类/后代/id 选择器演示层叠、继承与盒模型。</p>
+                    <span class="lesson-link" data-page-node-id="d8pJwbUUSqoLpmYduwtwmr">查看演示</span>
+                </a>
+                <a class="lesson" href="css-diner.html" data-page-node-id="370aFqGhYzW2Hgxggha3Lt">
+                    <span class="lesson-number" data-page-node-id="weasrGigQav4bwGe8cpdBV">06 / SELECTORS</span>
+                    <h3 data-page-node-id="P7FGf9hvfbKwpCdLa06kZr">CSS Diner 通关答案</h3>
+                    <p data-page-node-id="yT0P6KQ6rVfIWzmALdEGZe">CSS 选择器小游戏 32 关答案汇总，作为课堂测试内容。</p>
+                    <span class="lesson-link" data-page-node-id="VDAL0ZGbsp1M0KZ8EawTd2">查看答案</span>
+                </a>
+                <a class="lesson" href="stack.html">
+                    <span class="lesson-number">07 / GALLERY</span>
+                    <h3>图文列表（上图下文 / 图上文字）</h3>
+                    <p>上图下文与图上文字两种卡片布局，均用 ul/li/a/img/p 实现。</p>
+                    <span class="lesson-link">查看相册</span>
+                </a>
+                <a class="lesson" href="layout-homework.html">
+                    <span class="lesson-number">08 / LAYOUT</span>
+                    <h3>网页整体布局课后作业</h3>
+                    <p>课后作业答案：用 header/nav/main/aside/footer 组织整体结构，Flex 实现 1200px 版心两栏布局（主 792 + 侧 400 + 间隔 8px）。</p>
+                    <span class="lesson-link">查看答案</span>
+                </a>
+                <a class="lesson" href="css0915.html">
+                    <span class="lesson-number">09 / PRACTICE</span>
+                    <h3>实践代码</h3>
+                    <p>CSS 选择器与 animation 练习：grid 布局 + nth 选择器 / hover 变换 / 渐变 / 伪元素。</p>
+                    <span class="lesson-link">查看演示</span>
+                </a>
+                <a class="lesson" href="iconfont-1.html">
+                    <span class="lesson-number">10 / ICON FONT</span>
+                    <h3>图标字体 · Font Awesome</h3>
+                    <p>字体图标方案：CDN 已落地到 cdn/ 目录，含 Solid / Regular / Brands 三套字形与用法对照。</p>
+                    <span class="lesson-link">查看图标</span>
+                </a>
+                <a class="lesson" href="iconfont-2.html">
+                    <span class="lesson-number">11 / ICON SVG</span>
+                    <h3>矢量图标 · Lucide</h3>
+                    <p>SVG 方案：同一个图标库的描边式图标，可调粗细、可改颜色，与字体图标逐项对比。</p>
+                    <span class="lesson-link">查看图标</span>
+                </a>
+                <a class="lesson" href="iconfont-3.html">
+                    <span class="lesson-number">12 / TABBAR · FONT</span>
+                    <h3>移动端下导航（字体图标）</h3>
+                    <p>固定的自适应宽度底栏，4 个导航项，配右上角数字徽章与红点，图标取自 font/iconfont.woff2。</p>
+                    <span class="lesson-link">查看导航</span>
+                </a>
+                <a class="lesson" href="iconfont-4.html">
+                    <span class="lesson-number">13 / TABBAR · SVG</span>
+                    <h3>移动端下导航（内联 SVG）</h3>
+                    <p>同款底栏改用 symbol + use 的矢量图标，描边粗细由 CSS 变量控制，滑杆实时调整。</p>
+                    <span class="lesson-link">查看导航</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="brief" aria-labelledby="brief-title" data-page-node-id="Q3mAVC1AYiEwaoplpCuegD">
+            <h2 id="brief-title" data-page-node-id="vhKSBitk0KCHdsxgoFy0DM">本次页面任务</h2>
+            <blockquote data-page-node-id="Cc37FDt41n0oAZYDSEKlC3">创建一个新页面，包括本目录下的所有网页的超链接，使用原生代码，不使用 cdn，新页面名称为 index.html，主题为朱思冰的《高级网页设计》课堂实践，美化页面，课堂目录中包含 HTML 基础、自我介绍网页、其余模块后续在增加。页面中包括本提示词。</blockquote>
+        </section>
+    </main>
+
+    <footer data-page-node-id="94kxCp87HMtcEjHN2jNhTd">朱思冰 · 《高级网页设计》课堂实践 · 2026</footer>
+</body>
+
+</html>

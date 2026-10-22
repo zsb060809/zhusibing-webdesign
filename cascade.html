@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>朱思冰 · CSS 层叠与继承、盒模型</title>
+    <!-- 外链式 CSS：cascade.css 演示层叠/继承/盒模型 -->
+    <link rel="stylesheet" href="cascade.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <h1 class="container-title">CSS 层叠与继承、盒模型</h1>
+        <h2>三个核心概念的可视化演示</h2>
+
+        <!-- 普通卡片：受 .container .card-wrap（后代选择器）影响 -->
+        <div class="card-wrap">
+            <p class="note-line">① 继承（Inheritance）</p>
+            <p>
+                本卡片没有单独设置 <code>color</code>，却显示白色文字——
+                因为 <code>color</code> 是从 <code>body</code> 标签选择器继承下来的。
+                这就是“继承”：部分属性会自动由父元素传递给子元素。
+            </p>
+        </div>
+
+        <!-- id 卡片：受 #card-wrap（id 选择器）影响，背景被覆盖成主色 -->
+        <div class="card-wrap" id="card-wrap">
+            <p class="note-line">② 层叠（Cascade）</p>
+            <p>
+                这张卡片同时命中 <code>.card-wrap</code>（类选择器）、
+                <code>.container .card-wrap</code>（后代选择器）和
+                <code>#card-wrap</code>（id 选择器）。
+                id 选择器优先级最高，所以背景变成了课程主色 #5b6cff，
+                覆盖了类/后代选择器的背景 —— 这就是“层叠”规则：
+                优先级高的样式生效（id &gt; 类 &gt; 标签 &gt; 通配）。
+            </p>
+        </div>
+
+        <!-- 盒模型可视化 -->
+        <div class="card-wrap">
+            <p class="note-line">③ 盒模型（Box Model）</p>
+            <p>每个元素都是一个盒子，由内到外：内容 → 内边距(padding) → 边框(border) → 外边距(margin)。</p>
+
+            <div class="box-demo">
+                这是一个盒子：<code>padding:16px</code>（内边距）＋
+                <code>border:4px</code>（边框）＋ <code>margin:14px</code>（外边距）。
+                边框是黄色，能直观看到盒子边界。
+            </div>
+
+            <div class="box-demo">
+                另一个盒子。两个盒子之间的空隙就是各自的
+                <code>margin</code>（外边距），盒子内部的留白是
+                <code>padding</code>（内边距）。
+            </div>
+        </div>
+
+        <div class="card-wrap">
+            <p>
+                <a href="index.html">← 返回课堂目录</a>
+            </p>
+        </div>
+
+    </div>
+</body>
+
+</html>

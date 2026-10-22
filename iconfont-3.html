@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>移动端下导航 · 字体图标方案 | 朱思冰的《高级网页设计》</title>
+    <link rel="stylesheet" href="font/iconfont.css">
+    <style>
+        /* =========================================================
+           移动端固定下导航（字体图标方案）
+           所有类名 / id 名统一 zsb_ 前缀
+           ========================================================= */
+        :root {
+            --zsb_ink: #17252b;
+            --zsb_ink_soft: #4f6269;
+            --zsb_ink_faint: #8a979c;
+            --zsb_paper: #f7f5ef;
+            --zsb_card: #fffdf8;
+            --zsb_line: rgba(23, 37, 43, .10);
+            --zsb_teal: #087f8c;
+            --zsb_teal_soft: #dff0ef;
+            --zsb_orange: #e97843;
+            --zsb_yellow: #f4c95d;
+            --zsb_red: #d1483e;
+            --zsb_col: 480px;
+            --zsb_bar: 66px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+            color: var(--zsb_ink);
+            background: var(--zsb_paper);
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: calc(var(--zsb_bar) + env(safe-area-inset-bottom) + 24px);
+        }
+
+        /* 页面整体收成一条手机宽度的内容列，桌面端也能看清移动端效果 */
+        .zsb_col {
+            width: 100%;
+            max-width: var(--zsb_col);
+            margin: 0 auto;
+            background: var(--zsb_paper);
+            min-height: 100vh;
+        }
+
+        /* ---------- 顶部说明条（非移动端组件，仅用于课堂对照） ---------- */
+        .zsb_note {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 10px 14px;
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--zsb_line);
+            font-size: 13px;
+            color: var(--zsb_ink_soft);
+        }
+
+        .zsb_note strong { color: var(--zsb_ink); font-weight: 600; letter-spacing: .02em; }
+
+        .zsb_note a {
+            color: var(--zsb_teal);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(8, 127, 140, .3);
+            padding-bottom: 1px;
+        }
+
+        .zsb_note a:hover { color: var(--zsb_orange); border-bottom-color: rgba(233, 120, 67, .5); }
+
+        /* ---------- 应用栏 ---------- */
+        .zsb_appbar {
+            position: sticky;
+            top: 0;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            background: rgba(247, 245, 239, .92);
+            backdrop-filter: saturate(140%) blur(8px);
+            border-bottom: 1px solid var(--zsb_line);
+        }
+
+        .zsb_appbar h1 { font-size: 20px; font-weight: 600; letter-spacing: .04em; }
+        .zsb_appbar p { font-size: 12px; color: var(--zsb_ink_faint); margin-top: 2px; letter-spacing: .06em; }
+
+        .zsb_avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--zsb_ink);
+            color: var(--zsb_yellow);
+            display: grid;
+            place-items: center;
+            font-size: 13px;
+            letter-spacing: .04em;
+        }
+
+        /* ---------- 内容区 ---------- */
+        .zsb_body { padding: 18px 20px 8px; }
+
+        .zsb_poster {
+            position: relative;
+            background: var(--zsb_ink);
+            color: var(--zsb_paper);
+            border-radius: 18px;
+            padding: 22px 20px 20px;
+            overflow: hidden;
+        }
+
+        .zsb_poster::after {
+            content: "";
+            position: absolute;
+            right: -34px;
+            bottom: -46px;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: var(--zsb_teal);
+            opacity: .45;
+        }
+
+        .zsb_poster span {
+            font-size: 11px;
+            letter-spacing: .22em;
+            color: var(--zsb_yellow);
+        }
+
+        .zsb_poster h2 {
+            position: relative;
+            font-size: 23px;
+            font-weight: 600;
+            line-height: 1.35;
+            margin-top: 10px;
+            letter-spacing: .01em;
+        }
+
+        .zsb_poster p {
+            position: relative;
+            margin-top: 8px;
+            font-size: 13px;
+            line-height: 1.7;
+            color: rgba(247, 245, 239, .72);
+            max-width: 22em;
+        }
+
+        .zsb_feed { margin-top: 20px; display: grid; gap: 12px; }
+
+        .zsb_card {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            background: var(--zsb_card);
+            border: 1px solid var(--zsb_line);
+            border-radius: 16px;
+            padding: 15px 16px;
+        }
+
+        .zsb_thumb {
+            flex: none;
+            width: 46px;
+            height: 46px;
+            border-radius: 13px;
+            display: grid;
+            place-items: center;
+            background: var(--zsb_teal_soft);
+            color: var(--zsb_teal);
+            font-size: 20px;
+        }
+
+        .zsb_card:nth-child(2) .zsb_thumb { background: #fbeade; color: var(--zsb_orange); }
+        .zsb_card:nth-child(3) .zsb_thumb { background: #fbf2d9; color: #96731c; }
+
+        .zsb_card h3 { font-size: 15px; font-weight: 600; letter-spacing: .01em; }
+        .zsb_card p { font-size: 12.5px; line-height: 1.65; color: var(--zsb_ink_soft); margin-top: 4px; }
+
+        /* ---------- 要点说明 ---------- */
+        .zsb_doc { margin-top: 26px; }
+
+        .zsb_doc h2 {
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: .04em;
+            padding-left: 10px;
+            border-left: 3px solid var(--zsb_orange);
+        }
+
+        .zsb_doc ul { list-style: none; margin-top: 12px; display: grid; gap: 9px; }
+
+        .zsb_doc li {
+            position: relative;
+            padding-left: 16px;
+            font-size: 13px;
+            line-height: 1.75;
+            color: var(--zsb_ink_soft);
+        }
+
+        .zsb_doc li::before {
+            content: "";
+            position: absolute;
+            left: 2px;
+            top: 9px;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--zsb_teal);
+        }
+
+        .zsb_doc code {
+            font-family: "SFMono-Regular", Consolas, monospace;
+            font-size: 12px;
+            background: rgba(8, 127, 140, .09);
+            color: var(--zsb_teal);
+            padding: 1px 5px;
+            border-radius: 4px;
+        }
+
+        .zsb_code {
+            margin-top: 14px;
+            background: var(--zsb_ink);
+            color: #dfe7e6;
+            border-radius: 14px;
+            padding: 16px 18px;
+            font-family: "SFMono-Regular", Consolas, monospace;
+            font-size: 12px;
+            line-height: 1.8;
+            overflow-x: auto;
+            white-space: pre;
+        }
+
+        .zsb_code b { color: var(--zsb_yellow); font-weight: 400; }
+        .zsb_code i { color: var(--zsb_teal_soft); font-style: normal; }
+
+        /* =======================================================
+           核心：固定的自适应宽度下导航
+           ======================================================= */
+        .zsb_tabbar {
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 100%;                 /* 自适应宽度 */
+            max-width: var(--zsb_col);   /* 与内容列同宽，桌面端不会拉成一条 */
+            z-index: 20;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            align-items: stretch;
+            background: rgba(255, 253, 248, .96);
+            backdrop-filter: saturate(150%) blur(10px);
+            border-top: 1px solid var(--zsb_line);
+            box-shadow: 0 -6px 24px rgba(23, 37, 43, .07);
+            padding-bottom: env(safe-area-inset-bottom);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .zsb_tab {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            height: var(--zsb_bar);
+            text-decoration: none;
+            color: var(--zsb_ink_faint);
+            -webkit-tap-highlight-color: transparent;
+            transition: color .22s ease;
+        }
+
+        /* 图标容器：徽章与红点都以它为定位基准 */
+        .zsb_tab_mark {
+            position: relative;
+            display: grid;
+            place-items: center;
+            width: 44px;
+            height: 26px;
+            border-radius: 13px;
+            transition: background .22s ease;
+        }
+
+        .zsb_tab .zsb_icon { font-size: 19px; line-height: 1; }
+
+        .zsb_tab_label {
+            font-size: 11px;
+            letter-spacing: .08em;
+            line-height: 1;
+        }
+
+        /* 选中态：图标加一层淡青底，文字转墨色 */
+        .zsb_tab.is_on { color: var(--zsb_ink); }
+        .zsb_tab.is_on .zsb_tab_mark { background: var(--zsb_teal_soft); }
+        .zsb_tab.is_on .zsb_icon { color: var(--zsb_teal); }
+        .zsb_tab.is_on .zsb_tab_label { font-weight: 600; }
+
+        /* 数字徽章（右上角，>99 显示 99+） */
+        .zsb_badge {
+            position: absolute;
+            top: -3px;
+            left: 50%;
+            margin-left: 4px;
+            min-width: 17px;
+            height: 17px;
+            padding: 0 5px;
+            border-radius: 9px;
+            background: var(--zsb_red);
+            color: #fff;
+            font-size: 10.5px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 17px;
+            text-align: center;
+            box-shadow: 0 0 0 2px rgba(255, 253, 248, .96);
+        }
+
+        /* 红点（只提示不计数） */
+        .zsb_dot {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            margin-left: 8px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--zsb_red);
+            box-shadow: 0 0 0 2px rgba(255, 253, 248, .96);
+        }
+
+        .zsb_foot {
+            padding: 22px 20px 10px;
+            font-size: 11.5px;
+            color: var(--zsb_ink_faint);
+            letter-spacing: .04em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="zsb_col">
+        <!-- 说明条：课堂对照用，不属于移动端组件 -->
+        <nav class="zsb_note">
+            <strong>字体图标方案</strong>
+            <span>iconfont-3.html</span>
+            <a href="iconfont-4.html">看 SVG 方案 →</a>
+            <a href="index.html">返回首页</a>
+        </nav>
+
+        <header class="zsb_appbar">
+            <div>
+                <h1>首页</h1>
+                <p>ZHU SIBING · 24001010915</p>
+            </div>
+            <div class="zsb_avatar">zsb</div>
+        </header>
+
+        <main class="zsb_body">
+            <section class="zsb_poster">
+                <span>TABBAR / 字体图标</span>
+                <h2>四个入口，<br>一条固定不动的底栏。</h2>
+                <p>图标来自 iconfont.woff2，用 ::before 的 content 写 Unicode 码位渲染，可用 CSS 直接控制颜色与字号。</p>
+            </section>
+
+            <section class="zsb_feed">
+                <article class="zsb_card">
+                    <span class="zsb_thumb"><i class="zsb_icon zsb_icon_home" aria-hidden="true"></i></span>
+                    <div>
+                        <h3>首页</h3>
+                        <p>默认选中项，图标底色为淡青圆角块。</p>
+                    </div>
+                </article>
+                <article class="zsb_card">
+                    <span class="zsb_thumb"><i class="zsb_icon zsb_icon_compass" aria-hidden="true"></i></span>
+                    <div>
+                        <h3>发现</h3>
+                        <p>常规状态，图标与文字同为浅灰墨色。</p>
+                    </div>
+                </article>
+                <article class="zsb_card">
+                    <span class="zsb_thumb"><i class="zsb_icon zsb_icon_bell" aria-hidden="true"></i></span>
+                    <div>
+                        <h3>消息 · 带数字徽章</h3>
+                        <p>右上角红色徽章，超过 99 折叠为 99+。</p>
+                    </div>
+                </article>
+            </section>
+
+            <section class="zsb_doc">
+                <h2>实现要点</h2>
+                <ul>
+                    <li>用 <code>position: fixed</code> + <code>bottom: 0</code> 让底栏脱离文档流常驻视口底部。</li>
+                    <li><code>width: 100%</code> 保证自适应；<code>max-width</code> 与内容列一致，桌面端不会拉成一条长带。</li>
+                    <li><code>left: 50%</code> 配合 <code>translateX(-50%)</code> 水平居中。</li>
+                    <li><code>grid-template-columns: repeat(4, 1fr)</code> 四项等分，增删项目只改一个数字。</li>
+                    <li><code>padding-bottom: env(safe-area-inset-bottom)</code> 避让 iPhone 底部小黑条。</li>
+                    <li>徽章父级设 <code>position: relative</code>，徽章用 <code>position: absolute</code> 定位到右上角。</li>
+                </ul>
+                <pre class="zsb_code"><i>&lt;!-- 字体图标：类名 + 码位 --&gt;</i>
+&lt;a class="zsb_tab is_on" href="#"&gt;
+  &lt;span class="zsb_tab_mark"&gt;
+    &lt;i class="zsb_icon zsb_icon_home"&gt;&lt;/i&gt;
+  &lt;/span&gt;
+  &lt;span class="zsb_tab_label"&gt;首页&lt;/span&gt;
+&lt;/a&gt;
+
+<b>.zsb_icon_home::before { content: "\f015"; }</b>
+<i>/* 底栏：固定 + 自适应宽度 */</i>
+<b>.zsb_tabbar {
+  position: fixed;
+  left: 50%; transform: translateX(-50%);
+  bottom: 0; width: 100%; max-width: 480px;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+}</b></pre>
+            </section>
+
+            <p class="zsb_foot">朱思冰 · 《高级网页设计》课堂实践 · 图标字体下导航</p>
+        </main>
+    </div>
+
+    <!-- 固定下导航 -->
+    <nav class="zsb_tabbar" aria-label="底部导航">
+        <a class="zsb_tab is_on" href="#" aria-current="page">
+            <span class="zsb_tab_mark">
+                <i class="zsb_icon zsb_icon_home" aria-hidden="true"></i>
+            </span>
+            <span class="zsb_tab_label">首页</span>
+        </a>
+
+        <a class="zsb_tab" href="#">
+            <span class="zsb_tab_mark">
+                <i class="zsb_icon zsb_icon_compass" aria-hidden="true"></i>
+            </span>
+            <span class="zsb_tab_label">发现</span>
+        </a>
+
+        <a class="zsb_tab" href="#">
+            <span class="zsb_tab_mark">
+                <i class="zsb_icon zsb_icon_bell" aria-hidden="true"></i>
+                <em class="zsb_badge">6</em>
+            </span>
+            <span class="zsb_tab_label">消息</span>
+        </a>
+
+        <a class="zsb_tab" href="#">
+            <span class="zsb_tab_mark">
+                <i class="zsb_icon zsb_icon_user" aria-hidden="true"></i>
+                <em class="zsb_dot" aria-label="有更新"></em>
+            </span>
+            <span class="zsb_tab_label">我的</span>
+        </a>
+    </nav>
+
+    <script>
+        /* 切换选中项：变量统一 zsb_ 前缀 */
+        var zsb_tabs = document.querySelectorAll('.zsb_tabbar .zsb_tab');
+        zsb_tabs.forEach(function (zsb_item) {
+            zsb_item.addEventListener('click', function (zsb_e) {
+                zsb_e.preventDefault();
+                zsb_tabs.forEach(function (zsb_t) { zsb_t.classList.remove('is_on'); });
+                zsb_item.classList.add('is_on');
+                /* 点掉当前项的红点 / 徽章，模拟"已读" */
+                var zsb_mark = zsb_item.querySelector('.zsb_badge, .zsb_dot');
+                if (zsb_mark) { zsb_mark.style.display = 'none'; }
+            });
+        });
+    </script>
+</body>
+
+</html>

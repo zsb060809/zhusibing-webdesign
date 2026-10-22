@@ -1,0 +1,14 @@
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 临时文件
+*.log
+*.tmp
+_shot_*.png
+_zsb_*.js
+node_modules/
+
+# IDE 规则配置（不属于课程作品）
+.trae/

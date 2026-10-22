@@ -1,0 +1,41 @@
+/* =============================================================
+   iconfont.css —— 自绘图标字体（iconfont.woff2）
+   命名规范：所有类名以 zsb_ 开头
+   用法：<i class="zsb_icon zsb_icon_home" aria-hidden="true"></i>
+   ============================================================= */
+
+/* 1. 声明字体：只加载 woff2，体积最小，现代浏览器全支持 */
+@font-face {
+    font-family: "zsbiconfont";
+    src: url("iconfont.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+    /* block：图标字体不允许出现"先空白后跳字"，宁可短暂不可见 */
+}
+
+/* 2. 图标基类：统一盒模型、抗锯齿与对齐方式 */
+.zsb_icon {
+    font-family: "zsbiconfont" !important;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    display: inline-block;
+    vertical-align: -0.125em;          /* 与相邻汉字视觉居中 */
+    speak: never;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* 3. 四个导航图标：content 写 Unicode 码位（PUA 私有区）
+      首页 f015 · 发现 f14e · 消息 f0f3 · 我的 f007 */
+.zsb_icon_home::before     { content: "\f015"; }
+.zsb_icon_compass::before  { content: "\f14e"; }
+.zsb_icon_bell::before     { content: "\f0f3"; }
+.zsb_icon_user::before     { content: "\f007"; }
+
+/* 4. 辅助图标（页面说明区使用） */
+.zsb_icon_heart::before    { content: "\f004"; }
+.zsb_icon_book::before     { content: "\f02d"; }

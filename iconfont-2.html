@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SVG 图标原理与用法：Lucide 本地化实践 · 朱思冰">
+    <title>SVG 图标 · Lucide · 朱思冰</title>
+    <style>
+        :root {
+            --zsb-ink: #17252b;
+            --zsb-muted: #64757a;
+            --zsb-paper: #f7f5ef;
+            --zsb-card: #fffdf8;
+            --zsb-line: #dedbd0;
+            --zsb-teal: #087f8c;
+            --zsb-orange: #e97843;
+            --zsb-orange-soft: #fceee6;
+            --zsb-yellow: #f4c95d;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            color: var(--zsb-ink);
+            background: var(--zsb-paper);
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", sans-serif;
+            line-height: 1.75;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .zsb_topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px clamp(22px, 6vw, 88px);
+            border-bottom: 1px solid var(--zsb-line);
+            background: rgba(247, 245, 239, .92);
+            position: sticky;
+            top: 0;
+            z-index: 20;
+        }
+
+        .zsb_brand {
+            font-weight: 800;
+            letter-spacing: .08em;
+        }
+
+        .zsb_brand span {
+            color: var(--zsb-orange);
+        }
+
+        .zsb_back {
+            color: var(--zsb-muted);
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: color .2s;
+        }
+
+        .zsb_back:hover {
+            color: var(--zsb-orange);
+        }
+
+        .zsb_hero {
+            position: relative;
+            overflow: hidden;
+            padding: clamp(56px, 9vw, 110px) clamp(22px, 9vw, 140px) clamp(48px, 7vw, 84px);
+            background: var(--zsb-orange);
+            color: #fffdf8;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: clamp(28px, 5vw, 64px);
+            align-items: center;
+        }
+
+        .zsb_hero::after {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            right: 6%;
+            top: 14%;
+            border: 1px solid rgba(255, 255, 255, .28);
+            transform: rotate(-14deg);
+            pointer-events: none;
+        }
+
+        .zsb_hero h1 {
+            margin: 0 0 6px;
+            font-size: clamp(36px, 6vw, 68px);
+            line-height: 1.12;
+            letter-spacing: .02em;
+        }
+
+        .zsb_hero_sub {
+            margin: 0 0 18px;
+            color: var(--zsb-yellow);
+            font-size: 15px;
+            letter-spacing: .04em;
+        }
+
+        .zsb_hero p {
+            margin: 0;
+            max-width: 46em;
+            color: rgba(255, 253, 248, .9);
+            font-size: 16px;
+        }
+
+        .zsb_glyph {
+            position: relative;
+            z-index: 1;
+            color: #fffdf8;
+        }
+
+        .zsb_glyph svg {
+            width: clamp(96px, 15vw, 190px);
+            height: clamp(96px, 15vw, 190px);
+            stroke-width: 1.25;
+            filter: drop-shadow(0 14px 26px rgba(0, 0, 0, .18));
+        }
+
+        .zsb_glyph_cap {
+            position: absolute;
+            right: 4px;
+            bottom: -6px;
+            font-size: 12px;
+            color: rgba(255, 253, 248, .78);
+            letter-spacing: .06em;
+        }
+
+        .zsb_wrap {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 clamp(22px, 5vw, 48px);
+        }
+
+        .zsb_section {
+            padding: clamp(48px, 7vw, 84px) 0;
+        }
+
+        .zsb_section + .zsb_section {
+            border-top: 1px solid var(--zsb-line);
+        }
+
+        .zsb_h2 {
+            margin: 0 0 10px;
+            font-size: clamp(24px, 3vw, 34px);
+            line-height: 1.3;
+            letter-spacing: .01em;
+        }
+
+        .zsb_lead {
+            margin: 0 0 34px;
+            max-width: 52em;
+            color: var(--zsb-muted);
+            font-size: 15px;
+        }
+
+        .zsb_cols {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+        }
+
+        .zsb_col {
+            background: var(--zsb-card);
+            border: 1px solid var(--zsb-line);
+            border-radius: 4px;
+            padding: 26px 24px 28px;
+        }
+
+        .zsb_col_icon {
+            color: var(--zsb-orange);
+            margin-bottom: 14px;
+        }
+
+        .zsb_col_icon svg {
+            width: 28px;
+            height: 28px;
+            stroke-width: 1.75;
+        }
+
+        .zsb_col h3 {
+            margin: 0 0 8px;
+            font-size: 17px;
+        }
+
+        .zsb_col p {
+            margin: 0;
+            font-size: 14px;
+            color: var(--zsb-muted);
+        }
+
+        .zsb_group {
+            margin-bottom: 34px;
+        }
+
+        .zsb_group_name {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin: 0 0 16px;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .zsb_group_name em {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 13px;
+            color: var(--zsb-muted);
+        }
+
+        .zsb_grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+            gap: 12px;
+        }
+
+        .zsb_cell {
+            background: var(--zsb-card);
+            border: 1px solid var(--zsb-line);
+            border-radius: 4px;
+            padding: 20px 8px 14px;
+            text-align: center;
+            color: var(--zsb-ink);
+            transition: transform .18s ease, border-color .18s ease, color .18s ease;
+        }
+
+        .zsb_cell:hover {
+            transform: translateY(-3px);
+            border-color: var(--zsb-orange);
+            color: var(--zsb-orange);
+        }
+
+        .zsb_cell_icon {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .zsb_cell_icon svg {
+            width: 26px;
+            height: 26px;
+            stroke-width: 1.75;
+        }
+
+        .zsb_cell_name {
+            font-size: 11px;
+            color: var(--zsb-muted);
+            word-break: break-all;
+            line-height: 1.4;
+        }
+
+        /* 描边粗细互动演示 */
+        .zsb_demo {
+            display: grid;
+            grid-template-columns: auto minmax(0, 1fr);
+            gap: clamp(24px, 4vw, 48px);
+            align-items: center;
+            background: var(--zsb-card);
+            border: 1px solid var(--zsb-line);
+            border-radius: 4px;
+            padding: clamp(24px, 4vw, 40px);
+        }
+
+        .zsb_demo_stage {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .zsb_demo_stage svg {
+            width: 56px;
+            height: 56px;
+            color: var(--zsb-orange);
+        }
+
+        .zsb_slider {
+            width: 100%;
+            max-width: 340px;
+            accent-color: var(--zsb-orange);
+        }
+
+        .zsb_demo_meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: var(--zsb-muted);
+            max-width: 340px;
+            margin-bottom: 8px;
+        }
+
+        .zsb_demo_note {
+            margin: 14px 0 0;
+            font-size: 13px;
+            color: var(--zsb-muted);
+        }
+
+        .zsb_code {
+            background: var(--zsb-ink);
+            color: #e6efef;
+            border-radius: 4px;
+            padding: 22px 24px;
+            overflow-x: auto;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 13px;
+            line-height: 1.85;
+            margin: 0;
+        }
+
+        .zsb_code .zsb_c_tag {
+            color: var(--zsb-yellow);
+        }
+
+        .zsb_code .zsb_c_val {
+            color: #9fd8c4;
+        }
+
+        .zsb_code .zsb_c_note {
+            color: #8fa3a6;
+        }
+
+        .zsb_table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            background: var(--zsb-card);
+            border: 1px solid var(--zsb-line);
+        }
+
+        .zsb_table th,
+        .zsb_table td {
+            padding: 14px 18px;
+            text-align: left;
+            border-bottom: 1px solid var(--zsb-line);
+            vertical-align: top;
+        }
+
+        .zsb_table th {
+            background: var(--zsb-orange-soft);
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .zsb_table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .zsb_table td:first-child {
+            color: var(--zsb-muted);
+            width: 22%;
+        }
+
+        .zsb_foot {
+            padding: 34px clamp(22px, 6vw, 88px);
+            border-top: 1px solid var(--zsb-line);
+            color: var(--zsb-muted);
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 720px) {
+            .zsb_hero {
+                grid-template-columns: 1fr;
+            }
+
+            .zsb_demo {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="zsb_topbar">
+        <div class="zsb_brand">朱思冰<span>·</span>图标实践</div>
+        <a class="zsb_back" href="index.html"><i data-lucide="arrow-left"></i> 返回课堂目录</a>
+    </header>
+
+    <section class="zsb_hero">
+        <div>
+            <p class="zsb_hero_sub">Lucide 0.469 · 本地 CDN 引用</p>
+            <h1>SVG 图标</h1>
+            <p>图标本身就是一段矢量图形描述。Lucide 在运行时把占位标签替换成真正的 svg 标签，图形以描边方式绘制，粗细、端点、颜色都能单独调整。</p>
+        </div>
+        <div class="zsb_glyph">
+            <i data-lucide="boxes"></i>
+            <span class="zsb_glyph_cap">viewBox 0 0 24 24</span>
+        </div>
+    </section>
+
+    <main class="zsb_wrap">
+
+        <section class="zsb_section">
+            <h2 class="zsb_h2">它是怎么跑起来的</h2>
+            <p class="zsb_lead">SVG 不靠字体，靠的是矢量描述加运行时替换。</p>
+            <div class="zsb_cols">
+                <div class="zsb_col">
+                    <span class="zsb_col_icon"><i data-lucide="pen-tool"></i></span>
+                    <h3>路径描述形状</h3>
+                    <p>每个图标是一组 path、circle、line，按 24×24 的坐标系画出轮廓，不依赖任何字体文件。</p>
+                </div>
+                <div class="zsb_col">
+                    <span class="zsb_col_icon"><i data-lucide="minus"></i></span>
+                    <h3>描边而非填充</h3>
+                    <p>Lucide 用 stroke 画线、fill 设为 none，所以线条粗细干净统一，放大后不会糊。</p>
+                </div>
+                <div class="zsb_col">
+                    <span class="zsb_col_icon"><i data-lucide="sliders-horizontal"></i></span>
+                    <h3>属性随时可调</h3>
+                    <p>stroke-width、stroke-linecap、color 都是普通 CSS 属性，改一个值，整组图标跟着变。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="zsb_section">
+            <h2 class="zsb_h2">图标画廊</h2>
+            <p class="zsb_lead">以下图标由本地 cdn/lucide/lucide.min.js 在页面加载时生成。</p>
+
+            <div class="zsb_group">
+                <h3 class="zsb_group_name">常用界面 <em>interface</em></h3>
+                <div class="zsb_grid">
+                    <div class="zsb_cell"><span class="zsb_cell_icon"><i data-lucide="house"></i></span><span class="zsb_cell_name">house</span></div>
+                    <div class="zsb_cell"><span class="zsb_cell_icon"><i data-lucide="compass"></i></span><span class="zsb_cell_name">compass</span></div>
+                    <div class="zsb_cell"><span class="zsb_cell_icon"><i data-lucide="bell"></i></span><span class="zsb_cell_name">bell</span></div>
+                    <div class="zsb_cell"><span class="zsb_cell_icon"><i data-lucide="user"></i></span><span class="zsb_cell_name">user</span></div>
+                    <div class="zsb_cell"><span class="zsb_cell_icon"><i data-lucide="search"></i></span><span class="zsb_cell_name">search</span></div>
+                    <div class="zsb_cell"><span class="zsb_cell_icon"><i data-lucide="settings"></i></span><span class="zsb_cell_name">settings</span></div>
+                    <div class="zsb_cell"><span class="zsb_cell_icon"><i data-lucide="shopping-cart"></i></span><span class="zsb_cell_name">cart</span></div>
+                    <div class="zsb_cell"><span class="zsb_cell_icon"><i data-lucide="heart"></i></span><span class="zsb_cell_name">heart</span></div>
+                </div>
+            </div>
+
+            <div class="zsb_group">
+                <h3 class="zsb_group_name">文件与通信 <em>files &amp; comms</em></h3>
+                <div class="zsb_grid">
+                    <div class="zsb_cell"><span class="zsb_cell_icon"><i data-lucide="folder"></i></span><span class="zsb_cell_name">folder</span></div>
+                    <div class="zsb_cell"><span class="zsb_cell_icon"><i data-lucide="mail"></i></span><span class="zsb_cell_name">mail</span></div>
+                    <div class="zsb_cell"><span class="zsb_cell_icon"><i data-lucide="message-circle"></i></span><span class="zsb_cell_name">message</span></div>
+                    <div class="zsb_cell"><span class="zsb_cell_icon"><i data-lucide="image"></i></span><span class="zsb_cell_name">image</span></div>
+                    <div class="zsb_cell"><span class="zsb_cell_icon"><i data-lucide="camera"></i></span><span class="zsb_cell_name">camera</span></div>
+                    <div class="zsb_cell"><span class="zsb_cell_icon"><i data-lucide="music"></i></span><span class="zsb_cell_name">music</span></div>
+                    <div class="zsb_cell"><span class="zsb_cell_icon"><i data-lucide="clock"></i></span><span class="zsb_cell_name">clock</span></div>
+                    <div class="zsb_cell"><span class="zsb_cell_icon"><i data-lucide="star"></i></span><span class="zsb_cell_name">star</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="zsb_section">
+            <h2 class="zsb_h2">只有 SVG 做得到的事</h2>
+            <p class="zsb_lead">拖动滑块改变描边粗细——这是字体图标做不到的，因为它只能整体缩放。</p>
+            <div class="zsb_demo">
+                <div class="zsb_demo_stage" id="zsb_stage">
+                    <i data-lucide="house"></i>
+                    <i data-lucide="compass"></i>
+                    <i data-lucide="bell"></i>
+                    <i data-lucide="user"></i>
+                </div>
+                <div>
+                    <div class="zsb_demo_meta">
+                        <label for="zsb_stroke">stroke-width</label>
+                        <span id="zsb_stroke_val">1.75</span>
+                    </div>
+                    <input class="zsb_slider" type="range" id="zsb_stroke" min="0.5" max="3.5" step="0.25" value="1.75">
+                    <p class="zsb_demo_note">滑块修改的是 CSS 变量，四个图标同时响应。字体图标要达到类似效果只能换一套字重不同的字体文件。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="zsb_section">
+            <h2 class="zsb_h2">怎么用</h2>
+            <p class="zsb_lead">引入脚本，写占位标签，最后调用一次生成。</p>
+            <pre class="zsb_code"><span class="zsb_c_note">&lt;!-- ① 引入本地 Lucide 脚本 --&gt;</span>
+&lt;<span class="zsb_c_tag">script</span> src=<span class="zsb_c_val">"cdn/lucide/lucide.min.js"</span>&gt;&lt;/<span class="zsb_c_tag">script</span>&gt;
+
+<span class="zsb_c_note">&lt;!-- ② 用 data-lucide 写占位标签 --&gt;</span>
+&lt;<span class="zsb_c_tag">i</span> data-lucide=<span class="zsb_c_val">"house"</span>&gt;&lt;/<span class="zsb_c_tag">i</span>&gt;
+&lt;<span class="zsb_c_tag">i</span> data-lucide=<span class="zsb_c_val">"compass"</span>&gt;&lt;/<span class="zsb_c_tag">i</span>&gt;
+
+<span class="zsb_c_note">// ③ 页面加载后一次性替换成真 SVG</span>
+<span class="zsb_c_tag">lucide</span>.createIcons();
+
+<span class="zsb_c_note">/* ④ 之后它就是一个普通 svg，可以按 CSS 控制 */</span>
+svg { <span class="zsb_c_tag">stroke-width</span>: <span class="zsb_c_val">1.75</span>; <span class="zsb_c_tag">color</span>: <span class="zsb_c_val">#e97843</span>; }</pre>
+        </section>
+
+        <section class="zsb_section">
+            <h2 class="zsb_h2">SVG 与字体图标的差别</h2>
+            <p class="zsb_lead">同一件事的两种做法，取舍点不同。</p>
+            <table class="zsb_table">
+                <thead>
+                    <tr>
+                        <th>对比项</th>
+                        <th>SVG</th>
+                        <th>字体图标</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>着色</td>
+                        <td>可多色，每条路径单独上色</td>
+                        <td>只能整体单色</td>
+                    </tr>
+                    <tr>
+                        <td>线条控制</td>
+                        <td>描边粗细、端点形状都能调</td>
+                        <td>受字体本身设计约束</td>
+                    </tr>
+                    <tr>
+                        <td>网络请求</td>
+                        <td>内联零请求；用脚本库则需先加载库</td>
+                        <td>一个字体文件即可</td>
+                    </tr>
+                    <tr>
+                        <td>语义</td>
+                        <td>可加 title、role，读屏更友好</td>
+                        <td>是字符，容易被读屏念成乱码</td>
+                    </tr>
+                    <tr>
+                        <td>动画</td>
+                        <td>可做路径描边、局部变形</td>
+                        <td>只能整体旋转或变色</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+
+    <footer class="zsb_foot">
+        <span>朱思冰 · 《高级网页设计》课堂实践 · 24001010915</span>
+        <span>Lucide 脚本已下载至 cdn/lucide/，离线可用</span>
+    </footer>
+
+    <script src="cdn/lucide/lucide.min.js"></script>
+    <script>
+        (function () {
+            var zsb_stage = document.getElementById('zsb_stage');
+            var zsb_slider = document.getElementById('zsb_stroke');
+            var zsb_val = document.getElementById('zsb_stroke_val');
+
+            lucide.createIcons();
+
+            function zsb_applyStroke() {
+                var zsb_w = zsb_slider.value;
+                zsb_stage.style.setProperty('--zsb-lucide-stroke', zsb_w);
+                zsb_val.textContent = zsb_w;
+                var zsb_svgs = zsb_stage.querySelectorAll('svg');
+                for (var zsb_i = 0; zsb_i < zsb_svgs.length; zsb_i++) {
+                    zsb_svgs[zsb_i].setAttribute('stroke-width', zsb_w);
+                }
+            }
+
+            zsb_slider.addEventListener('input', zsb_applyStroke);
+            zsb_applyStroke();
+        })();
+    </script>
+</body>
+
+</html>

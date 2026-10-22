@@ -1,0 +1,90 @@
+/* ============================================================
+   list.css —— 上图下文 / 图文列表样式（按课堂代码）
+   配套 stack.html 使用
+   选择器类型标注：
+   （1）标签选择器   —— * / img
+   （2）类选择器     —— .container / .list1 / .list2
+   （4）后代选择器   —— .list2 li / .list1 li a / .list1 li a p / .list2 p
+   （5）群组选择器   —— .list1,.list2 / .list1 li,.list2 li / .list1 li a,.list2 li a
+   ============================================================ */
+
+/* 通配选择器：清空默认间距，统一盒模型 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 标签选择器：图片块级显示、占满宽度、去边框 */
+img {
+    display: block;
+    width: 100%;
+    border: none;
+}
+
+/* 类选择器：页面主容器，固定宽度居中 */
+.container {
+    width: 1200px;
+    max-width: none;   /* 覆盖 html_basic.css 的 820px 限制，按课堂代码用 1200px */
+    margin: 0 auto;
+}
+
+/* 群组（并集）选择器：list1 / list2 共用弹性布局 */
+.list1, .list2 {
+    display: flex;
+    /* flex-wrap: wrap 换行 */
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    /* li 之间的间隔 */
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* 绝对定位的父元素设置相对定位（list2 用） */
+.list2 li {
+    position: relative;
+}
+
+/* 群组 + 后代：list1 / list2 每项不缩放，占约 1/3 宽 */
+.list1 li, .list2 li {
+    /* flex 参数不缩放，每项占 25%，基础间距是 10px */
+    flex: 0 0 calc(33.33% - 10px);
+}
+
+/* 后代：卡片链接整张可点 */
+.list1 li a, .list2 li a {
+    text-decoration: none;
+    color: black;
+    display: block;
+}
+
+/* 后代：list1 的文字在图片下方、水平居中 */
+.list1 li a p {
+    /* 文字水平居中 */
+    text-align: center;
+    /* 当文字的 height 和 line-height 一致时文字垂直居中 */
+    height: 36px;
+    line-height: 36px;
+    font-size: 16px;
+    font-weight: bold;
+    /* 文字间距 */
+    letter-spacing: 2px;
+}
+
+/* 后代：list2 的文字以绝对定位浮在图片底部（上图下文·覆盖式） */
+.list2 p {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(99, 100, 255, 0.8);
+    color: white;
+    text-align: center;
+    width: 100%;
+    font-size: 16px;
+    font-weight: bold;
+    /* 垂直居中 */
+    line-height: 36px;
+    height: 36px;
+}

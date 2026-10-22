@@ -1,0 +1,265 @@
+/* =========================================================
+   网页整体布局 课后作业样式
+   在老师课堂代码 layout004 基础上改的，尺寸按作业要求调成了 792/400/8。
+   下面每种选择器都标了类型。
+   ========================================================= */
+
+/* ① 通配选择器：清掉浏览器默认外边距/内边距，盒模型好算 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ② 标签选择器：整页文字基线（body 是标签） */
+body {
+    font-family: "Microsoft YaHei", sans-serif;
+    background: #f0f2f5;
+    color: #333;
+    line-height: 1.7;
+}
+
+/* ③ id 选择器：页头。老师课堂里 header 用了 position:relative，
+      这里照搬——因为里面 logo/login 要绝对定位，父级得先 relative */
+#header {
+    position: relative;
+    min-width: 1200px;
+    height: 90px;
+    background: rgb(45, 23, 255);
+    color: #fff;
+}
+
+/* ② 标签选择器：导航条（nav 是标签） */
+nav {
+    height: 60px;
+    background: #2e7d32;
+    color: #fff;
+    line-height: 60px;
+    text-align: center;
+    font-size: 18px;
+}
+
+/* ④ 类选择器：版心，固定 1200px 居中 */
+.wrap {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+/* ④ 类选择器：两栏容器。
+   作业 2.3 要求：display:flex 开启弹性，gap:8px 控制两栏间距。
+   注意：老师课堂用的是 gap:10px、主 780；作业改成了 792/400/8，
+   这里按作业来。间距一律用 gap，禁止用 margin 去挤。 */
+.content-row {
+    display: flex;     /* 父容器开启 flex */
+    gap: 8px;          /* 两栏间隔 8px（不用 margin） */
+    margin-top: 10px;
+}
+
+/* ② 标签选择器：主内容区，宽 792px */
+main {
+    width: 792px;      /* 作业规定主内容 792px */
+    background: #fff;
+    min-height: 640px;
+    padding: 16px;
+    border-radius: 6px;
+}
+
+/* ② 标签选择器：侧边栏，宽 400px */
+aside {
+    width: 400px;      /* 作业规定侧边栏 400px */
+    background: #fff;
+    min-height: 640px;
+    padding: 16px;
+    border-radius: 6px;
+}
+
+/* ② 标签选择器：页脚 */
+footer {
+    background: #37474f;
+    color: #fff;
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* 子绝父相：logo / login 绝对定位，挂在 #header 这个 relative 父级上 */
+.logo {
+    position: absolute;
+    top: 0;
+    left: 20px;
+    height: 90px;
+    line-height: 90px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.login {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    height: 90px;
+    line-height: 90px;
+}
+
+/* ================= 6 张图文卡片（作业 2.2） ================= */
+
+/* ④ 类选择器：卡片最外层 */
+.box {
+    margin-top: 14px;
+}
+
+/* ⑤ 后代选择器：.box 里面的 ul 才是 li 的直接父级，
+      所以 flex 要写在这里，卡片才会横排（这也是第一部分 bug3 的坑） */
+.box ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    list-style: none;   /* 去掉 li 默认的项目符号 */
+    padding: 0;
+}
+
+/* ⑤ 后代选择器：.box 里的每一个 li */
+.box li {
+    width: 300px;
+    overflow: hidden;     /* 防止图片放大后溢出 li，盖住旁边卡片 */
+    position: relative;   /* 子绝父相：给 .txt 当定位参照 */
+    border-radius: 6px;
+    list-style: none;
+}
+
+/* 卡片里的图片：默认状态就写好 transition，移入移出都有动画 */
+.box li img {
+    width: 100%;
+    display: block;
+    transition: transform .6s;   /* transition 写在默认，不是 :hover */
+}
+
+/* hover 时图片放大到 1.2 倍（transform 只动视觉，不挤布局） */
+.box li:hover img {
+    transform: scale(1.2);
+}
+
+/* 文字条：绝对定位贴在卡片底部，盖一层半透明黑底 */
+.txt {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    color: #fff;
+    background: rgba(0, 0, 0, .6);
+    padding-left: 10px;
+    font-size: 14px;
+    transition: height .4s;     /* 高度变化也加过渡，文字展开才平滑 */
+}
+
+/* 奇数卡片（:nth-child(odd)）hover 时，文字条铺满整张卡片 */
+.box li:nth-child(odd):hover .txt {
+    height: 100%;
+}
+
+/* ================= 第四部分：纯 CSS 回到顶部按钮 ================= */
+
+/* ③ id 选择器：回到顶部。纯 CSS，不写 JS */
+#backTop {
+    position: fixed;        /* 固定在视口，不随滚动走 */
+    left: 20px;
+    bottom: 20px;
+    width: 50px;
+    height: 50px;
+    background: #5b6cff;
+    color: #fff;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 22px;
+    opacity: .5;            /* 初始半透明 */
+    z-index: 999;           /* 浮在页面内容之上 */
+    transition: all .3s;
+}
+
+#backTop:hover {
+    opacity: 1;             /* hover 完全不透明 */
+    transform: scale(1.1);  /* 同时轻微放大 */
+}
+
+/* ================= 答案区排版（下半页） ================= */
+
+/* ④ 类选择器：答案容器 */
+.hw {
+    width: 1100px;
+    margin: 30px auto;
+    background: #fff;
+    padding: 30px 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px #00000010;
+}
+
+/* ⑥ 群组选择器：多个标题一起设，省得写三遍 */
+.hw h1,
+.hw h2,
+.hw h3 {
+    color: #5b6cff;
+    margin: 18px 0 8px;
+}
+
+.hw h1 {
+    text-align: center;
+    border-bottom: 2px solid #5b6cff;
+    padding-bottom: 12px;
+}
+
+/* 行内代码/代码块 */
+.hw code {
+    background: #eef1f8;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-family: Consolas, monospace;
+    color: #d6336c;
+}
+
+.hw pre {
+    background: #282c34;
+    color: #abb2bf;
+    padding: 14px;
+    border-radius: 6px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+/* 找错：红框是 bug，绿框是改法 */
+.bug {
+    border-left: 4px solid #e53935;
+    background: #fdecea;
+    padding: 8px 14px;
+    margin: 10px 0;
+}
+
+.fix {
+    border-left: 4px solid #43a047;
+    background: #e8f5e9;
+    padding: 8px 14px;
+    margin: 10px 0;
+}
+
+/* 父 relative 子 absolute 示意图外框 */
+.diagram {
+    background: #eef3ff;
+    border: 1px solid #cdd6f4;
+    border-radius: 6px;
+    padding: 12px;
+    margin: 12px 0;
+    text-align: center;
+}
+
+/* 手绘截图：宽度自适应，别撑出容器 */
+.diagram img {
+    max-width: 100%;
+    border-radius: 4px;
+}

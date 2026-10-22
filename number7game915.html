@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="SemcA8DJJ2ELcKMcpBm7Dg">
+<head data-page-node-id="ITyDTjWsSlpgt0TEkrUzI7">
+<meta charset="UTF-8" data-page-node-id="U1Nc2wkaRZDYaTsDkTp2aZ">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="VEt54YpF0hy7rO1A7DiRGx">
+<title>数7游戏 - 朱思冰</title>
+<link rel="stylesheet" href="number7game915.css" data-page-node-id="AIQNokmpwHcF7yFJG3mc39">
+</head>
+<body data-page-node-id="3WKXF50nFE3YN0XLtBykQ0">
+<h1 data-page-node-id="OOVjmAiFrnV60cc051eV3o">数7游戏 · 100</h1>
+<div class="rule" data-page-node-id="YHkQGu7dd04DIBN0wwbw3I">规则：数字中包含 7，或是 7 的倍数 → 显示【过】</div>
+<div id="stats" data-page-node-id="S9N8vRxtdlzhiT0vT5VH0l">
+  <span class="chip" data-page-node-id="eNHs7c8LeBQd38Y6brETG6">总数：100</span>
+  <span class="chip" data-page-node-id="u1PJX6ADzrfFSvdPqJeIV8">跳过：<b id="skip" data-page-node-id="7h1kOIok2asgdErFioGDFB">0</b></span>
+  <span class="chip" data-page-node-id="3r9GP38BAR51vpMrBLuGD4">留下：<b id="keep" data-page-node-id="3UPzmBjJT4O57Kyq1Vhkov">0</b></span>
+</div>
+<div id="grid" data-page-node-id="NgVhBEHjDSBqTVRLZqo0Go"></div>
+<div class="sign" data-page-node-id="caJCpvfAaLyAD94gMLfN9a">学号：24001010915　姓名：朱思冰</div>
+
+<script>
+  // 在网格中依次生成 1~100 的格子，并统计跳过数量
+  var grid = document.getElementById("grid");
+  var skip = 0;
+  for (var i = 1; i <= 100; i++) {
+    var box = document.createElement("div");
+    box.style.animationDelay = (i * 12) + "ms";
+    // 判断条件：能被 7 整除，或数字里含有 7
+    var hasSeven = String(i).indexOf("7") !== -1;
+    if (i % 7 === 0 || hasSeven) {
+      box.className = "cell pass";
+      box.textContent = "过";
+      skip++;
+    } else {
+      box.className = "cell";
+      box.textContent = i;
+    }
+    grid.appendChild(box);
+  }
+  document.getElementById("skip").textContent = skip;
+  document.getElementById("keep").textContent = 100 - skip;
+</script>
+</body>
+</html>
