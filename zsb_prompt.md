@@ -31,3 +31,26 @@
 - iconfont-3.html 用字体图标（::before content 码位）；iconfont-4.html 用内联 SVG symbol
 - 下导航：position:fixed + left/right:0 + 内层 max-width 480px 居中，实现「固定 + 自适应宽度」
 - 徽章：消息项数字徽章，我的项红点
+
+---
+
+## 2026-11-02 13:52 · 模型：DeepSeek-V4.1-Flash（WorkBuddy 环境）
+
+**提示词原文：**
+
+请给我新建一个HTML文件，显示tab选项卡，选项卡分别为国内新闻、省内新闻、国际新闻、最热新闻，国内新闻作为默认选项。文件单独放在JS文件夹中，外部引用，JS部分tab选项卡可复用。实现代码中包含事件监听，清除所有选项卡的选中状态再设置当前元素的选中状态。修改规则AGENTS.md，在新建一个html文件时，要加入注释，尤其是js部分代码的主要功能实现。注释内容包括：姓名，时间，使用模型、功能名称及简介。AGENTS.md 所有说明、检查条目统一简体中文；文件路径、HTML、CSS、JS 标识符保留英文。后续在这个项目里，生成文档、检查清单都遵守这条约定。
+
+
+---
+
+## 2026-11-02 14:19 · 模型：DeepSeek-V4.1-Flash（WorkBuddy 环境）
+
+**提示词原文：**
+
+https://spontaneous-valkyrie-4e4229.netlify.app/skill-github-pages-guide0 这是这堂课的任务，完成它（附图：课堂测试 3/4.jpg，汽车最新上市/即将上市选项卡表格效果图）
+
+**执行摘要：**
+
+- 参照 4.jpg 还原「最新上市 / 即将上市」选项卡 + 价格表格页面，文件 car-tabs.html + car-tabs.css，复用 js/zsb_tabs.js
+- 按 skill-github-pages-guide 流程完成 GitHub 仓库与 Pages 发布
+

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="朱思冰的高级网页设计课堂练习：可复用 Tab 选项卡">
+    <title>Tab 选项卡 · 新闻频道 | 朱思冰</title>
+
+    <!--
+    ============================================================
+    姓名：朱思冰（学号 24001010915）
+    时间：2026-11-02
+    使用模型：DeepSeek-V4.1-Flash（WorkBuddy 环境）
+    功能名称：新闻频道 Tab 选项卡页面
+    简介：四个选项卡（国内新闻、省内新闻、国际新闻、最热新闻）切换内容面板，
+          默认显示国内新闻。交互逻辑全部放在外部文件 js/zsb_tabs.js 中，
+          样式放在外部文件 tab.css 中，页面本身不写行内脚本与行内样式。
+    ============================================================
+    -->
+
+    <!-- 外链样式表：选项卡外观 -->
+    <link rel="stylesheet" href="tab.css">
+    <!-- 外链脚本：选项卡切换逻辑，页面加载后自动初始化 -->
+    <script src="js/zsb_tabs.js" defer></script>
+</head>
+
+<body>
+    <!-- 顶部导航 -->
+    <nav class="zsb_topbar" aria-label="主导航">
+        <a class="zsb_brand" href="index.html">WEB<span>/</span>LAB</a>
+        <a href="index.html">返回课堂目录 ↑</a>
+    </nav>
+
+    <!-- 页面标题区 -->
+    <header class="zsb_header">
+        <p class="zsb_eyebrow">JAVASCRIPT · TAB 组件</p>
+        <h1>新闻频道选项卡</h1>
+        <p>点击上方选项卡切换频道，当前项会高亮并显示对应的内容面板。组件按 data 属性识别元素，同一页面放多组选项卡也不会互相干扰。</p>
+    </header>
+
+    <main class="zsb_main">
+        <!--
+            选项卡组容器：data-zsb-tabs 标记这是一组选项卡
+            内部每个按钮的 data-zsb-tab 与面板的 data-zsb-panel 一一对应
+        -->
+        <div class="zsb_tabs" data-zsb-tabs>
+
+            <!-- 选项卡按钮区 -->
+            <div class="zsb_tab_head" role="tablist" aria-label="新闻频道">
+                <!-- 默认选中项：带 zsb_is_active 类，aria-selected 为 true -->
+                <button class="zsb_tab_btn zsb_is_active" type="button" role="tab" id="zsb_tab_cn"
+                    data-zsb-tab="cn" aria-selected="true" aria-controls="zsb_panel_cn" tabindex="0">国内新闻</button>
+                <button class="zsb_tab_btn" type="button" role="tab" id="zsb_tab_province"
+                    data-zsb-tab="province" aria-selected="false" aria-controls="zsb_panel_province"
+                    tabindex="-1">省内新闻</button>
+                <button class="zsb_tab_btn" type="button" role="tab" id="zsb_tab_world" data-zsb-tab="world"
+                    aria-selected="false" aria-controls="zsb_panel_world" tabindex="-1">国际新闻</button>
+                <button class="zsb_tab_btn" type="button" role="tab" id="zsb_tab_hot" data-zsb-tab="hot"
+                    aria-selected="false" aria-controls="zsb_panel_hot" tabindex="-1">最热新闻</button>
+            </div>
+
+            <!-- 内容面板区：四个面板，只有带 zsb_is_active 的才显示 -->
+            <section class="zsb_tab_panel zsb_is_active" id="zsb_panel_cn" role="tabpanel"
+                aria-labelledby="zsb_tab_cn" data-zsb-panel="cn">
+                <ul class="zsb_news_list">
+                    <li class="zsb_news_item">
+                        <span class="zsb_news_no">01</span>
+                        <div class="zsb_news_body">
+                            <h2 class="zsb_news_title">全国多地进入赏秋季，文旅市场持续升温</h2>
+                            <p class="zsb_news_meta"><span>新华社</span><span>10:20</span></p>
+                        </div>
+                    </li>
+                    <li class="zsb_news_item">
+                        <span class="zsb_news_no">02</span>
+                        <div class="zsb_news_body">
+                            <h2 class="zsb_news_title">国产大飞机完成新一轮航线验证飞行</h2>
+                            <p class="zsb_news_meta"><span>人民日报</span><span>09:45</span></p>
+                        </div>
+                    </li>
+                    <li class="zsb_news_item">
+                        <span class="zsb_news_no">03</span>
+                        <div class="zsb_news_body">
+                            <h2 class="zsb_news_title">前三季度新能源汽车产销同比双增长</h2>
+                            <p class="zsb_news_meta"><span>经济日报</span><span>08:30</span></p>
+                        </div>
+                    </li>
+                </ul>
+                <p class="zsb_panel_note">共 3 条 · 国内频道</p>
+            </section>
+
+            <section class="zsb_tab_panel" id="zsb_panel_province" role="tabpanel" aria-labelledby="zsb_tab_province"
+                data-zsb-panel="province" aria-hidden="true">
+                <ul class="zsb_news_list">
+                    <li class="zsb_news_item">
+                        <span class="zsb_news_no">01</span>
+                        <div class="zsb_news_body">
+                            <h2 class="zsb_news_title">大连港前三季度集装箱吞吐量稳步增长</h2>
+                            <p class="zsb_news_meta"><span>辽宁日报</span><span>11:05</span></p>
+                        </div>
+                    </li>
+                    <li class="zsb_news_item">
+                        <span class="zsb_news_no">02</span>
+                        <div class="zsb_news_body">
+                            <h2 class="zsb_news_title">辽宁新增 12 个省级夜间文旅消费集聚区</h2>
+                            <p class="zsb_news_meta"><span>辽沈晚报</span><span>09:12</span></p>
+                        </div>
+                    </li>
+                    <li class="zsb_news_item">
+                        <span class="zsb_news_no">03</span>
+                        <div class="zsb_news_body">
+                            <h2 class="zsb_news_title">沈阳地铁新线路进入试运行阶段</h2>
+                            <p class="zsb_news_meta"><span>沈阳日报</span><span>昨天 18:40</span></p>
+                        </div>
+                    </li>
+                </ul>
+                <p class="zsb_panel_note">共 3 条 · 省内频道</p>
+            </section>
+
+            <section class="zsb_tab_panel" id="zsb_panel_world" role="tabpanel" aria-labelledby="zsb_tab_world"
+                data-zsb-panel="world" aria-hidden="true">
+                <ul class="zsb_news_list">
+                    <li class="zsb_news_item">
+                        <span class="zsb_news_no">01</span>
+                        <div class="zsb_news_body">
+                            <h2 class="zsb_news_title">全球气候大会筹备会议闭幕，多方呼吁加快减排</h2>
+                            <p class="zsb_news_meta"><span>新华社</span><span>12:30</span></p>
+                        </div>
+                    </li>
+                    <li class="zsb_news_item">
+                        <span class="zsb_news_no">02</span>
+                        <div class="zsb_news_body">
+                            <h2 class="zsb_news_title">国际油价小幅波动，市场关注供需变化</h2>
+                            <p class="zsb_news_meta"><span>路透社</span><span>10:08</span></p>
+                        </div>
+                    </li>
+                    <li class="zsb_news_item">
+                        <span class="zsb_news_no">03</span>
+                        <div class="zsb_news_body">
+                            <h2 class="zsb_news_title">欧洲多国推进高铁跨境联程票务系统</h2>
+                            <p class="zsb_news_meta"><span>BBC</span><span>昨天 21:15</span></p>
+                        </div>
+                    </li>
+                </ul>
+                <p class="zsb_panel_note">共 3 条 · 国际频道</p>
+            </section>
+
+            <section class="zsb_tab_panel" id="zsb_panel_hot" role="tabpanel" aria-labelledby="zsb_tab_hot"
+                data-zsb-panel="hot" aria-hidden="true">
+                <ul class="zsb_news_list">
+                    <li class="zsb_news_item">
+                        <span class="zsb_news_no">01</span>
+                        <div class="zsb_news_body">
+                            <h2 class="zsb_news_title">全国秋粮收获进度过八成</h2>
+                            <p class="zsb_news_meta"><span>热度 <b class="zsb_news_hot">98.2 万</b></span><span>持续上升</span></p>
+                        </div>
+                    </li>
+                    <li class="zsb_news_item">
+                        <span class="zsb_news_no">02</span>
+                        <div class="zsb_news_body">
+                            <h2 class="zsb_news_title">寒潮预警：北方多地降温超过 10℃</h2>
+                            <p class="zsb_news_meta"><span>热度 <b class="zsb_news_hot">76.5 万</b></span><span>持续上升</span></p>
+                        </div>
+                    </li>
+                    <li class="zsb_news_item">
+                        <span class="zsb_news_no">03</span>
+                        <div class="zsb_news_body">
+                            <h2 class="zsb_news_title">国产开源大模型社区发布新版本</h2>
+                            <p class="zsb_news_meta"><span>热度 <b class="zsb_news_hot">63.1 万</b></span><span>新上榜</span></p>
+                        </div>
+                    </li>
+                </ul>
+                <p class="zsb_panel_note">共 3 条 · 最热频道</p>
+            </section>
+        </div>
+    </main>
+
+    <footer class="zsb_footer">朱思冰 · 《高级网页设计》课堂实践 · 2026</footer>
+</body>
+
+</html>

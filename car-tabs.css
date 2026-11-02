@@ -1,0 +1,152 @@
+@charset "utf-8";
+/* ============================================================
+ * 姓名：朱思冰（学号 24001010915）
+ * 时间：2026-11-02
+ * 使用模型：DeepSeek-V4.1-Flash（WorkBuddy 环境）
+ * 功能名称：汽车最新上市 / 即将上市 选项卡表格样式表
+ * 简介：按课堂测试效果图还原的表格样式。选项卡按钮、表格表头、行间虚线
+ *       逐项对照参考图配色；选中状态类名 zsb_is_active 与 js/zsb_tabs.js
+ *       保持一致。
+ * ============================================================ */
+
+:root {
+    --zsb_navy: #0a293d;
+    --zsb_text: #24384a;
+    --zsb_blue: #3c5691;
+    --zsb_light: #eef5fb;
+    --zsb_line: #cfe0ee;
+    --zsb_dot: #d5d5d5;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 60px 20px;
+    background: #ffffff;
+    color: var(--zsb_text);
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+}
+
+/* ---------- 选项卡外框 ---------- */
+.zsb_tabs {
+    max-width: 640px;
+    margin: 0 auto;
+    border: 1px solid var(--zsb_line);
+    border-top: 0;
+    background: #fff;
+}
+
+/* ---------- 选项卡按钮区 ---------- */
+.zsb_tab_head {
+    display: flex;
+    background: var(--zsb_light);
+}
+
+.zsb_tab_btn {
+    padding: 14px 34px;
+    border: 0;
+    border-bottom: 1px solid var(--zsb_line);
+    background: transparent;
+    color: var(--zsb_text);
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: .04em;
+    cursor: pointer;
+    transition: background .18s ease, color .18s ease;
+}
+
+.zsb_tab_btn:hover {
+    color: var(--zsb_blue);
+}
+
+/* 选中态：白底、顶部蓝线、左右浅蓝线，并向下压 1px 盖住分隔线 */
+.zsb_tab_btn.zsb_is_active {
+    margin-bottom: -1px;
+    border-top: 3px solid var(--zsb_blue);
+    border-left: 1px solid var(--zsb_line);
+    border-right: 1px solid var(--zsb_line);
+    border-bottom: 1px solid #fff;
+    background: #fff;
+    color: var(--zsb_navy);
+    font-weight: 700;
+}
+
+/* ---------- 内容面板 ---------- */
+.zsb_tab_panel {
+    display: none;
+    padding: 6px 18px 14px;
+}
+
+.zsb_tab_panel.zsb_is_active {
+    display: block;
+}
+
+/* ---------- 价格表格 ---------- */
+.zsb_price_table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.zsb_price_table th {
+    padding: 20px 10px 14px;
+    color: var(--zsb_navy);
+    font-size: 18px;
+    font-weight: 700;
+    text-align: left;
+    letter-spacing: .04em;
+    white-space: nowrap;
+}
+
+.zsb_price_table td {
+    padding: 14px 10px;
+    border-top: 1px dotted var(--zsb_dot);
+    color: var(--zsb_text);
+    font-size: 17px;
+    line-height: 1.5;
+    white-space: nowrap;
+}
+
+/* 三列宽度：日期 22%、车型 42%、售价 36% */
+.zsb_price_table col.zsb_col_date {
+    width: 22%;
+}
+
+.zsb_price_table col.zsb_col_model {
+    width: 42%;
+}
+
+.zsb_price_table col.zsb_col_price {
+    width: 36%;
+}
+
+/* 售价列数字间距稍大，接近参考图观感 */
+.zsb_price_table td.zsb_price {
+    letter-spacing: .05em;
+}
+
+/* ---------- 窄屏适配 ---------- */
+@media (max-width: 520px) {
+    body {
+        padding: 26px 12px;
+    }
+
+    .zsb_tab_btn {
+        padding: 12px 20px;
+        font-size: 16px;
+    }
+
+    .zsb_price_table th {
+        padding: 14px 6px 10px;
+        font-size: 16px;
+    }
+
+    .zsb_price_table td {
+        padding: 11px 6px;
+        font-size: 14px;
+    }
+}

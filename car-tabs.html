@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="朱思冰的高级网页设计课堂测试：汽车最新上市选项卡表格">
+    <title>最新上市 · 汽车售价表 | 朱思冰</title>
+
+    <!--
+    ============================================================
+    姓名：朱思冰（学号 24001010915）
+    时间：2026-11-02
+    使用模型：DeepSeek-V4.1-Flash（WorkBuddy 环境）
+    功能名称：汽车最新上市 / 即将上市 选项卡表格页
+    简介：按课堂测试效果图还原的表格页。顶部两个选项卡切换两组上市数据，
+          默认显示「最新上市」。交互复用 js/zsb_tabs.js 中的 zsbTabs 组件，
+          样式写在外部文件 car-tabs.css，页面不含行内脚本与行内样式。
+    ============================================================
+    -->
+
+    <link rel="stylesheet" href="car-tabs.css">
+    <script src="js/zsb_tabs.js" defer></script>
+</head>
+
+<body>
+    <!-- 选项卡组容器：data-zsb-tabs 标记一组选项卡 -->
+    <div class="zsb_tabs" data-zsb-tabs>
+
+        <!-- 选项卡按钮区 -->
+        <div class="zsb_tab_head" role="tablist" aria-label="上市时间">
+            <!-- 默认选中项 -->
+            <button class="zsb_tab_btn zsb_is_active" type="button" role="tab" id="zsb_tab_latest"
+                data-zsb-tab="latest" aria-selected="true" aria-controls="zsb_panel_latest" tabindex="0">最新上市</button>
+            <button class="zsb_tab_btn" type="button" role="tab" id="zsb_tab_soon" data-zsb-tab="soon"
+                aria-selected="false" aria-controls="zsb_panel_soon" tabindex="-1">即将上市</button>
+        </div>
+
+        <!-- 内容面板：最新上市 -->
+        <section class="zsb_tab_panel zsb_is_active" id="zsb_panel_latest" role="tabpanel"
+            aria-labelledby="zsb_tab_latest" data-zsb-panel="latest">
+            <table class="zsb_price_table">
+                <colgroup>
+                    <col class="zsb_col_date">
+                    <col class="zsb_col_model">
+                    <col class="zsb_col_price">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th scope="col">上市时间</th>
+                        <th scope="col">品牌/车型</th>
+                        <th scope="col">售价（万元）</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>12月13日</td>
+                        <td>沃尔沃S60L</td>
+                        <td class="zsb_price">26.99-38.49</td>
+                    </tr>
+                    <tr>
+                        <td>12月12日</td>
+                        <td>Jeep牧马人龙腾典藏</td>
+                        <td class="zsb_price">47.99-59.99</td>
+                    </tr>
+                    <tr>
+                        <td>12月10日</td>
+                        <td>一汽大众高尔夫7</td>
+                        <td class="zsb_price">11.89-18.29</td>
+                    </tr>
+                    <tr>
+                        <td>12月6日</td>
+                        <td>2014款古思特</td>
+                        <td class="zsb_price">419.0-666.0</td>
+                    </tr>
+                    <tr>
+                        <td>12月5日</td>
+                        <td>起亚新款K5</td>
+                        <td class="zsb_price">15.98-25.18</td>
+                    </tr>
+                    <tr>
+                        <td>12月5日</td>
+                        <td>2014款奥德赛</td>
+                        <td class="zsb_price">22.98-28.68</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 内容面板：即将上市 -->
+        <section class="zsb_tab_panel" id="zsb_panel_soon" role="tabpanel" aria-labelledby="zsb_tab_soon"
+            data-zsb-panel="soon" aria-hidden="true">
+            <table class="zsb_price_table">
+                <colgroup>
+                    <col class="zsb_col_date">
+                    <col class="zsb_col_model">
+                    <col class="zsb_col_price">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th scope="col">上市时间</th>
+                        <th scope="col">品牌/车型</th>
+                        <th scope="col">预售价（万元）</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>12月20日</td>
+                        <td>全新一代君越</td>
+                        <td class="zsb_price">22.98-31.98</td>
+                    </tr>
+                    <tr>
+                        <td>12月18日</td>
+                        <td>长安CS75 PLUS</td>
+                        <td class="zsb_price">11.79-15.49</td>
+                    </tr>
+                    <tr>
+                        <td>12月15日</td>
+                        <td>宝马3系旅行版</td>
+                        <td class="zsb_price">39.80-46.90</td>
+                    </tr>
+                    <tr>
+                        <td>12月12日</td>
+                        <td>比亚迪宋Pro</td>
+                        <td class="zsb_price">10.98-13.98</td>
+                    </tr>
+                    <tr>
+                        <td>12月8日</td>
+                        <td>丰田凯美瑞双擎</td>
+                        <td class="zsb_price">20.98-26.98</td>
+                    </tr>
+                    <tr>
+                        <td>12月1日</td>
+                        <td>现代领动</td>
+                        <td class="zsb_price">9.98-14.68</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+</body>
+
+</html>
