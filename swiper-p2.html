@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>任务二 · creative 自定义变换 | 朱思冰</title>
+
+    <!--
+    ============================================================
+    姓名：朱思冰（学号 24001010915）
+    时间：2026-11-06
+    使用模型：DeepSeek-V4.1-Flash（WorkBuddy 环境）
+    功能名称：任务二 · creative 仿写（第 7 种效果：自定义变换）
+    简介：课堂讲了 6 种 effect，这一页补上第 7 种 creative：上一张缩小左移
+          带角度、下一张放大右移。页面里可直接切换「原版」与「旋转 20°」两种
+          transform，用来回答"改一个数值让卡片转 20 度"的追问。
+    ============================================================
+    -->
+
+    <link rel="stylesheet" href="cdn/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="swiper-course.css">
+</head>
+
+<body>
+    <div class="zsb_wrap">
+
+        <header class="zsb_head">
+            <span class="zsb_badge">任 务 二 · C R E A T I V E 仿 写</span>
+            <h1>第 7 种效果：<b>creative 自定义变换</b></h1>
+            <p>slide / fade / cube / coverflow / flip / cards 是 Swiper 内置的 6 种。第 7 种 <b>creative</b> 不给现成模板，
+                而是让你分别描述"上一张停在哪、下一张停在哪"，中间过程由 Swiper 自动补间。</p>
+            <div class="zsb_tags">
+                <i>prev / next 双描述</i><i>缩小左移带角度</i><i>放大右移</i><i>答辩：百分号相对谁</i>
+            </div>
+        </header>
+
+        <section class="zsb_card">
+            <h2>一、效果要求<small>照着题目描述写 transform</small></h2>
+            <table class="zsb_table">
+                <tr>
+                    <th style="width:110px">位置</th>
+                    <th>视觉要求</th>
+                    <th>实现手段</th>
+                </tr>
+                <tr>
+                    <td>上一张（prev）</td>
+                    <td>缩小、向左移、带一点角度</td>
+                    <td><code>scale</code> + 负的 <code>translate</code> + <code>rotate</code></td>
+                </tr>
+                <tr>
+                    <td>下一张（next）</td>
+                    <td>放大、向右移</td>
+                    <td><code>scale</code> 大于 1 + 正的 <code>translate</code></td>
+                </tr>
+            </table>
+
+            <div class="zsb_code">new Swiper('#zsbSw2', {
+  effect: 'creative',
+  creativeEffect: {
+    prev: {                       <span class="zsb_c">// 上一张：缩到 0.8、往左挪 55%、逆时针歪 10°</span>
+      translate: ['-55%', 0, -120],
+      rotate: [0, 0, -10],
+      scale: 0.8,
+      opacity: .9,
+      shadow: true
+    },
+    next: {                       <span class="zsb_c">// 下一张：放大到 1.08、往右挪 55%</span>
+      translate: ['55%', 0, -40],
+      rotate: [0, 0, 6],
+      scale: 1.08,
+      shadow: true
+    }
+  }
+});</div>
+        </section>
+
+        <section class="zsb_card">
+            <h2>二、运行效果<small>拖一拖，或点下面的按钮切换到 20° 版本</small></h2>
+
+            <div class="zsb_btns">
+                <button class="zsb_btn zsb_on" type="button" data-rotate="-10">原版（歪 10°）</button>
+                <button class="zsb_btn" type="button" data-rotate="20">追问版（歪 20°）</button>
+            </div>
+
+            <div class="zsb_demo">
+                <span class="zsb_demo_tag">演示台 · creative：上一张缩小左移，下一张放大右移</span>
+                <div class="zsb_swiper_box">
+                    <div class="swiper" id="zsbSw2">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="swiper-imgs/tiangong_1.jpg" alt="天宫空间站">
+                                <div class="zsb_cap">
+                                    <h3>天宫空间站</h3>
+                                    <p>当前张：保持原始大小</p>
+                                </div>
+                            </div>
+                            <div class="swiper-slide"><img src="swiper-imgs/fuxing_1.jpg" alt="复兴号动车组">
+                                <div class="zsb_cap">
+                                    <h3>复兴号动车组</h3>
+                                    <p>滑到它时，上一张会缩到左边并歪着</p>
+                                </div>
+                            </div>
+                            <div class="swiper-slide"><img src="swiper-imgs/c919_1.jpg" alt="C919 大飞机">
+                                <div class="zsb_cap">
+                                    <h3>C919 大飞机</h3>
+                                    <p>下一张则被放大推到右边</p>
+                                </div>
+                            </div>
+                            <div class="swiper-slide"><img src="swiper-imgs/fendouzhe_1.jpg" alt="奋斗者号">
+                                <div class="zsb_cap">
+                                    <h3>奋斗者号</h3>
+                                    <p>角度由 rotate 的第三个数值控制</p>
+                                </div>
+                            </div>
+                            <div class="swiper-slide"><img src="swiper-imgs/fast_1.jpg" alt="中国天眼">
+                                <div class="zsb_cap">
+                                    <h3>中国天眼 FAST</h3>
+                                    <p>把它改成 20，就是右下角按钮的效果</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-pagination" id="zsbPag2"></div>
+                        <div class="swiper-button-prev" id="zsbPrev2"></div>
+                        <div class="swiper-button-next" id="zsbNext2"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="zsb_card">
+            <h2>三、prev / next 的 transform 各控制什么<small>用自己的话写下来</small></h2>
+            <table class="zsb_table">
+                <tr>
+                    <th style="width:150px">属性</th>
+                    <th>prev（上一张）</th>
+                    <th>next（下一张）</th>
+                </tr>
+                <tr>
+                    <td><code>translate</code></td>
+                    <td>把上一张往<b>左</b>推、往后（z 轴负值）压，制造"退到后面"的纵深感</td>
+                    <td>把下一张往<b>右</b>推，让它从右侧排队等进来</td>
+                </tr>
+                <tr>
+                    <td><code>rotate</code></td>
+                    <td>绕 <b>Z 轴</b>逆时针歪一点（负角度），像卡片被甩到一边</td>
+                    <td>绕 Z 轴轻微顺时针，角度比 prev 小，显得更"正"</td>
+                </tr>
+                <tr>
+                    <td><code>scale</code></td>
+                    <td>小于 1，缩小，强化"已经翻过去"的层次</td>
+                    <td>大于 1，放大，强调"即将上场"</td>
+                </tr>
+                <tr>
+                    <td><code>opacity</code></td>
+                    <td>略微变淡</td>
+                    <td>保持清晰</td>
+                </tr>
+                <tr>
+                    <td><code>shadow</code></td>
+                    <td>加投影，脱离背景</td>
+                    <td>加投影</td>
+                </tr>
+            </table>
+            <p>一句话：<b>prev 描述"旧的一张退场时停在哪"，next 描述"新的一张候场时待在哪"</b>，当前这一张永远是 translate 为 0、scale 为 1 的原位。</p>
+        </section>
+
+        <section class="zsb_card">
+            <h2>四、答辩<small>两个追问</small></h2>
+
+            <div class="zsb_qa">
+                <strong>问 1：transform 里的百分号，是相对谁算的？</strong>
+                <p>相对<b>这一张幻灯片自身</b>的尺寸，和父容器、和屏幕都无关：<code>translate</code> 的水平方向 100% = 一张幻灯片的宽度，
+                    垂直方向 100% = 一张幻灯片的高度。所以 <code>['-55%', 0, -120]</code> 的意思是"往左挪半张多一点，同时往后压 120 像素"。
+                    注意 z 轴没有百分比可用，只能写像素值。</p>
+            </div>
+
+            <div class="zsb_qa">
+                <strong>问 2：改一个数值，让卡片转 20 度，怎么做？</strong>
+                <p>把 <code>rotate</code> 的第三个数值（绕 Z 轴的角度）从 <code>-10</code> 改成 <code>20</code>：
+                    <code>rotate: [0, 0, 20]</code>。上面那个「追问版」按钮就是把 prev 的 rotate 换成 20° 后重建实例的效果——
+                    卡片明显歪得更多了。如果想让下一张反向歪，就把 next 的 rotate 改成 <code>[0, 0, -20]</code>。</p>
+            </div>
+        </section>
+
+        <div class="zsb_back">
+            <a href="index.html">← 返回课堂目录</a>
+            <a href="swiper-p1.html">← 任务一 · 提示词工程师</a>
+            <a href="swiper-p3.html">任务三 · 光影展 →</a>
+        </div>
+    </div>
+
+    <script src="cdn/swiper/swiper-bundle.min.js"></script>
+    <script src="js/zsb_swiper_p2.js"></script>
+</body>
+
+</html>

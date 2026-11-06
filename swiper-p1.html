@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>任务一 · 提示词工程师 | 朱思冰</title>
+
+    <!--
+    ============================================================
+    姓名：朱思冰（学号 24001010915）
+    时间：2026-11-06
+    使用模型：DeepSeek-V4.1-Flash（WorkBuddy 环境）
+    功能名称：任务一 · 提示词工程师（让 AI 生成 cube 轮播配置）
+    简介：记录两轮提示词与 AI 返回代码的差异，逐条验证四项需求，并给出
+          答辩回答。页面底部是可真实运行的验证台，Swiper 库从本地
+          cdn/swiper/ 引入，配置写在 js/zsb_swiper_p1.js。
+    ============================================================
+    -->
+
+    <link rel="stylesheet" href="cdn/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="swiper-course.css">
+</head>
+
+<body>
+    <div class="zsb_wrap">
+
+        <header class="zsb_head">
+            <span class="zsb_badge">任 务 一 · 提 示 词 工 程 师</span>
+            <h1>让 AI 听懂需求：<b>#wySw4 的 cube 轮播</b></h1>
+            <p>同一件事，第一轮提示词说的是"我想要什么"，第二轮提示词说的是"哪一条、用什么参数、不要什么"。差别就体现在 AI 交回来的代码上。</p>
+            <div class="zsb_tags">
+                <i>两轮提示词</i><i>逐项验证</i><i>答辩三问</i>
+            </div>
+        </header>
+
+        <!-- 需求清单 -->
+        <section class="zsb_card">
+            <h2>一、这一轮要 AI 产出什么<small>题目给出的四条硬性需求</small></h2>
+            <table class="zsb_table">
+                <tr>
+                    <th style="width:70px">编号</th>
+                    <th>需求</th>
+                    <th>对应 Swiper 参数</th>
+                </tr>
+                <tr>
+                    <td>①</td>
+                    <td>无循环播放（翻到最后一张就停住）</td>
+                    <td><code>不写 loop</code>（默认 false）</td>
+                </tr>
+                <tr>
+                    <td>②</td>
+                    <td>3.2 秒自动翻页，手动操作后不停止</td>
+                    <td><code>autoplay.delay: 3200</code> + <code>disableOnInteraction: false</code></td>
+                </tr>
+                <tr>
+                    <td>③</td>
+                    <td>圆点分页器可点击跳转</td>
+                    <td><code>pagination.clickable: true</code></td>
+                </tr>
+                <tr>
+                    <td>④</td>
+                    <td>初始效果为立方体</td>
+                    <td><code>effect: 'cube'</code></td>
+                </tr>
+            </table>
+            <p>要求：至少两轮提示词，第一轮允许有遗漏，但要保留每轮提示词与 AI 的回答，逐项验证。</p>
+        </section>
+
+        <!-- 第一轮 -->
+        <section class="zsb_card">
+            <h2>二、第 1 轮提示词<small>只描述了"想要什么"</small></h2>
+            <div class="zsb_prompt">用 Swiper 给 #wySw4 写一段初始化代码，要求：
+1. 自动播放，3.2 秒换一张
+2. 底部要有圆点分页器
+3. 用立方体效果
+4. 用户手动拖过之后不要停下来
+
+直接给我可以粘贴的 new Swiper('#wySw4', { ... }) 代码。</div>
+
+            <h3>AI 第一轮的返回（节选）</h3>
+            <div class="zsb_code">var swiper = new Swiper('#wySw4', {
+  loop: true,
+  effect: 'cube',
+  autoplay: 3200,
+  pagination: { el: '#wyPag4' }
+});</div>
+
+            <h3>这段代码一眼能看出的问题</h3>
+            <table class="zsb_table">
+                <tr>
+                    <th style="width:70px">需求</th>
+                    <th>代码实际写的</th>
+                    <th>问题</th>
+                </tr>
+                <tr>
+                    <td>①</td>
+                    <td><code>loop: true</code></td>
+                    <td class="zsb_no">写反了，需求是"无循环"</td>
+                </tr>
+                <tr>
+                    <td>②</td>
+                    <td><code>autoplay: 3200</code></td>
+                    <td class="zsb_no">这是 Swiper 5 的老写法，v11 要写成对象</td>
+                </tr>
+                <tr>
+                    <td>②</td>
+                    <td>没有 <code>disableOnInteraction</code></td>
+                    <td class="zsb_no">v11 默认是 true，拖动一下自动播放就停了</td>
+                </tr>
+                <tr>
+                    <td>③</td>
+                    <td><code>pagination</code> 只有 el</td>
+                    <td class="zsb_no">没写 <code>clickable</code>，"可点击"没有任何体现</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- 第二轮 -->
+        <section class="zsb_card">
+            <h2>三、第 2 轮提示词<small>把需求翻译成参数，并且明确说"不要什么"</small></h2>
+            <div class="zsb_prompt">你上一版有三处不符合要求，按下面逐条改，改完每条给出对应参数：
+
+1. 版本：Swiper 11，用 swiper-bundle，初始化对象写法。
+2. 不要循环：不要写 loop，翻到最后一张就停，不要绕回第一张。
+3. 自动播放 3.2 秒，并且用户拖动松手后要继续播，不要停 —— 请用 autoplay 对象的 delay
+   和 disableOnInteraction 两个参数实现。
+4. 分页器用 #wyPag4，必须能点圆点跳转，把 clickable 明确写出来。
+5. 初始效果 cube，切换速度 800ms。
+6. 输出完整代码，并在每个参数后面用一行注释说明它对应上面第几条。</div>
+
+            <h3>AI 第二轮的返回（最终采用）</h3>
+            <div class="zsb_code">new Swiper('#wySw4', {
+  speed: 800,                              // 第 5 条：切换 800ms
+  effect: 'cube',                          // 第 5 条：初始立方体
+  // 第 2 条：这里刻意不写 loop，保持默认 false
+  autoplay: {
+    delay: 3200,                           // 第 3 条：3.2 秒一张
+    disableOnInteraction: false            // 第 3 条：拖动后继续自动播放
+  },
+  pagination: {
+    el: '#wyPag4',                         // 第 4 条：圆点容器
+    clickable: true                        // 第 4 条：点圆点可跳转
+  }
+});</div>
+            <p>第二轮的关键变化：把"不要循环"写成了明确的否定指令（<b>不要写 loop</b>），把"拖动后不停"翻译成了具体参数名，还要求 AI 逐条对应，避免它自由发挥。</p>
+        </section>
+
+        <!-- 验证 -->
+        <section class="zsb_card">
+            <h2>四、逐项验证<small>下面这个轮播就是上面那段代码跑出来的</small></h2>
+
+            <div class="zsb_demo">
+                <span class="zsb_demo_tag">验证台 · 无循环 + 3.2 秒自动 + 圆点可点 + cube</span>
+                <div class="zsb_swiper_box">
+                    <div class="swiper" id="wySw4">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="swiper-imgs/tiangong_1.jpg" alt="天宫空间站">
+                                <div class="zsb_cap">
+                                    <h3>天宫空间站</h3>
+                                    <p>1 / 5 · 初始就是立方体效果</p>
+                                </div>
+                            </div>
+                            <div class="swiper-slide"><img src="swiper-imgs/fuxing_1.jpg" alt="复兴号动车组">
+                                <div class="zsb_cap">
+                                    <h3>复兴号动车组</h3>
+                                    <p>2 / 5 · 什么都不做，3.2 秒后会自己翻</p>
+                                </div>
+                            </div>
+                            <div class="swiper-slide"><img src="swiper-imgs/c919_1.jpg" alt="C919 大飞机">
+                                <div class="zsb_cap">
+                                    <h3>C919 大飞机</h3>
+                                    <p>3 / 5 · 拖动一下，自动播放不会停</p>
+                                </div>
+                            </div>
+                            <div class="swiper-slide"><img src="swiper-imgs/fendouzhe_1.jpg" alt="奋斗者号">
+                                <div class="zsb_cap">
+                                    <h3>奋斗者号</h3>
+                                    <p>4 / 5 · 点圆点可以直接跳过来</p>
+                                </div>
+                            </div>
+                            <div class="swiper-slide"><img src="swiper-imgs/fast_1.jpg" alt="中国天眼">
+                                <div class="zsb_cap">
+                                    <h3>中国天眼 FAST</h3>
+                                    <p>5 / 5 · 最后一张，再往后不会绕回第一张</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-pagination" id="wyPag4"></div>
+                    </div>
+                </div>
+            </div>
+
+            <table class="zsb_table">
+                <tr>
+                    <th style="width:70px">需求</th>
+                    <th>怎么验</th>
+                    <th style="width:150px">结果</th>
+                    <th>一句话结论</th>
+                </tr>
+                <tr>
+                    <td>①</td>
+                    <td>点最后一个圆点，等自动播放再走一轮</td>
+                    <td class="zsb_ok">停在 5/5 不动</td>
+                    <td>没有 loop，翻到底就停。</td>
+                </tr>
+                <tr>
+                    <td>②</td>
+                    <td>什么都不做，掐表看两张之间的间隔；再拖动一次看是否继续</td>
+                    <td class="zsb_ok">约 3.2 秒一张，拖动后继续</td>
+                    <td>delay 与 disableOnInteraction 都生效。</td>
+                </tr>
+                <tr>
+                    <td>③</td>
+                    <td>直接点第 3 个圆点</td>
+                    <td class="zsb_ok">跳转到 3/5</td>
+                    <td>clickable: true 生效。</td>
+                </tr>
+                <tr>
+                    <td>④</td>
+                    <td>刷新页面看首屏切换动作</td>
+                    <td class="zsb_ok">立方体翻转</td>
+                    <td>effect: 'cube' 生效。</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- 答辩 -->
+        <section class="zsb_card">
+            <h2>五、答辩<small>三个问题的书面回答</small></h2>
+
+            <div class="zsb_qa">
+                <strong>问 1：你的第一版提示词漏掉了哪个需求？</strong>
+                <p>漏在"不要循环"这一条——我只写了四条要什么，没有写"不要什么"，AI 就按轮播的常见习惯默认给了 <code>loop: true</code>。
+                    另外"拖动后不要停"我只说了自然语言，没给出参数落点，AI 用了旧版本的 <code>autoplay: 3200</code>，等于把需求丢了。</p>
+            </div>
+
+            <div class="zsb_qa">
+                <strong>问 2：你是怎么在第二轮里"说清楚"的？</strong>
+                <p>做了四件事：<b>①锁定版本</b>（Swiper 11，避免它给旧写法）；<b>②每条需求编号</b>（第 1～6 条），要求 AI 逐条对应；
+                    <b>③把自然语言翻译成参数名</b>（delay / disableOnInteraction / clickable）；<b>④明确写否定项</b>（不要写 loop），
+                    并且要求"每个参数后面注释它对应第几条"，这样它没法含糊过去。</p>
+            </div>
+
+            <div class="zsb_qa">
+                <strong>问 3：AI 第一次给的代码错在哪？</strong>
+                <p>三处：<b>①</b> <code>loop: true</code> 与"无循环"完全相反，属于把需求理解反了；
+                    <b>②</b> <code>autoplay: 3200</code> 是 v5 的数字写法，v11 必须是对象，而且没有 <code>disableOnInteraction: false</code>，拖动后会自动停；
+                    <b>③</b> <code>pagination</code> 只写了 el，没有 <code>clickable</code>，虽然 v11 默认是 true，但代码里没有任何地方能证明它满足"可点击"这条要求。</p>
+            </div>
+        </section>
+
+        <div class="zsb_back">
+            <a href="index.html">← 返回课堂目录</a>
+            <a href="swiper-task.html">课堂任务 4 个轮播 →</a>
+            <a href="swiper-p2.html">任务二 · creative →</a>
+        </div>
+    </div>
+
+    <script src="cdn/swiper/swiper-bundle.min.js"></script>
+    <script src="js/zsb_swiper_p1.js"></script>
+</body>
+
+</html>

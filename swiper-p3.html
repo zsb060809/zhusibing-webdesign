@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>任务三 · 大国重器光影展 | 朱思冰</title>
+
+    <!--
+    ============================================================
+    姓名：朱思冰（学号 24001010915）
+    时间：2026-11-06
+    使用模型：DeepSeek-V4.1-Flash（WorkBuddy 环境）
+    功能名称：任务三 · 综合创作（六件展品光影展 + 键盘控制 + 视差）
+    简介：在课堂五件展品的基础上补入第六件「爱达·魔都号」，图片由 AI 生成
+          （横版 16:9）。新增能力为 keyboard 键盘控制，同时启用 parallax
+          视差让展品编号与标题在切换时错位移动，并提供 delay 现场改值的按钮。
+    ============================================================
+    -->
+
+    <link rel="stylesheet" href="cdn/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="swiper-expo.css">
+</head>
+
+<body>
+
+    <header class="zsb_expo_head">
+        <span class="zsb_badge">大 国 重 器 · 光 影 展</span>
+        <h1>六件展品，<b>从万米深潜到万米高空</b></h1>
+        <p>键盘 ← → 可以翻页；每翻一次，展品编号与标题会以不同速度错位移动，这就是视差。</p>
+    </header>
+
+    <div class="zsb_expo_stage">
+        <div class="swiper zsb_expo_swiper" id="zsbExpo">
+            <div class="swiper-wrapper">
+
+                <!-- 01 天宫空间站 -->
+                <div class="swiper-slide">
+                    <img src="swiper-imgs/tiangong_1.jpg" alt="天宫空间站">
+                    <div class="zsb_expo_cap">
+                        <span class="zsb_expo_no" data-swiper-parallax="-200">EXHIBIT 01</span>
+                        <h2 data-swiper-parallax="-380">天宫空间站</h2>
+                        <p data-swiper-parallax="-560">三舱基本构型，中国人自己的太空家园。神舟乘组接力值守，太空实验常年不断。</p>
+                        <div class="zsb_meta" data-swiper-parallax="-700">2022 年全面建成 · 近地轨道 400 公里</div>
+                    </div>
+                </div>
+
+                <!-- 02 复兴号 -->
+                <div class="swiper-slide">
+                    <img src="swiper-imgs/fuxing_1.jpg" alt="复兴号动车组">
+                    <div class="zsb_expo_cap">
+                        <span class="zsb_expo_no" data-swiper-parallax="-200">EXHIBIT 02</span>
+                        <h2 data-swiper-parallax="-380">复兴号动车组</h2>
+                        <p data-swiper-parallax="-560">350 公里时速商业运营，从追赶到领跑，中国高铁成为一张流动的国家名片。</p>
+                        <div class="zsb_meta" data-swiper-parallax="-700">2017 年首发 · 京沪高铁</div>
+                    </div>
+                </div>
+
+                <!-- 03 C919 -->
+                <div class="swiper-slide">
+                    <img src="swiper-imgs/c919_1.jpg" alt="C919 大飞机">
+                    <div class="zsb_expo_cap">
+                        <span class="zsb_expo_no" data-swiper-parallax="-200">EXHIBIT 03</span>
+                        <h2 data-swiper-parallax="-380">C919 大飞机</h2>
+                        <p data-swiper-parallax="-560">国产干线客机完成商业首航，中国人的大飞机梦终于照进现实。</p>
+                        <div class="zsb_meta" data-swiper-parallax="-700">2023 年商业首航 · 沪蓉航线</div>
+                    </div>
+                </div>
+
+                <!-- 04 奋斗者号 -->
+                <div class="swiper-slide">
+                    <img src="swiper-imgs/fendouzhe_1.jpg" alt="奋斗者号">
+                    <div class="zsb_expo_cap">
+                        <span class="zsb_expo_no" data-swiper-parallax="-200">EXHIBIT 04</span>
+                        <h2 data-swiper-parallax="-380">奋斗者号</h2>
+                        <p data-swiper-parallax="-560">坐底 10909 米，把中国的旗帜插进马里亚纳海沟，深海探测进入中国时代。</p>
+                        <div class="zsb_meta" data-swiper-parallax="-700">2020 年万米深潜 · 马里亚纳海沟</div>
+                    </div>
+                </div>
+
+                <!-- 05 中国天眼 -->
+                <div class="swiper-slide">
+                    <img src="swiper-imgs/fast_1.jpg" alt="中国天眼 FAST">
+                    <div class="zsb_expo_cap">
+                        <span class="zsb_expo_no" data-swiper-parallax="-200">EXHIBIT 05</span>
+                        <h2 data-swiper-parallax="-380">中国天眼 FAST</h2>
+                        <p data-swiper-parallax="-560">500 米口径球面射电望远镜，世界最大单口径，听见宇宙深处的脉冲。</p>
+                        <div class="zsb_meta" data-swiper-parallax="-700">2016 年落成 · 贵州平塘</div>
+                    </div>
+                </div>
+
+                <!-- 06 爱达·魔都号（新增） -->
+                <div class="swiper-slide">
+                    <img src="swiper-imgs/aida_modu.jpg" alt="爱达·魔都号大型邮轮">
+                    <div class="zsb_expo_cap">
+                        <span class="zsb_expo_no" data-swiper-parallax="-200">EXHIBIT 06 · 新增</span>
+                        <h2 data-swiper-parallax="-380">爱达·魔都号</h2>
+                        <p data-swiper-parallax="-560">我国首艘国产大型邮轮，13.55 万吨、323.6 米长、2125 间客房，2024 年 1 月 1 日自上海首航。</p>
+                        <div class="zsb_meta" data-swiper-parallax="-700">2024 年 1 月首航 · 上海吴淞口</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </div>
+
+    <!-- 现场改 delay 的按钮 -->
+    <div class="zsb_controls">
+        <span>现场改 delay（毫秒）：</span>
+        <button type="button" data-delay="1500">1500 · 快</button>
+        <button type="button" data-delay="4200" class="zsb_on">4200 · 默认</button>
+        <button type="button" data-delay="5000">5000 · 慢</button>
+    </div>
+
+    <main class="zsb_expo_main">
+
+        <section class="zsb_panel">
+            <h2>一、这次加了什么<small>第六件展品 + 课堂上没讲过的新能力</small></h2>
+            <table class="zsb_table">
+                <tr>
+                    <th style="width:130px">项目</th>
+                    <th>做法</th>
+                </tr>
+                <tr>
+                    <td>第六件展品</td>
+                    <td>「爱达·魔都号」，图片由 AI 生成后裁成横版 16:9（1600×900），slide 结构与前五张完全一致：
+                        <code>.swiper-slide &gt; img + .zsb_expo_cap</code>。</td>
+                </tr>
+                <tr>
+                    <td>新能力一</td>
+                    <td><b>keyboard 键盘控制</b>：<code>keyboard: { enabled: true, onlyInViewport: true }</code>，
+                        方向键 ← → 翻页，滚轮不会误触发。</td>
+                </tr>
+                <tr>
+                    <td>新能力二</td>
+                    <td><b>parallax 视差</b>：<code>parallax: true</code> 配合元素上的
+                        <code>data-swiper-parallax="-380"</code>，标题比图片移动得更快，形成前后层次。</td>
+                </tr>
+            </table>
+        </section>
+
+        <section class="zsb_panel">
+            <h2>二、关键代码<small>整段初始化</small></h2>
+            <div class="zsb_code">new Swiper('#zsbExpo', {
+  loop: true,
+  speed: 900,
+  effect: 'slide',
+  parallax: true,                       <span class="zsb_c">// 打开视差，配合 data-swiper-parallax</span>
+  keyboard: {
+    enabled: true,                      <span class="zsb_c">// ← → 可以翻页</span>
+    onlyInViewport: true                <span class="zsb_c">// 轮播不在视口内时不抢键盘</span>
+  },
+  autoplay: {
+    delay: 4200,
+    disableOnInteraction: false
+  },
+  pagination: { el: '.swiper-pagination', clickable: true },
+  navigation: { prevEl: '.swiper-button-prev', nextEl: '.swiper-button-next' }
+});</div>
+        </section>
+
+        <section class="zsb_panel">
+            <h2>三、与 AI 的关键对话记录<small>提示词与两次重要往返</small></h2>
+
+            <h3>第 1 轮提示词</h3>
+            <div class="zsb_prompt">我在做一个 Swiper 光影展页面，已经有五张展品图，现在要加第六件：
+爱达·魔都号（首艘国产大型邮轮，2024 年 1 月首航）。
+要求：slide 结构和原来完全一致（img + 标题层），并且给这个轮播加上键盘左右键翻页。
+请给我完整的 slide 结构和初始化代码。</div>
+
+            <h3>AI 第 1 次返回的问题</h3>
+            <p>它给的 slide 里把标题层写成了 <code>&lt;div class="caption"&gt;</code>，和原有结构
+                <code>.zsb_expo_cap</code> 不一致，直接粘进去会导致这一张没样式；键盘部分只写了
+                <code>keyboard: true</code>，在 Swiper 11 里这种写法不生效，必须是对象。</p>
+
+            <h3>第 2 轮提示词（追问）</h3>
+            <div class="zsb_prompt">两点改一下：
+1. 第六张的标题层类名必须沿用 .zsb_expo_cap，内部结构是 span.zsb_expo_no + h2 + p + div.zsb_meta，
+   和前面五张一模一样，不要自创类名。
+2. Swiper 11 的 keyboard 要写成对象：keyboard: { enabled: true, onlyInViewport: true }；
+   同时告诉我 parallax 怎么用，标题要比图片动得快一点。</div>
+
+            <h3>AI 第 2 次返回的关键片段</h3>
+            <div class="zsb_code">&lt;div class="swiper-slide"&gt;
+  &lt;img src="swiper-imgs/aida_modu.jpg" alt="爱达·魔都号"&gt;
+  &lt;div class="zsb_expo_cap"&gt;
+    &lt;span class="zsb_expo_no" data-swiper-parallax="-200"&gt;EXHIBIT 06&lt;/span&gt;
+    &lt;h2 data-swiper-parallax="-380"&gt;爱达·魔都号&lt;/h2&gt;
+    &lt;p data-swiper-parallax="-560"&gt;……&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</div>
+            <p>结论：<b>AI 能写结构，但"必须沿用已有类名"这件事要明说</b>；负得越多的 <code>data-swiper-parallax</code>，移动越快。</p>
+        </section>
+
+        <section class="zsb_panel">
+            <h2>四、答辩<small>四个问题</small></h2>
+
+            <div class="zsb_qa">
+                <strong>问 1：这段代码是什么意思？</strong>
+                <p><code>new Swiper('#zsbExpo', {...})</code> 是初始化：<code>loop</code> 让六张图首尾相接；
+                    <code>speed: 900</code> 是一次切换动画 900 毫秒；<code>parallax: true</code> 打开视差，
+                    让带 <code>data-swiper-parallax</code> 的元素按数值比例错位移动；<code>keyboard</code> 接管方向键；
+                    <code>autoplay.delay</code> 是每张停留时间；<code>pagination</code> / <code>navigation</code> 只是把已有的圆点和箭头接上。</p>
+            </div>
+
+            <div class="zsb_qa">
+                <strong>问 2：AI 第一次给的哪里不对，你改了什么？</strong>
+                <p>两处：<b>①</b> 标题层类名自创成 <code>.caption</code>，我要求它沿用 <code>.zsb_expo_cap</code>，
+                    否则第六张会掉样式；<b>②</b> 键盘写成 <code>keyboard: true</code>，Swiper 11 不认，我改成对象并加了
+                    <code>onlyInViewport</code>。</p>
+            </div>
+
+            <div class="zsb_qa">
+                <strong>问 3：新参数的作用？</strong>
+                <p><code>keyboard.enabled</code>：允许键盘左右方向键翻页；<code>onlyInViewport</code>：只有轮播在可视区域时才响应键盘，
+                    避免页面滚动到别处按方向键也被吃掉。<code>parallax</code> 与 <code>data-swiper-parallax="-380"</code>：元素随滑动做反向位移，
+                    数值绝对值越大移动越快，从而形成"图片慢、文字快"的层次感。</p>
+            </div>
+
+            <div class="zsb_qa">
+                <strong>问 4：现场把 delay 改成指定值，预期会怎么变？</strong>
+                <p>改成 <b>1500</b>：每张只停 1.5 秒，切换会显得急促，适合图片少、信息简单的场景；
+                    改成 <b>5000</b>：每张停 5 秒，节奏变慢，适合有长文案需要阅读的场景。
+                    代码层面改的是 <code>swiper.params.autoplay.delay</code>，改完调用一次
+                    <code>autoplay.start()</code> 让它立即按新间隔重新计时——上面那三个按钮就是这么实现的，点一下就能看到节奏变化。</p>
+            </div>
+        </section>
+
+        <div class="zsb_back">
+            <a href="index.html">← 返回课堂目录</a>
+            <a href="swiper-p2.html">← 任务二 · creative</a>
+            <a href="swiper-task.html">课堂任务 4 个轮播 →</a>
+        </div>
+    </main>
+
+    <script src="cdn/swiper/swiper-bundle.min.js"></script>
+    <script src="js/zsb_swiper_p3.js"></script>
+</body>
+
+</html>

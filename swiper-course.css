@@ -1,0 +1,406 @@
+@charset "utf-8";
+/* ============================================================
+ * 姓名：朱思冰（学号 24001010915）
+ * 时间：2026-11-06
+ * 使用模型：DeepSeek-V4.1-Flash（WorkBuddy 环境）
+ * 功能名称：Swiper 作业页共用样式（任务一 / 任务二）
+ * 简介：提示词记录页与 creative 效果页共用的版式。深蓝主色取自课堂
+ *       光影展页面，卡片式分块展示提示词、代码、验证台与答辩。
+ * ============================================================ */
+
+:root {
+    --zsb_navy: #0f2b5b;
+    --zsb_blue: #1d5bbf;
+    --zsb_orange: #e8890c;
+    --zsb_ink: #1f2937;
+    --zsb_muted: #6b7280;
+    --zsb_line: #e3e9f5;
+    --zsb_bg: #f6f8fc;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--zsb_bg);
+    color: var(--zsb_ink);
+    font-family: "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+    line-height: 1.8;
+}
+
+a {
+    color: var(--zsb_blue);
+}
+
+.zsb_wrap {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 34px 20px 70px;
+}
+
+/* ---------- 顶部标题 ---------- */
+.zsb_head {
+    padding: 34px 36px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #0f2b5b, #1d5bbf);
+    color: #fff;
+    box-shadow: 0 14px 34px rgba(15, 43, 91, .28);
+    margin-bottom: 24px;
+}
+
+.zsb_head .zsb_badge {
+    display: inline-block;
+    padding: 5px 14px;
+    margin-bottom: 14px;
+    border: 1px solid rgba(255, 255, 255, .32);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .14);
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+.zsb_head h1 {
+    margin: 0;
+    font-size: 28px;
+    line-height: 1.4;
+}
+
+.zsb_head h1 b {
+    color: #ffd166;
+}
+
+.zsb_head p {
+    margin: 12px 0 0;
+    color: #d9e3f5;
+    font-size: 14.5px;
+}
+
+.zsb_head .zsb_tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.zsb_head .zsb_tags i {
+    font-style: normal;
+    padding: 6px 14px;
+    border: 1px solid rgba(255, 255, 255, .26);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, .12);
+    font-size: 13px;
+}
+
+/* ---------- 卡片 ---------- */
+.zsb_card {
+    position: relative;
+    margin-bottom: 22px;
+    padding: 26px 30px;
+    border: 1px solid var(--zsb_line);
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 4px 14px rgba(31, 41, 55, .05);
+}
+
+.zsb_card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+    border-radius: 18px 0 0 18px;
+    background: linear-gradient(#0f2b5b, #1d5bbf);
+}
+
+.zsb_card h2 {
+    margin: 0 0 6px;
+    font-size: 20px;
+    color: #111827;
+}
+
+.zsb_card h2 small {
+    display: block;
+    margin-top: 4px;
+    color: #9ca3af;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.zsb_card h3 {
+    margin: 20px 0 8px;
+    font-size: 15.5px;
+    color: var(--zsb_navy);
+}
+
+.zsb_card p {
+    margin: 8px 0;
+    font-size: 14.5px;
+    color: #374151;
+}
+
+.zsb_card code {
+    padding: 1px 7px;
+    border-radius: 5px;
+    background: #eef2ff;
+    color: #1d4ed8;
+    font-family: Consolas, monospace;
+    font-size: 13px;
+}
+
+/* ---------- 提示词 / 代码块 ---------- */
+.zsb_prompt,
+.zsb_code {
+    margin: 12px 0;
+    padding: 16px 18px;
+    border-radius: 12px;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.85;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-x: auto;
+}
+
+.zsb_prompt {
+    border: 1px solid #fde68a;
+    background: #fffbea;
+    color: #7c5e10;
+}
+
+.zsb_code {
+    border: 1px solid #dbe4ff;
+    background: #0f1b33;
+    color: #d6e2ff;
+}
+
+.zsb_code .zsb_k {
+    color: #7fb2ff;
+}
+
+.zsb_code .zsb_s {
+    color: #ffd166;
+}
+
+.zsb_code .zsb_c {
+    color: #7b8aa8;
+}
+
+/* ---------- 验证台 ---------- */
+.zsb_demo {
+    margin: 16px 0 8px;
+    padding: 18px;
+    border: 1px dashed #c7d8f8;
+    border-radius: 14px;
+    background: #f8fbff;
+}
+
+.zsb_demo .zsb_demo_tag {
+    display: inline-block;
+    margin-bottom: 12px;
+    padding: 4px 14px;
+    border: 1px solid #c7d8f8;
+    border-radius: 999px;
+    background: #e8f0ff;
+    color: var(--zsb_navy);
+    font-size: 12.5px;
+}
+
+.zsb_swiper_box {
+    max-width: 720px;
+    margin: 0 auto;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 10px 26px rgba(15, 43, 91, .18);
+}
+
+.zsb_swiper_box .swiper {
+    border-radius: 14px;
+}
+
+.zsb_swiper_box .swiper-slide {
+    position: relative;
+    height: 300px;
+}
+
+.zsb_swiper_box .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.zsb_cap {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 34px 20px 14px;
+    background: linear-gradient(transparent, rgba(5, 15, 35, .82));
+    color: #fff;
+}
+
+.zsb_cap h3 {
+    margin: 0;
+    color: #fff;
+    font-size: 17px;
+    letter-spacing: 1px;
+}
+
+.zsb_cap p {
+    margin: 4px 0 0;
+    color: #dbe6f8;
+    font-size: 12.5px;
+}
+
+.zsb_swiper_box .swiper-pagination-bullet {
+    background: #0f2b5b;
+    opacity: .35;
+}
+
+.zsb_swiper_box .swiper-pagination-bullet-active {
+    width: 22px;
+    border-radius: 6px;
+    background: var(--zsb_orange);
+    opacity: 1;
+}
+
+.zsb_swiper_box .swiper-button-next,
+.zsb_swiper_box .swiper-button-prev {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(15, 43, 91, .65);
+    color: #fff;
+    --swiper-navigation-size: 17px;
+}
+
+.zsb_swiper_box .swiper-button-next:hover,
+.zsb_swiper_box .swiper-button-prev:hover {
+    background: var(--zsb_orange);
+}
+
+/* ---------- 表格 ---------- */
+.zsb_table {
+    width: 100%;
+    margin: 12px 0;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.zsb_table th,
+.zsb_table td {
+    padding: 10px 12px;
+    border: 1px solid var(--zsb_line);
+    text-align: left;
+    vertical-align: top;
+}
+
+.zsb_table th {
+    background: #f1f5ff;
+    color: var(--zsb_navy);
+    font-weight: 700;
+}
+
+.zsb_table td.zsb_ok {
+    color: #15803d;
+    font-weight: 700;
+}
+
+.zsb_table td.zsb_no {
+    color: #b91c1c;
+    font-weight: 700;
+}
+
+/* ---------- 答辩区 ---------- */
+.zsb_qa {
+    margin: 14px 0;
+    padding: 16px 18px;
+    border-left: 4px solid var(--zsb_orange);
+    border-radius: 0 12px 12px 0;
+    background: #fffaf0;
+}
+
+.zsb_qa strong {
+    display: block;
+    margin-bottom: 6px;
+    color: #92400e;
+    font-size: 14.5px;
+}
+
+.zsb_qa p {
+    margin: 0;
+    color: #5b4415;
+    font-size: 14px;
+}
+
+/* ---------- 按钮 ---------- */
+.zsb_btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 14px 0 4px;
+}
+
+.zsb_btn {
+    padding: 9px 20px;
+    border: 1.5px solid #c7d8f8;
+    border-radius: 999px;
+    background: #fff;
+    color: var(--zsb_blue);
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+.zsb_btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(29, 91, 191, .18);
+}
+
+.zsb_btn.zsb_on {
+    border-color: transparent;
+    background: linear-gradient(135deg, #0f2b5b, #1d5bbf);
+    color: #fff;
+}
+
+/* ---------- 返回链接 ---------- */
+.zsb_back {
+    margin-top: 26px;
+    text-align: center;
+}
+
+.zsb_back a {
+    display: inline-block;
+    margin: 0 6px;
+    padding: 10px 24px;
+    border: 1px solid #dbe4ff;
+    border-radius: 999px;
+    background: #fff;
+    color: var(--zsb_navy);
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.zsb_back a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(15, 43, 91, .15);
+}
+
+@media (max-width: 640px) {
+    .zsb_card {
+        padding: 20px 18px;
+    }
+
+    .zsb_head {
+        padding: 26px 22px;
+    }
+
+    .zsb_swiper_box .swiper-slide {
+        height: 210px;
+    }
+}

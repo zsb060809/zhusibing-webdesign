@@ -1,0 +1,384 @@
+@charset "utf-8";
+/* ============================================================
+ * 姓名：朱思冰（学号 24001010915）
+ * 时间：2026-11-06
+ * 使用模型：DeepSeek-V4.1-Flash（WorkBuddy 环境）
+ * 功能名称：任务三 · 大国重器光影展（六件展品）样式表
+ * 简介：深色展厅风格。轮播区全宽沉浸式，展品编号与标题随视差数据属性错位
+ *       移动；下方技术说明、AI 对话记录与答辩区沿用同一套深色卡片。
+ * ============================================================ */
+
+:root {
+    --zsb_bg: #070d1a;
+    --zsb_panel: rgba(18, 30, 52, .86);
+    --zsb_line: rgba(120, 160, 230, .22);
+    --zsb_text: #e6edfb;
+    --zsb_muted: #93a4c4;
+    --zsb_gold: #f0b429;
+    --zsb_cyan: #4cc9f0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background:
+        radial-gradient(1200px 600px at 50% -10%, rgba(76, 201, 240, .12), transparent 60%),
+        var(--zsb_bg);
+    color: var(--zsb_text);
+    font-family: "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+    line-height: 1.85;
+}
+
+a {
+    color: var(--zsb_cyan);
+    text-decoration: none;
+}
+
+/* ---------- 顶部 ---------- */
+.zsb_expo_head {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 46px 24px 22px;
+    text-align: center;
+}
+
+.zsb_expo_head .zsb_badge {
+    display: inline-block;
+    padding: 5px 16px;
+    border: 1px solid var(--zsb_line);
+    border-radius: 999px;
+    background: rgba(76, 201, 240, .08);
+    color: var(--zsb_cyan);
+    font-size: 12.5px;
+    letter-spacing: 3px;
+}
+
+.zsb_expo_head h1 {
+    margin: 16px 0 10px;
+    font-size: clamp(26px, 4vw, 40px);
+    letter-spacing: 2px;
+}
+
+.zsb_expo_head h1 b {
+    color: var(--zsb_gold);
+}
+
+.zsb_expo_head p {
+    max-width: 720px;
+    margin: 0 auto;
+    color: var(--zsb_muted);
+    font-size: 14.5px;
+}
+
+/* ---------- 轮播 ---------- */
+.zsb_expo_stage {
+    max-width: 1180px;
+    margin: 18px auto 0;
+    padding: 0 24px;
+}
+
+.zsb_expo_swiper {
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, .55), 0 0 0 1px var(--zsb_line);
+}
+
+.zsb_expo_swiper .swiper-slide {
+    position: relative;
+    height: min(62vh, 560px);
+    background: #0a1426;
+}
+
+.zsb_expo_swiper .swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: saturate(1.05) brightness(.92);
+}
+
+.zsb_expo_swiper .swiper-slide::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(4, 10, 22, .86) 0%, rgba(4, 10, 22, .35) 45%, transparent 78%),
+        linear-gradient(transparent 55%, rgba(4, 10, 22, .85));
+}
+
+.zsb_expo_cap {
+    position: absolute;
+    z-index: 2;
+    left: 6%;
+    bottom: 12%;
+    max-width: 54%;
+}
+
+.zsb_expo_no {
+    display: block;
+    font-size: 13px;
+    letter-spacing: 6px;
+    color: var(--zsb_gold);
+    margin-bottom: 6px;
+}
+
+.zsb_expo_cap h2 {
+    margin: 0;
+    font-size: clamp(24px, 3.4vw, 40px);
+    letter-spacing: 3px;
+    text-shadow: 0 6px 24px rgba(0, 0, 0, .6);
+}
+
+.zsb_expo_cap p {
+    margin: 12px 0 0;
+    max-width: 460px;
+    color: #d3ddf0;
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+.zsb_expo_cap .zsb_meta {
+    margin-top: 14px;
+    font-size: 12.5px;
+    color: var(--zsb_muted);
+    letter-spacing: 1px;
+}
+
+/* 分页与导航 */
+.zsb_expo_swiper .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    opacity: .35;
+}
+
+.zsb_expo_swiper .swiper-pagination-bullet-active {
+    width: 26px;
+    border-radius: 5px;
+    background: var(--zsb_gold);
+    opacity: 1;
+}
+
+.zsb_expo_swiper .swiper-button-next,
+.zsb_expo_swiper .swiper-button-prev {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(10, 20, 38, .55);
+    color: #fff;
+    --swiper-navigation-size: 18px;
+    transition: background .2s;
+}
+
+.zsb_expo_swiper .swiper-button-next:hover,
+.zsb_expo_swiper .swiper-button-prev:hover {
+    background: var(--zsb_gold);
+    color: #1a1200;
+}
+
+/* ---------- 控制条 ---------- */
+.zsb_controls {
+    max-width: 1180px;
+    margin: 14px auto 0;
+    padding: 0 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    color: var(--zsb_muted);
+    font-size: 13.5px;
+}
+
+.zsb_controls button {
+    padding: 8px 18px;
+    border: 1px solid var(--zsb_line);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--zsb_text);
+    font-family: inherit;
+    font-size: 13.5px;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+.zsb_controls button:hover {
+    border-color: var(--zsb_gold);
+    color: var(--zsb_gold);
+}
+
+.zsb_controls button.zsb_on {
+    border-color: transparent;
+    background: var(--zsb_gold);
+    color: #1a1200;
+    font-weight: 700;
+}
+
+/* ---------- 正文卡片 ---------- */
+.zsb_expo_main {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 44px 24px 70px;
+}
+
+.zsb_panel {
+    margin-bottom: 22px;
+    padding: 26px 30px;
+    border: 1px solid var(--zsb_line);
+    border-radius: 18px;
+    background: var(--zsb_panel);
+}
+
+.zsb_panel h2 {
+    margin: 0 0 4px;
+    font-size: 20px;
+    color: #fff;
+}
+
+.zsb_panel h2 small {
+    display: block;
+    margin-top: 4px;
+    color: var(--zsb_muted);
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.zsb_panel h3 {
+    margin: 20px 0 8px;
+    font-size: 15px;
+    color: var(--zsb_gold);
+}
+
+.zsb_panel p {
+    margin: 8px 0;
+    color: #cfd9ec;
+    font-size: 14.5px;
+}
+
+.zsb_panel code {
+    padding: 1px 7px;
+    border-radius: 5px;
+    background: rgba(76, 201, 240, .12);
+    color: var(--zsb_cyan);
+    font-family: Consolas, monospace;
+    font-size: 13px;
+}
+
+.zsb_code {
+    margin: 12px 0;
+    padding: 16px 18px;
+    border: 1px solid var(--zsb_line);
+    border-radius: 12px;
+    background: rgba(3, 8, 18, .85);
+    color: #cfe0ff;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.85;
+    white-space: pre-wrap;
+    overflow-x: auto;
+}
+
+.zsb_code .zsb_c {
+    color: #7d8db0;
+}
+
+.zsb_prompt {
+    margin: 12px 0;
+    padding: 16px 18px;
+    border: 1px solid rgba(240, 180, 41, .35);
+    border-radius: 12px;
+    background: rgba(240, 180, 41, .08);
+    color: #f6dfa6;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.85;
+    white-space: pre-wrap;
+}
+
+/* ---------- 表格 ---------- */
+.zsb_table {
+    width: 100%;
+    margin: 12px 0;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.zsb_table th,
+.zsb_table td {
+    padding: 10px 12px;
+    border: 1px solid var(--zsb_line);
+    text-align: left;
+    vertical-align: top;
+}
+
+.zsb_table th {
+    background: rgba(76, 201, 240, .08);
+    color: #dceaff;
+    font-weight: 700;
+}
+
+.zsb_table td {
+    color: #c6d2e7;
+}
+
+/* ---------- 答辩 ---------- */
+.zsb_qa {
+    margin: 14px 0;
+    padding: 16px 18px;
+    border-left: 4px solid var(--zsb_gold);
+    border-radius: 0 12px 12px 0;
+    background: rgba(240, 180, 41, .07);
+}
+
+.zsb_qa strong {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--zsb_gold);
+    font-size: 14.5px;
+}
+
+.zsb_qa p {
+    margin: 0;
+    color: #d5deee;
+    font-size: 14px;
+}
+
+/* ---------- 返回 ---------- */
+.zsb_back {
+    padding: 10px 0 60px;
+    text-align: center;
+}
+
+.zsb_back a {
+    display: inline-block;
+    margin: 0 6px;
+    padding: 10px 26px;
+    border: 1px solid var(--zsb_line);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .04);
+    color: var(--zsb_text);
+    font-size: 14px;
+}
+
+.zsb_back a:hover {
+    border-color: var(--zsb_gold);
+    color: var(--zsb_gold);
+}
+
+@media (max-width: 700px) {
+    .zsb_expo_cap {
+        left: 6%;
+        right: 6%;
+        max-width: none;
+        bottom: 14%;
+    }
+
+    .zsb_expo_swiper .swiper-slide {
+        height: 380px;
+    }
+
+    .zsb_panel {
+        padding: 20px 18px;
+    }
+}
