@@ -54,3 +54,19 @@ https://spontaneous-valkyrie-4e4229.netlify.app/skill-github-pages-guide0 这是
 - 参照 4.jpg 还原「最新上市 / 即将上市」选项卡 + 价格表格页面，文件 car-tabs.html + car-tabs.css，复用 js/zsb_tabs.js
 - 按 skill-github-pages-guide 流程完成 GitHub 仓库与 Pages 发布
 
+
+---
+
+## 2026-11-06 · 模型：DeepSeek-V4.1-Flash（WorkBuddy 环境）
+
+**提示词原文：**
+
+@swiper.zip @swiper-imgs.zip @swiper-task.html https://spontaneous-valkyrie-4e4229.netlify.app/swiper-task https://spontaneous-valkyrie-4e4229.netlify.app/swiper-lesson 本节课任务4都要完成，并将目前为止所有的课堂实践提交到netlify上，index文件中有所有课堂实践的入口。@企业微信截图_17938617767290.png 按照要求完成所有的任务
+
+**执行摘要：**
+
+- swiper 依赖落地到本地 cdn/swiper/，四张轮播任务全部写入 swiper-task.html（最简 / 循环+分页+箭头 / 自动播放 / 四种效果切换）
+- 任务一 swiper-p1.html + js/zsb_swiper_p1.js：两轮提示词、两次代码差异对照、逐项验证表、答辩，成品 cube
+- 任务二 swiper-p2.html + js/zsb_swiper_p2.js：creativeEffect 自定义第七种效果，按钮把 rotate 改 20°
+- 任务三 swiper-p3.html + js/zsb_swiper_p3.js：新增第六件展品「爱达·魔都号」（AI 生图 1600×900），keyboard 方向键 + parallax 视差 + 现场改 delay
+- index.html 目录扩展到 19 个模块，全部课堂实践可从此进入
