@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>诗词列表 · 数据从本地服务器来 | 朱思冰</title>
+
+    <!--
+    ============================================================
+    姓名：朱思冰（学号 24001010915）
+    时间：2026-11-12
+    使用模型：DeepSeek-V4.1-Flash（WorkBuddy 环境）
+    功能名称：从 JSON 到 fetch —— 诗词列表页面
+    简介：页面上图下文的诗词卡片，数据不是写死的，而是向本地 Express
+          服务器（http://localhost:3015/api/poems）发 fetch 请求拿回来的；
+          同时并发请求 /api/authors 拿到作者列表。服务器没启动时页面给出
+          提示而不是白屏。额外提供关键字搜索与按标题长度排序。
+           使用前：在 db 文件夹里执行 node server.js（端口 3015）。
+    ============================================================
+    -->
+
+    <link rel="stylesheet" href="poems.css">
+</head>
+
+<body>
+
+    <header class="zsb_head">
+        <h1>诗词列表</h1>
+        <p>数据来自本地接口 <code>http://localhost:3015/api/poems</code> —— 改了 db.json，刷新页面就能看到。</p>
+    </header>
+
+    <!-- 搜索 + 排序 -->
+    <div class="zsb_toolbar">
+        <input class="zsb_search" id="zsbSearch" type="text" placeholder="输入关键字，按标题 / 内容 / 作者筛选">
+        <button class="zsb_sort" id="zsbSortBtn" type="button">排序：默认顺序</button>
+    </div>
+
+    <p class="zsb_tip" id="zsbTip">正在请求数据……</p>
+
+    <!-- 卡片挂载点：内容由 js/zsb_poems.js 渲染 -->
+    <ul class="zsb_list" id="zsbPoemList"></ul>
+
+    <div class="zsb_foot">
+        <p>接口：<a href="http://localhost:3015/api/poems" target="_blank">/api/poems</a> ·
+            <a href="http://localhost:3015/api/authors" target="_blank">/api/authors</a></p>
+        <p><a href="index.html">← 返回课堂目录</a></p>
+    </div>
+
+    <script src="js/zsb_poems.js"></script>
+</body>
+
+</html>

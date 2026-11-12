@@ -70,3 +70,20 @@ https://spontaneous-valkyrie-4e4229.netlify.app/skill-github-pages-guide0 这是
 - 任务二 swiper-p2.html + js/zsb_swiper_p2.js：creativeEffect 自定义第七种效果，按钮把 rotate 改 20°
 - 任务三 swiper-p3.html + js/zsb_swiper_p3.js：新增第六件展品「爱达·魔都号」（AI 生图 1600×900），keyboard 方向键 + parallax 视差 + 现场改 delay
 - index.html 目录扩展到 19 个模块，全部课堂实践可从此进入
+
+---
+
+## 2026-11-12 · 模型：DeepSeek-V4.1-Flash（WorkBuddy 环境）
+
+**提示词原文：**
+
+https://spontaneous-valkyrie-4e4229.netlify.app/json-fetch-lesson @db.json  @企业微信截图_17944619199177.png @企业微信截图_17944621221606.png  npm init -y    npm install express 看看今天的任务，跑一下
+
+**执行摘要：**
+
+- 新建 `db/` 目录，放入 db.json，执行 npm init -y + npm install express（65 个包）
+- `db/server.js`：/api/poems（每次请求重读 db.json）+ /api/authors（作者去重）+ 统一 CORS；端口 3015（3004 被占用）
+- db.json 增补：新增「静夜思」「江雪」两条，补上 4 位作者，修正「脊楼」→「登高」
+- `poems.html` + `poems.css` + `js/zsb_poems.js`：Promise.all 并发取两份数据、上图下文卡片、关键字搜索、按标题长度排序、catch 兜底提示
+- `db/README.md`：启动步骤、三档任务完成情况、答辩四问
+- index.html 增加到 20 个模块（20 / FETCH · JSON）

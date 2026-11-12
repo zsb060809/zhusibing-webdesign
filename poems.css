@@ -1,0 +1,209 @@
+/*!
+ * ============================================================
+ * 姓名：朱思冰（学号 24001010915）
+ * 时间：2026-11-12
+ * 使用模型：DeepSeek-V4.1-Flash（WorkBuddy 环境）
+ * 功能名称：诗词列表页样式
+ * 简介：上图下文卡片列表（三列自适应），配搜索框与排序按钮的样式；
+ *       窄屏自动降到两列、一列。
+ * ============================================================
+ */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0 0 60px;
+    background: #f5f2ea;
+    color: #23282d;
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    line-height: 1.7;
+}
+
+.zsb_head {
+    padding: 56px clamp(20px, 8vw, 110px) 34px;
+    background: #23303a;
+    color: #f7f3e8;
+}
+
+.zsb_head h1 {
+    margin: 0 0 10px;
+    font-size: clamp(26px, 4vw, 40px);
+    letter-spacing: .04em;
+}
+
+.zsb_head p {
+    margin: 0;
+    color: #b9c6cf;
+    font-size: 15px;
+}
+
+.zsb_head code {
+    color: #f4c95d;
+    font-family: Consolas, monospace;
+}
+
+.zsb_toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    max-width: 1180px;
+    margin: 32px auto 0;
+    padding: 0 20px;
+}
+
+.zsb_search {
+    flex: 1 1 260px;
+    min-width: 200px;
+    padding: 11px 16px;
+    border: 1px solid #cfc8b6;
+    border-radius: 4px;
+    background: #fffdf8;
+    color: #23282d;
+    font-size: 15px;
+    font-family: inherit;
+}
+
+.zsb_search:focus {
+    outline: 2px solid #087f8c;
+    outline-offset: 1px;
+}
+
+.zsb_sort {
+    padding: 11px 18px;
+    border: 1px solid #087f8c;
+    border-radius: 4px;
+    background: #fffdf8;
+    color: #087f8c;
+    font-size: 15px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background .2s ease, color .2s ease;
+}
+
+.zsb_sort:hover {
+    background: #e6f2f3;
+}
+
+.zsb_sort.zsb_on {
+    background: #087f8c;
+    color: #fffdf8;
+}
+
+.zsb_tip {
+    max-width: 1180px;
+    margin: 14px auto 0;
+    padding: 0 20px;
+    color: #6b7780;
+    font-size: 14px;
+}
+
+.zsb_tip.zsb_error {
+    color: #b3402b;
+    font-weight: 700;
+}
+
+.zsb_list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    max-width: 1180px;
+    margin: 26px auto 0;
+    padding: 0 20px;
+    list-style: none;
+}
+
+.zsb_card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #fffdf8;
+    border: 1px solid #e2dccd;
+    box-shadow: 0 6px 18px rgba(35, 48, 58, .07);
+    transition: transform .22s ease, box-shadow .22s ease;
+}
+
+.zsb_card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgba(35, 48, 58, .14);
+}
+
+.zsb_card a {
+    display: block;
+    height: 190px;
+    overflow: hidden;
+}
+
+.zsb_card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .4s ease;
+}
+
+.zsb_card:hover img {
+    transform: scale(1.05);
+}
+
+.zsb_card_body {
+    padding: 18px 20px 22px;
+}
+
+.zsb_card_body h3 {
+    margin: 0 0 8px;
+    font-size: 19px;
+    color: #23303a;
+}
+
+.zsb_card_body p {
+    margin: 0 0 12px;
+    color: #5d6a72;
+    font-size: 14px;
+}
+
+.zsb_author {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 999px;
+    background: #eef3f4;
+    color: #087f8c;
+    font-size: 12px;
+}
+
+.zsb_empty {
+    grid-column: 1 / -1;
+    padding: 40px 0;
+    text-align: center;
+    color: #8b949a;
+}
+
+.zsb_foot {
+    max-width: 1180px;
+    margin: 46px auto 0;
+    padding: 0 20px;
+    color: #8b949a;
+    font-size: 13px;
+}
+
+.zsb_foot a {
+    color: #087f8c;
+}
+
+@media (max-width: 900px) {
+    .zsb_list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .zsb_list {
+        grid-template-columns: 1fr;
+    }
+
+    .zsb_card a {
+        height: 200px;
+    }
+}
