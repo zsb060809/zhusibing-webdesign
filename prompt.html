@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>任务一 · 提示词记录（prompt.md） | 朱思冰</title>
+
+    <!--
+    ============================================================
+    姓名：朱思冰（学号 24001010915）
+    时间：2026-11-06
+    使用模型：DeepSeek-V4.1-Flash（WorkBuddy 环境）
+    功能名称：任务一 · 提示词记录页
+    简介：两轮提示词的原文、AI 两次返回的代码、两版差异对照表、
+          四项需求的验证结论与答辩三问。在线可读，不必下载文件。
+    ============================================================
+    -->
+
+    <link rel="stylesheet" href="doc.css">
+</head>
+
+<body>
+
+    <header class="zsb_doc_head">
+        <h1>任务一 · 提示词记录</h1>
+        <p>朱思冰　学号 24001010915　9 班 15 号</p>
+        <p>两轮提示词 → AI 两次返回 → 差异对照 → 逐项验证 → 答辩三问</p>
+        <p>对应页面：<a href="swiper-p1.html">swiper-p1.html（可运行的验证台）</a></p>
+    </header>
+
+    <main class="zsb_doc">
+
+        <h2>一、题目要求</h2>
+        <table>
+            <tr>
+                <th style="width:70px">编号</th>
+                <th>需求</th>
+                <th>对应 Swiper 参数</th>
+            </tr>
+            <tr>
+                <td>①</td>
+                <td>无循环，翻到最后一张停住</td>
+                <td><strong>不写 <code>loop</code></strong>（默认 false）</td>
+            </tr>
+            <tr>
+                <td>②</td>
+                <td>3.2 秒自动翻页，手动操作后不停止</td>
+                <td><code>autoplay: { delay: 3200, disableOnInteraction: false }</code></td>
+            </tr>
+            <tr>
+                <td>③</td>
+                <td>圆点分页器可点击跳转</td>
+                <td><code>pagination: { el: '#wyPag4', clickable: true }</code></td>
+            </tr>
+            <tr>
+                <td>④</td>
+                <td>初始效果为 cube</td>
+                <td><code>effect: 'cube'</code></td>
+            </tr>
+        </table>
+
+        <h2>二、第 1 轮提示词（原文）</h2>
+        <pre><code>用 Swiper 给 #wySw4 写一段初始化代码，要求：
+1. 自动播放，3.2 秒换一张
+2. 底部要有圆点分页器
+3. 用立方体效果
+4. 用户手动拖过之后不要停下来
+
+直接给我可以粘贴的 new Swiper('#wySw4', { ... }) 代码。</code></pre>
+
+        <h3>AI 第 1 轮的返回</h3>
+        <pre><code>var swiper = new Swiper('#wySw4', {
+  loop: true,
+  effect: 'cube',
+  autoplay: 3200,
+  pagination: { el: '#wyPag4' }
+});</code></pre>
+
+        <h3>这一版的四个漏洞</h3>
+        <table>
+            <tr>
+                <th style="width:110px">需求</th>
+                <th>AI 实际写的</th>
+                <th>问题</th>
+            </tr>
+            <tr>
+                <td>① 无循环</td>
+                <td><code>loop: true</code></td>
+                <td><strong>方向写反了</strong>，我只说了"自动播放"，它就把默认补成循环</td>
+            </tr>
+            <tr>
+                <td>② 3.2 秒</td>
+                <td><code>autoplay: 3200</code></td>
+                <td>这是 Swiper 5 的旧写法，v11 里数字会被整个忽略，根本不自动播</td>
+            </tr>
+            <tr>
+                <td>② 拖动后继续</td>
+                <td>未写</td>
+                <td>缺 <code>disableOnInteraction: false</code>，默认 true → 一碰就停</td>
+            </tr>
+            <tr>
+                <td>③ 圆点可点</td>
+                <td><code>pagination: { el: '#wyPag4' }</code></td>
+                <td>少了 <code>clickable: true</code>，圆点只能看不能点</td>
+            </tr>
+            <tr>
+                <td>④ cube</td>
+                <td><code>effect: 'cube'</code></td>
+                <td>这条是对的</td>
+            </tr>
+        </table>
+        <p>另外还漏了 <code>speed</code>：没写就走默认 300ms，cube 转得太急，看起来像"闪一下"。</p>
+
+        <h2>三、第 2 轮提示词（原文，最终采用）</h2>
+        <pre><code>你上一版有三处不符合要求，按下面逐条改，改完每条给出对应参数：
+
+1. 版本：Swiper 11，用 swiper-bundle，初始化对象写法。
+2. 不要循环：不要写 loop，翻到最后一张就停，不要绕回第一张。
+3. 自动播放 3.2 秒，并且用户拖动松手后要继续播，不要停 —— 请用 autoplay 对象的 delay
+   和 disableOnInteraction 两个参数实现。
+4. 分页器用 #wyPag4，必须能点圆点跳转，把 clickable 明确写出来。
+5. 初始效果 cube，切换速度 800ms。
+6. 输出完整代码，并在每个参数后面用一行注释说明它对应上面第几条。</code></pre>
+
+        <h3>AI 第 2 轮的返回（最终采用）</h3>
+        <pre><code>new Swiper('#wySw4', {
+  speed: 800,                              // 第 5 条：切换 800ms
+  effect: 'cube',                          // 第 5 条：初始立方体
+  // 第 2 条：这里刻意不写 loop，保持默认 false
+  autoplay: {
+    delay: 3200,                           // 第 3 条：3.2 秒一张
+    disableOnInteraction: false            // 第 3 条：拖动后继续自动播放
+  },
+  pagination: {
+    el: '#wyPag4',                         // 第 4 条：圆点容器
+    clickable: true                        // 第 4 条：点圆点可跳转
+  }
+});</code></pre>
+
+        <h3>两轮之间到底改了什么</h3>
+        <table>
+            <tr>
+                <th style="width:100px">改动</th>
+                <th>第 1 轮</th>
+                <th>第 2 轮</th>
+                <th>为什么</th>
+            </tr>
+            <tr>
+                <td>循环</td>
+                <td><code>loop: true</code></td>
+                <td>整行删掉</td>
+                <td>"不要循环"必须写成否定指令，不能只是"没提"</td>
+            </tr>
+            <tr>
+                <td>自动播放</td>
+                <td><code>autoplay: 3200</code></td>
+                <td><code>autoplay: { delay: 3200, disableOnInteraction: false }</code></td>
+                <td>v11 里 autoplay 是对象，光写数字会被忽略</td>
+            </tr>
+            <tr>
+                <td>分页器</td>
+                <td><code>pagination: { el: '#wyPag4' }</code></td>
+                <td>加 <code>clickable: true</code></td>
+                <td>题只说"圆点分页器"，没说要能点，得补</td>
+            </tr>
+            <tr>
+                <td>切换速度</td>
+                <td>未写（默认 300ms）</td>
+                <td><code>speed: 800</code></td>
+                <td>让 cube 翻转看得清</td>
+            </tr>
+            <tr>
+                <td>版本约束</td>
+                <td>未声明</td>
+                <td>"Swiper 11，用 swiper-bundle"</td>
+                <td>不声明版本，它就按训练数据里的旧版本写</td>
+            </tr>
+        </table>
+
+        <h2>四、逐项验证</h2>
+        <p>下面是 <a href="swiper-p1.html">swiper-p1.html</a> 页面「四、逐项验证」里那个验证台的实测记录。</p>
+        <table>
+            <tr>
+                <th style="width:90px">需求</th>
+                <th>怎么验</th>
+                <th style="width:170px">实测结果</th>
+                <th>一句话结论</th>
+            </tr>
+            <tr>
+                <td>① 无循环</td>
+                <td>点最后一个圆点，等自动播放再走一轮</td>
+                <td>停在 5/5 不动</td>
+                <td>没写 loop，翻到底就停</td>
+            </tr>
+            <tr>
+                <td>② 3.2 秒</td>
+                <td>什么都不做，掐表看两张之间的间隔</td>
+                <td>约 3.2 秒一张</td>
+                <td><code>delay</code> 生效</td>
+            </tr>
+            <tr>
+                <td>② 拖动后继续</td>
+                <td>手动拖一次，然后松手等</td>
+                <td>继续自动翻页</td>
+                <td><code>disableOnInteraction: false</code> 生效</td>
+            </tr>
+            <tr>
+                <td>③ 圆点可点</td>
+                <td>直接点第 3 个圆点</td>
+                <td>跳到 3/5</td>
+                <td><code>clickable: true</code> 生效</td>
+            </tr>
+            <tr>
+                <td>④ cube</td>
+                <td>刷新页面看首屏切换动作</td>
+                <td>立方体翻转</td>
+                <td><code>effect: 'cube'</code> 生效</td>
+            </tr>
+        </table>
+
+        <h2>五、答辩三问</h2>
+
+        <h3>问 1：你的第一版提示词漏掉了哪个需求？</h3>
+        <p>最明显的是 <strong>"不要循环"</strong>。我第一轮只说"自动播放、圆点、立方体、拖动后不停"，默认"没说就是不要"，
+            但 AI 的默认是"没说就给你 <code>loop: true</code>"——它见过的轮播绝大多数都是循环的。</p>
+        <p>第二个是 <strong>"圆点要能点"</strong>：只说了"要有圆点分页器"，AI 就只给了容器。</p>
+        <p>还漏了 <strong>Swiper 版本</strong>：没说版本，它按旧版本写成了 <code>autoplay: 3200</code>。</p>
+
+        <h3>问 2：你是怎么在第二轮里"说清楚"的？</h3>
+        <p>三件事：</p>
+        <ol>
+            <li><strong>把否定需求写成否定指令</strong>——不说"我需要无循环"，而是直接写"不要写 loop，翻到最后一张就停，不要绕回第一张"；</li>
+            <li><strong>把效果翻译成参数名</strong>——不说"拖动后继续"，而是说"用 autoplay 对象的 delay 和 disableOnInteraction 两个参数实现"；</li>
+            <li><strong>加输出格式约束</strong>——声明版本，并要求每个参数后面用注释标明对应第几条，这样它没法自由发挥，我也能一眼核对。</li>
+        </ol>
+
+        <h3>问 3：AI 第一次给的代码错在哪？</h3>
+        <p>四处：<code>loop: true</code> 方向写反；<code>autoplay: 3200</code> 是旧写法、v11 不认；缺
+            <code>disableOnInteraction: false</code> 导致手一碰就停；缺 <code>clickable: true</code> 导致圆点不能点。
+            另外没写 <code>speed</code>，cube 转得太快。</p>
+
+        <h2>六、结论</h2>
+        <blockquote>
+            第一轮提示词写的是"我想要什么"，第二轮写的是"哪一条、用什么参数、不要什么"。
+            AI 不会读心，它只会按概率补全——所有"默认不要"的东西都必须显式说成"不要"，所有"要"的东西最好落到具体参数名上。
+        </blockquote>
+
+    </main>
+
+    <div class="zsb_doc_foot">
+        <p><a href="index.html">← 返回课堂目录</a> ·
+            <a href="swiper-p1.html">任务一 · 验证台</a> ·
+            <a href="swiper-task23-code.html">任务二、三 · 代码展示</a></p>
+    </div>
+
+</body>
+
+</html>

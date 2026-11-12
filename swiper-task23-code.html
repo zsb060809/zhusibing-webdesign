@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>任务二、任务三 · 代码展示 | 朱思冰</title>
+
+    <!--
+    ============================================================
+    姓名：朱思冰（学号 24001010915）
+    时间：2026-11-06
+    使用模型：DeepSeek-V4.1-Flash（WorkBuddy 环境）
+    功能名称：任务二（creative 仿写）与任务三（综合创作）的代码展示页
+    简介：逐项拆解 creativeEffect 的 translate / rotate / scale，
+          再展示光影展的 keyboard、parallax、现场改 delay 的实现，
+          末尾附两段答辩问答与实测记录。
+    ============================================================
+    -->
+
+    <link rel="stylesheet" href="doc.css">
+</head>
+
+<body>
+
+    <header class="zsb_doc_head">
+        <h1>任务二、任务三 · 代码展示</h1>
+        <p>朱思冰　学号 24001010915　9 班 15 号</p>
+        <p>任务二：<a href="swiper-p2.html">swiper-p2.html</a> ·
+            任务三：<a href="swiper-p3.html">swiper-p3.html</a></p>
+    </header>
+
+    <main class="zsb_doc">
+
+        <h2>任务二 · creative 仿写（课堂没讲的效果）</h2>
+
+        <h3>1. 官方示例里的一句话</h3>
+        <p>官方 <code>demos/257-effect-creative.html</code> 的思路只有一句：
+            <strong>creativeEffect 里的 prev 和 next，分别描述"上一张此刻停在哪、下一张此刻停在哪"。</strong></p>
+        <table>
+            <tr>
+                <th style="width:130px">属性</th>
+                <th>管什么</th>
+                <th>我的取值</th>
+                <th>视觉结果</th>
+            </tr>
+            <tr>
+                <td><code>translate</code></td>
+                <td>位移，<code>[x, y, z]</code></td>
+                <td>prev <code>['-55%', 0, -120]</code><br>next <code>['55%', 0, -40]</code></td>
+                <td>上一张往左移开并后退，下一张从右后方靠过来</td>
+            </tr>
+            <tr>
+                <td><code>rotate</code></td>
+                <td>旋转，<code>[x, y, z]</code> 角度</td>
+                <td>prev <code>[0, 0, -10]</code><br>next <code>[0, 0, 6]</code></td>
+                <td>上一张逆时针歪 10°，下一张顺时针歪 6°</td>
+            </tr>
+            <tr>
+                <td><code>scale</code></td>
+                <td>缩放</td>
+                <td>prev <code>0.8</code> / next <code>1.08</code></td>
+                <td>上一张缩小、下一张放大，形成"抽卡"的层次</td>
+            </tr>
+            <tr>
+                <td><code>opacity</code> / <code>shadow</code></td>
+                <td>透明度 / 投影</td>
+                <td>prev <code>0.9</code>，两边都开 shadow</td>
+                <td>上一张略微变暗，卡片有厚度</td>
+            </tr>
+        </table>
+
+        <h3>2. 完整初始化代码（js/zsb_swiper_p2.js 核心段）</h3>
+        <pre><code>var zsb_rotate_z = -10;      // 上一张的 Z 轴角度，按钮会改这个值
+
+function zsb_build() {
+  var zsb_el = document.querySelector('#zsbSw2');
+  if (!zsb_el || typeof window.Swiper !== 'function') {
+    return null;
+  }
+
+  return new window.Swiper('#zsbSw2', {
+    loop: true,
+    speed: 600,
+    grabCursor: true,
+    effect: 'creative',
+    creativeEffect: {
+      prev: {                                   // 上一张停在哪
+        translate: ['-55%', 0, -120],           // 向左移出 55%，并后退 120px
+        rotate: [0, 0, zsb_rotate_z],           // 逆时针歪（默认 -10°）
+        scale: 0.8,                             // 缩小到 80%
+        opacity: 0.9,
+        shadow: true
+      },
+      next: {                                   // 下一张停在哪
+        translate: ['55%', 0, -40],             // 在右后方 55% 处待命
+        rotate: [0, 0, 6],                      // 顺时针歪 6°
+        scale: 1.08,                            // 放大 8%，形成"冒头"感
+        shadow: true
+      }
+    },
+    pagination: { el: '#zsbPag2', clickable: true },
+    navigation: { prevEl: '#zsbPrev2', nextEl: '#zsbNext2' }
+  });
+}</code></pre>
+
+        <h3>3. 追问"改成 20 度"怎么实现</h3>
+        <p>creativeEffect 在初始化时就已经算成 transform 写进样式了，创建后不能再改参数，所以做法是<strong>销毁 + 重建</strong>：</p>
+        <pre><code>function zsb_switch_rotate(zsb_value, zsb_button) {
+  zsb_rotate_z = zsb_value;                       // 换角度
+
+  // 先清掉所有按钮的选中态，再把当前按钮点亮
+  document.querySelectorAll('.zsb_btns .zsb_btn').forEach(function (zsb_item) {
+    zsb_item.classList.remove('zsb_on');
+  });
+  if (zsb_button) { zsb_button.classList.add('zsb_on'); }
+
+  if (zsb_swiper && !zsb_swiper.destroyed) {
+    zsb_swiper.destroy(true, true);               // 连 DOM 上的样式一起清掉
+  }
+  zsb_swiper = zsb_build();                       // 用新角度重建
+}</code></pre>
+
+        <h3>4. 答辩两问</h3>
+        <p><strong>问：transform 里的百分比是相对谁的？</strong><br>
+            相对<strong>元素自身</strong>的宽高，不是相对父容器。<code>translate: ['-55%', 0, -120]</code>
+            意思是"往左挪自身宽度的 55%"，所以无论轮播容器多宽，卡片露出的比例始终一样，换屏幕尺寸不会错位。
+            另外 <code>translate</code> 的第三个数 z 是像素，不是百分比——百分比只能用在 x 和 y 上，z 轴没有"自身厚度"可参照。</p>
+        <p><strong>问：改一个数值让卡片转 20 度，怎么做？</strong><br>
+            改 <code>creativeEffect.prev.rotate</code> 的第三个值（Z 轴）。注意两件事：
+            ① 改完必须<strong>重建实例</strong>，因为 transform 在初始化时就算好了；
+            ② 20° 时上一张的边角会明显翘起，配合 <code>scale: 0.8</code> 才看得出"歪着缩到后面"的立体感。
+            所以页面上把"默认 -10°"和"20°"做成了两个按钮，点一下就能对比。</p>
+
+        <hr>
+
+        <h2>任务三 · 综合创作</h2>
+
+        <h3>1. 三件事</h3>
+        <table>
+            <tr>
+                <th style="width:180px">事项</th>
+                <th>做法</th>
+            </tr>
+            <tr>
+                <td>① 新增第六件展品</td>
+                <td>「爱达·魔都号」（首艘国产大型邮轮，2024-01 首航）。图片用 AI 生成后裁成
+                    <strong>16:9（1600×900）</strong>，slide 结构与前五张完全一致：<code>.swiper-slide &gt; img + .zsb_expo_cap</code></td>
+            </tr>
+            <tr>
+                <td>② 新能力：keyboard</td>
+                <td><code>keyboard: { enabled: true, onlyInViewport: true }</code>，方向键 ← → 翻页</td>
+            </tr>
+            <tr>
+                <td>③ 新能力：parallax</td>
+                <td><code>parallax: true</code> + 元素上的 <code>data-swiper-parallax</code>，文字比图片动得快</td>
+            </tr>
+        </table>
+        <p>题目说 keyboard / mousewheel / zoom 任选其一，我选 <strong>keyboard</strong>：它是唯一不依赖鼠标的方式，答辩时最好演示——按一下方向键，六张展品依次翻过去。</p>
+
+        <h3>2. 完整初始化代码（js/zsb_swiper_p3.js）</h3>
+        <pre><code>function zsb_build() {
+  var zsb_el = document.querySelector('#zsbExpo');
+
+  if (!zsb_el || typeof window.Swiper !== 'function') {
+    return null;
+  }
+
+  return new window.Swiper('#zsbExpo', {
+    loop: true,          // 六张展品首尾相接
+    speed: 900,          // 一次切换 900ms，比默认慢，更有"展厅"的从容感
+    parallax: true,      // 打开视差
+
+    keyboard: {
+      enabled: true,          // 方向键 ← → 可以翻页
+      onlyInViewport: true    // 轮播不在视口里时不抢键盘事件
+    },
+
+    autoplay: {
+      delay: zsb_default_delay,          // 4200ms
+      disableOnInteraction: false        // 手动翻页后自动播放继续
+    },
+
+    pagination: { el: '.swiper-pagination', clickable: true },
+    navigation: { prevEl: '.swiper-button-prev', nextEl: '.swiper-button-next' }
+  });
+}</code></pre>
+
+        <h3>3. 视差怎么用（每张展品内部）</h3>
+        <pre><code>&lt;div class="swiper-slide"&gt;
+  &lt;img src="swiper-imgs/aida_modu.jpg" alt="爱达·魔都号大型邮轮"&gt;
+  &lt;div class="zsb_expo_cap"&gt;
+    &lt;span class="zsb_expo_no" data-swiper-parallax="-200"&gt;EXHIBIT 06 · 新增&lt;/span&gt;
+    &lt;h2 data-swiper-parallax="-380"&gt;爱达·魔都号&lt;/h2&gt;
+    &lt;p data-swiper-parallax="-560"&gt;我国首艘国产大型邮轮，13.55 万吨、323.6 米长、2125 间客房……&lt;/p&gt;
+    &lt;div class="zsb_meta" data-swiper-parallax="-700"&gt;2024 年 1 月首航 · 上海吴淞口&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        <p>规则很好记：<strong>负得越多，移动得越快</strong>。编号 -200 几乎跟着图片走，标题 -380 快一档，正文 -560 更快，日期 -700 最快——
+            翻页时文字像被风扯着往前冲，图片却慢悠悠地平移，前后层次就出来了。</p>
+
+        <h3>4. 现场改 delay 的按钮</h3>
+        <pre><code>function zsb_set_delay(zsb_value, zsb_button) {
+  // 先清全部选中态，再点亮当前按钮
+  document.querySelectorAll('.zsb_controls button').forEach(function (zsb_item) {
+    zsb_item.classList.remove('zsb_on');
+  });
+  if (zsb_button) { zsb_button.classList.add('zsb_on'); }
+
+  if (!zsb_swiper || zsb_swiper.destroyed) { return; }
+
+  zsb_swiper.params.autoplay.delay = zsb_value;   // 改参数
+  zsb_swiper.autoplay.stop();                     // 停 → 起，新间隔才立刻生效
+  zsb_swiper.autoplay.start();
+}</code></pre>
+
+        <h3>5. 答辩四问</h3>
+        <p><strong>问 1：这段代码是什么意思？</strong><br>
+            <code>new Swiper('#zsbExpo', {...})</code> 是初始化。<code>loop</code> 让六张展品首尾相接；
+            <code>speed: 900</code> 是一次切换动画 900ms；<code>parallax: true</code> 打开视差（让带
+            <code>data-swiper-parallax</code> 的元素按比例错位移动）；<code>keyboard</code> 接管键盘方向键；
+            <code>autoplay.delay</code> 是每张停留时间；<code>pagination</code> / <code>navigation</code>
+            只是把页面上已有的圆点和左右箭头接上。</p>
+
+        <p><strong>问 2：AI 第一次给的哪里不对，你改了什么？</strong><br>
+            两处。① <strong>类名自创</strong>——它把标题层写成 <code>&lt;div class="caption"&gt;</code>，
+            和原有五张的 <code>.zsb_expo_cap</code> 不一致，直接粘进去第六张就会掉样式；我要求它沿用
+            <code>.zsb_expo_cap</code>，内部结构是 <code>span.zsb_expo_no + h2 + p + div.zsb_meta</code>，和前面五张一模一样。
+            ② <strong>keyboard 写法错</strong>——它写的是 <code>keyboard: true</code>，Swiper 11 里不生效，必须是对象；
+            我改成 <code>keyboard: { enabled: true, onlyInViewport: true }</code>。</p>
+
+        <p><strong>问 3：新参数的作用？</strong><br>
+            <code>keyboard.enabled</code>：允许方向键左右翻页；
+            <code>keyboard.onlyInViewport</code>：只有轮播在可视区域时才响应键盘，避免页面滚到别处按方向键也被"吃掉"；
+            <code>parallax</code> 与 <code>data-swiper-parallax="-380"</code>：元素随滑动做反向位移，
+            数值绝对值越大移动越快，形成"图片慢、文字快"的层次。</p>
+
+        <p><strong>问 4：现场把 delay 改成指定值，预期会怎么变？</strong><br>
+            改成 <strong>1500</strong>：每张只停 1.5 秒，切换显得急促，适合图片少、信息简单的场景；
+            改成 <strong>5000</strong>：每张停 5 秒，节奏放慢，适合有长文案需要阅读的场景。
+            代码层面改的是 <code>swiper.params.autoplay.delay</code>，改完必须 <code>stop()</code> 再
+            <code>start()</code> 一次——因为 autoplay 的定时器在启动那一刻就按旧值排好了，
+            只改参数要等这一轮走完才换新间隔。页面上那三个按钮就是这么实现的，点一下立刻能看到节奏变化。</p>
+
+        <h3>6. 实测记录</h3>
+        <table>
+            <tr>
+                <th style="width:180px">检查项</th>
+                <th>结果</th>
+            </tr>
+            <tr>
+                <td>展品数量</td>
+                <td>6 张，六张配图全部加载成功，无 404</td>
+            </tr>
+            <tr>
+                <td>键盘</td>
+                <td>按 → 后 <code>realIndex</code> 由 0 变 1</td>
+            </tr>
+            <tr>
+                <td>视差</td>
+                <td><code>parallax: true</code> 已生效，各层位移比例正确</td>
+            </tr>
+            <tr>
+                <td>delay 按钮</td>
+                <td>点 5000 后 <code>params.autoplay.delay = 5000</code>、<code>autoplay.running = true</code>，按钮高亮同步切换</td>
+            </tr>
+            <tr>
+                <td>控制台</td>
+                <td>0 报错</td>
+            </tr>
+        </table>
+
+    </main>
+
+    <div class="zsb_doc_foot">
+        <p><a href="index.html">← 返回课堂目录</a> ·
+            <a href="prompt.html">任务一 · 提示词记录</a> ·
+            <a href="swiper-task.html">四个课堂轮播任务</a></p>
+    </div>
+
+</body>
+
+</html>

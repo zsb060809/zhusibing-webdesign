@@ -1,0 +1,164 @@
+/*!
+ * ============================================================
+ * 姓名：朱思冰（学号 24001010915）
+ * 时间：2026-11-06
+ * 使用模型：DeepSeek-V4.1-Flash（WorkBuddy 环境）
+ * 功能名称：Markdown 文档页样式（提示词记录 / 代码展示）
+ * 简介：给 prompt.html 与 swiper-task23-code.html 共用的阅读版式：
+ *       代码块、表格、答辩问答块，保持与课程页同一套配色。
+ * ============================================================
+ */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0 0 70px;
+    background: #f3f1ea;
+    color: #23282d;
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    line-height: 1.85;
+}
+
+.zsb_doc_head {
+    padding: 52px clamp(20px, 8vw, 110px) 38px;
+    background: #22303a;
+    color: #f7f3e8;
+}
+
+.zsb_doc_head h1 {
+    margin: 0 0 12px;
+    font-size: clamp(26px, 4vw, 38px);
+    letter-spacing: .03em;
+}
+
+.zsb_doc_head p {
+    margin: 4px 0;
+    color: #b7c5ce;
+    font-size: 14px;
+}
+
+.zsb_doc_head a {
+    color: #f4c95d;
+    text-decoration: none;
+}
+
+.zsb_doc {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 46px 24px 0;
+}
+
+.zsb_doc h2 {
+    margin: 54px 0 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #22303a;
+    font-size: 24px;
+}
+
+.zsb_doc h2:first-child {
+    margin-top: 0;
+}
+
+.zsb_doc h3 {
+    margin: 30px 0 10px;
+    font-size: 18px;
+    color: #087f8c;
+}
+
+.zsb_doc p,
+.zsb_doc li {
+    font-size: 15px;
+    color: #3a464e;
+}
+
+.zsb_doc strong {
+    color: #17252b;
+}
+
+.zsb_doc code {
+    padding: 1px 6px;
+    border-radius: 3px;
+    background: #e8e4d8;
+    color: #b3402b;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 13.5px;
+}
+
+.zsb_doc pre {
+    overflow-x: auto;
+    margin: 14px 0 20px;
+    padding: 18px 20px;
+    border-left: 4px solid #087f8c;
+    border-radius: 4px;
+    background: #1e2a33;
+    color: #e6edf1;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 13.5px;
+    line-height: 1.7;
+}
+
+.zsb_doc pre code {
+    padding: 0;
+    background: none;
+    color: inherit;
+    font-size: inherit;
+}
+
+.zsb_doc table {
+    width: 100%;
+    margin: 16px 0 24px;
+    border-collapse: collapse;
+    background: #fffdf8;
+    font-size: 14.5px;
+}
+
+.zsb_doc th,
+.zsb_doc td {
+    padding: 10px 12px;
+    border: 1px solid #ded8c8;
+    text-align: left;
+    vertical-align: top;
+}
+
+.zsb_doc th {
+    background: #eef1ee;
+    font-weight: 700;
+}
+
+.zsb_doc blockquote {
+    margin: 18px 0;
+    padding: 12px 18px;
+    border-left: 4px solid #f4c95d;
+    background: #fffdf8;
+    color: #4a565e;
+}
+
+.zsb_doc hr {
+    margin: 46px 0;
+    border: none;
+    border-top: 1px dashed #cfc8b6;
+}
+
+.zsb_doc ul,
+.zsb_doc ol {
+    padding-left: 24px;
+}
+
+.zsb_doc a {
+    color: #087f8c;
+}
+
+.zsb_doc_foot {
+    max-width: 900px;
+    margin: 40px auto 0;
+    padding: 0 24px;
+    color: #8b949a;
+    font-size: 13px;
+}
+
+.zsb_doc_foot a {
+    color: #087f8c;
+}
