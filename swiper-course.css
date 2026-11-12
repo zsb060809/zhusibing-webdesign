@@ -225,6 +225,27 @@ a {
     height: 300px;
 }
 
+/* ---------- creative 专用：露出左右邻居 ----------
+   creative 效果里上一张、下一张都停在当前卡片两侧，
+   容器一旦 overflow:hidden 就会把它们整个裁掉，
+   看起来跟普通 slide 没区别。这里改成可见，并把
+   z 轴往后退让中间这张压在邻居上面。 */
+.zsb_swiper_box.zsb_swiper_wide {
+    overflow: visible;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.zsb_swiper_box.zsb_swiper_wide .swiper {
+    overflow: visible;
+    border-radius: 14px;
+}
+
+.zsb_swiper_box.zsb_swiper_wide .swiper-slide {
+    border-radius: 14px;
+    box-shadow: 0 10px 26px rgba(15, 43, 91, .18);
+}
+
 .zsb_swiper_box .swiper-slide img {
     display: block;
     width: 100%;
